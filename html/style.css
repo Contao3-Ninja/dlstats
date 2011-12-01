@@ -1,0 +1,32 @@
+/**
+ * Backend stylesheet for dlstats
+ */
+ 
+.dlstats-left
+{
+	display:block;
+	float:left;
+	white-space:nowrap;
+}
+
+.dlstats-timestamp
+{
+	width:130px;
+} 
+
+.dlstats-downloads
+{
+	width:40px;
+	text-align:right;
+	padding:0 10px 0 0;
+}
+
+.dlstats-ip
+{
+	width:250px;
+}
+
+.dlstatdets
+{
+	margin:-15px 0 0 0;
+} 

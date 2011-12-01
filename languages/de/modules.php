@@ -1,0 +1,16 @@
+<?php
+/**
+ * TL_ROOT/system/modules/dlstats/languages/de/modules.php 
+ * 
+ * Contao extension: dlstats
+ * Language file for modules (de)
+ * 
+ * Copyright : &copy; 2011 
+ * License   : LGPL 
+ * Author    : Glen Langer (BugBuster)
+ * Translator: Glen Langer (BugBuster)
+ */
+ 
+$GLOBALS['TL_LANG']['MOD']['dlstats'] = array("Download-Statistiken","Dieses Modul stellt Download-Statistiken dar.");
+ 
+?>
