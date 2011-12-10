@@ -25,4 +25,10 @@ $GLOBALS['TL_LANG']['tl_dlstats']['edit']		= array('Edit', 'Edit this file stati
 $GLOBALS['TL_LANG']['tl_dlstats']['delete']		= array('Delete', 'Delete this file statistics.');
 $GLOBALS['TL_LANG']['tl_dlstats']['details']	= array('Details', 'View details of the downloads.');
 
+/**
+ * Errorlog
+ */
+$GLOBALS['TL_LANG']['tl_dlstats']['no_key']      = 'No path/filename is specified (parameter 2)';
+$GLOBALS['TL_LANG']['tl_dlstats']['wrong_key']   = 'Faulty or incorrect tag name (parameter 1)';
+
 ?>

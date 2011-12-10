@@ -93,7 +93,7 @@ $GLOBALS['TL_DCA']['tl_dlstatdets'] = array
 			'exclude'		=> true,
 			'search'		=> true,
 			'inputType'		=> 'text',
-			'eval'			=> array('mandatory'=>true, 'maxlength'=>20, 'nospace'=>true)
+			'eval'			=> array('mandatory'=>true, 'maxlength'=>40, 'nospace'=>true)
 		),
 		'username' => array
 		(
@@ -102,6 +102,14 @@ $GLOBALS['TL_DCA']['tl_dlstatdets'] = array
 			'search'		=> true,
 			'inputType'		=> 'text',
 			'eval'			=> array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true)
+		),
+		'domain' => array
+		(
+		        'label'			=> &$GLOBALS['TL_LANG']['tl_dlstatdets']['domain'],
+		        'exclude'		=> true,
+		        'search'		=> true,
+		        'inputType'		=> 'text',
+		        'eval'			=> array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true)
 		)
 	)
 );
@@ -118,16 +126,15 @@ class tl_dlstatdets extends Backend
 	 */
 	public function listRecords($row)
 	{
+	    $this->import('String');
 		return
 			'<div class="dlstatdets">'
 		  . '<span class="dlstats-timestamp dlstats-left">'.date($GLOBALS['TL_CONFIG']['datimFormat'],$row['tstamp']).'</span>'
-		  . '<span class="dlstats-ip dlstats-left">'.$row['ip'].'</span>'
-		  . '<span class="dlstats-username dlstats-left">'.$row['username'].'</span>'
-		  //. '<span class="dlstats-username dlstats-left">'.gethostbyaddr($row['ip']).'</span>'
+		  . '<span class="dlstats-ip dlstats-left">'.$row['ip'].'<br>'.$this->String->substr($row['domain'],50).'</span>'
+		  . '<span class="dlstats-username dlstats-left">'.$this->String->substr($row['username'],30).'</span>'
 		  . '</div>';
 	} // listRecords
 	
 } // class tl_dlstatdets
-
 
 ?>

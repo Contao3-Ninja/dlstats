@@ -1,3 +1,4 @@
-/.svn/
-*/.svn/
-.svn*
+.svn/
+Bearbeiten1.txt
+test.php
+class-gen1.php

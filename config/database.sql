@@ -33,6 +33,7 @@ CREATE TABLE `tl_dlstatdets` (
   `tstamp` int(10) unsigned NOT NULL default '0',
   `pid` int(10) unsigned NOT NULL default '0',
   `ip` varchar(64) NOT NULL default '',
+  `domain` varchar(64) NOT NULL default '',
   `username` varchar(64) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`)

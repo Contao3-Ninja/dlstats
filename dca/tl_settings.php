@@ -27,7 +27,7 @@
  */
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['__selector__'][]	= 'dlstats'; 
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']	   .= ';{dlstats_legend},dlstats'; 
-$GLOBALS['TL_DCA']['tl_settings']['subpalettes']['dlstats']		= 'dlstatdets'; 
+$GLOBALS['TL_DCA']['tl_settings']['subpalettes']['dlstats']		= 'dlstatdets,dlstat_disable_anonymized_ip'; 
 
 /**
  * Add field
@@ -42,5 +42,20 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatdets'] = array(
 	'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstatdets'],
 	'inputType'	=> 'checkbox'
 );
+
+if ($this->User->isAdmin)
+{
+    $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstat_disable_anonymized_ip'] = array(
+            'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstat_disable_anonymized_ip'],
+            'inputType'	=> 'checkbox'
+    );
+} else {
+    $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstat_disable_anonymized_ip'] = array(
+            'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstat_disable_anonymized_ip'],
+            'inputType'	=> 'checkbox',
+            'eval'      => array('disabled'=>'true')
+    );
+}
+
 
 ?>

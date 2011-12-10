@@ -23,10 +23,10 @@
 
 .dlstats-ip
 {
-	width:250px;
+	width:300px;
 }
 
 .dlstatdets
 {
-	margin:-15px 0 0 0;
+	float: left;
 } 

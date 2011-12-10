@@ -34,8 +34,11 @@ $GLOBALS['BE_MOD']['content']['dlstats'] = array(
 );
 
 /**
- * Register some hooks (DO NOT CHANGE!)
+ * -------------------------------------------------------------------------
+ * HOOKS
+ * -------------------------------------------------------------------------
  */
 $GLOBALS['TL_HOOKS']['postDownload'][] = array('Dlstats', 'logDownload');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('ModuleDlstatsTag', 'DlstatsReplaceInsertTags');
 
 ?>

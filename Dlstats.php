@@ -1,4 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
+
+if (! defined('TL_ROOT'))
+	die('You can not access this file directly!');
+
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2011 Leo Feyer
@@ -20,7 +24,6 @@
  * @filesource
  */
 
-
 /**
  * Class Dlstats
  * 
@@ -29,8 +32,30 @@
  * @package    GLDLStats
  * @license    LGPL
  */
-class Dlstats extends Controller
+class Dlstats extends DlstatsHelper
 {
+
+	/**
+	 * tl_dlstats.id
+	 * @var integer
+	 */
+	private $_statId = 0;
+
+	/**
+	 * File name for logging
+	 * @var string
+	 */
+	private $_filename = '';
+
+	/**
+	 * Initialize the object
+	 */
+	protected function __construct()
+	{
+		parent::__construct();
+		$this->import('Database');
+	}
+
 	/**
 	 * Log the download
 	 * @param	string	$fileName	Filename, Hook Parameter
@@ -38,51 +63,73 @@ class Dlstats extends Controller
 	 */
 	public function logDownload($fileName)
 	{
-		if ( isset($GLOBALS['TL_CONFIG']['dlstats']) && $GLOBALS['TL_CONFIG']['dlstats'] === true ) 
+		$this->_filename = $fileName;
+		
+		if (isset($GLOBALS['TL_CONFIG']['dlstats']) && $GLOBALS['TL_CONFIG']['dlstats'] === true)
 		{
-			$this->import('Database');
-			$q = $this->Database->prepare("SELECT * FROM `tl_dlstats` WHERE `filename`=?")
-							    ->execute($fileName);
-			if ($q->next()) {
-				$statId = $q->id;
-				$this->Database->prepare("UPDATE `tl_dlstats` SET `tstamp`=?, `downloads`=`downloads`+1 WHERE `id`=?")
-							   ->execute(time(), $statId);
-			} else {
-				$q = $this->Database->prepare("INSERT INTO `tl_dlstats` %s")
-						  ->set(array('tstamp'=>time(), 'filename'=>$fileName, 'downloads'=>1))
-						  ->execute();
-				$statId = $q->insertId;
-			} // if			
-			if ( isset($GLOBALS['TL_CONFIG']['dlstatdets']) && $GLOBALS['TL_CONFIG']['dlstatdets'] === true ) 
+			if ($this->DL_LOG === true)
 			{
-				$ip = $this->Environment->ip;
-				$username = '';
-				$ckie = 'FE_USER_AUTH';
-				$sid  = session_id();
-				$hash = sha1($sid.$ip.$ckie);
-				if ($this->Input->cookie($ckie) == $hash) 
+				$this->logDLStats();
+				if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) && $GLOBALS['TL_CONFIG']['dlstatdets'] === true)
 				{
-					$qs = $this->Database->prepare("SELECT * FROM `tl_session` WHERE `hash`=? AND `name`=?")
-										 ->execute($hash, $ckie);
-					if ($qs->next() && 
-						$qs->sessionID == $sid && 
-						$qs->ip == $ip && 
-						($qs->tstamp+$GLOBALS['TL_CONFIG']['sessionTimeout']) > time() ) 
-					{
-						$qm = $this->Database->prepare("SELECT `username` FROM `tl_member` WHERE id=?")
-											 ->execute($qs->pid);
-						if ($qm->next()) {
-							$username = $qm->username;
-						}
-					} // if
-				} // if
-				$this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
-							   ->set(array('tstamp'=>time(), 'pid'=>$statId, 'ip'=>$ip, 'username'=>$username))
-							   ->execute();
+					$this->logDLStatDetails();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Helper function log file name
+	 * @return void
+	 */
+	protected function logDLStats()
+	{
+		$q = $this->Database->prepare("SELECT id FROM `tl_dlstats` WHERE `filename`=?")
+							->execute($this->_filename);
+		if ($q->next())
+		{
+			$this->_statId = $q->id;
+			$this->Database->prepare("UPDATE `tl_dlstats` SET `tstamp`=?, `downloads`=`downloads`+1 WHERE `id`=?")
+							->execute(time(), $this->_statId);
+		}
+		else
+		{
+			$q = $this->Database->prepare("INSERT INTO `tl_dlstats` %s")
+								->set(array('tstamp' => time(), 'filename' => $this->_filename, 'downloads' => 1))
+								->execute();
+			$this->_statId = $q->insertId;
+		} // if
+	}
+
+	/**
+	 * Helper function log details
+	 * @return void
+	 */
+	protected function logDLStatDetails()
+	{
+		$username = '';
+		$ckie = 'FE_USER_AUTH';
+		$hash = sha1(session_id() . $this->IP . $ckie);
+		if ($this->Input->cookie($ckie) == $hash)
+		{
+			$qs = $this->Database->prepare("SELECT pid, tstamp, sessionID, ip FROM `tl_session` WHERE `hash`=? AND `name`=?")
+								 ->execute($hash, $ckie);
+			if ($qs->next() && $qs->sessionID == session_id() && $qs->ip == $this->IP && ($qs->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
+			{
+				$qm = $this->Database->prepare("SELECT `username` FROM `tl_member` WHERE id=?")
+									 ->execute($qs->pid);
+				if ($qm->next())
+				{
+					$username = $qm->username;
+				}
 			} // if
 		} // if
-	} // logDownload
-	
+		$this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
+						->set(array('tstamp' => time(), 'pid' => $this->_statId, 'ip' => $this->AnonymizeIP(), 'domain' => $this->AnonymizeDomain(), 'username' => $username))
+						->execute();
+	}
+
 } // class Dlstats
+
 
 ?>
