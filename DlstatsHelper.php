@@ -99,8 +99,8 @@ class DlstatsHelper extends Controller
 	 *
 	 * @param string $ip	IP Address (IPv4 or IPv6)
 	 * @return mixed		false: no valid IPv4 and no valid IPv6
-	 * "IPv4" : IPv4 Address
-	 * "IPv6" : IPv6 Address
+	 * 						"IPv4" : IPv4 Address
+	 * 						"IPv6" : IPv6 Address
 	 * @access protected
 	 */
 	protected function CheckIPVersion($UserIP = false)
