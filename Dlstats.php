@@ -108,13 +108,17 @@ class Dlstats extends DlstatsHelper
 	protected function logDLStatDetails()
 	{
 		$username = '';
-		$ckie = 'FE_USER_AUTH';
-		$hash = sha1(session_id() . $this->IP . $ckie);
-		if ($this->Input->cookie($ckie) == $hash)
+		$strCookie = 'FE_USER_AUTH';
+		//$hash = sha1(session_id() . $this->IP . $ckie);
+		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->IP : '') . $strCookie);
+		if ($this->Input->cookie($strCookie) == $hash)
 		{
 			$qs = $this->Database->prepare("SELECT pid, tstamp, sessionID, ip FROM `tl_session` WHERE `hash`=? AND `name`=?")
-								 ->execute($hash, $ckie);
-			if ($qs->next() && $qs->sessionID == session_id() && $qs->ip == $this->IP && ($qs->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
+								 ->execute($hash, $strCookie);
+			if ($qs->next() && 
+				$qs->sessionID == session_id() && 
+				($GLOBALS['TL_CONFIG']['disableIpCheck'] || $qs->ip == $this->IP) && 
+				($qs->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
 				$qm = $this->Database->prepare("SELECT `username` FROM `tl_member` WHERE id=?")
 									 ->execute($qs->pid);
@@ -125,7 +129,7 @@ class Dlstats extends DlstatsHelper
 			} // if
 		} // if
 		$this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
-						->set(array('tstamp' => time(), 'pid' => $this->_statId, 'ip' => $this->AnonymizeIP(), 'domain' => $this->AnonymizeDomain(), 'username' => $username))
+						->set(array('tstamp' => time(), 'pid' => $this->_statId, 'ip' => $this->dlstatsAnonymizeIP(), 'domain' => $this->dlstatsAnonymizeDomain(), 'username' => $username))
 						->execute();
 	}
 

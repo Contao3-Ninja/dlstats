@@ -224,7 +224,7 @@ class DlstatsHelper extends Controller
 				{
 					$network[1] = 128;
 				}
-				if ($this->DL_IPv6_InNetwork($UserIP, $network[0], $network[1]))
+				if ($this->dlstatsIPv6InNetwork($UserIP, $network[0], $network[1]))
 				{
 					return true; // IP found
 				}
@@ -257,7 +257,7 @@ class DlstatsHelper extends Controller
 				{
 					$network[1] = 32;
 				}
-				if ($this->IPv4_InNetwork($UserIP, $network[0], $network[1]))
+				if ($this->dlstatsIPv4InNetwork($UserIP, $network[0], $network[1]))
 				{
 					return true; // IP found
 				}
@@ -275,7 +275,7 @@ class DlstatsHelper extends Controller
 	 * @return boolean
 	 * @access protected
 	 */
-	protected function IPv4_InNetwork($ip, $net_addr = 0, $net_mask = 0)
+	protected function dlstatsIPv4InNetwork($ip, $net_addr = 0, $net_mask = 0)
 	{
 		if ($net_mask <= 0)
 		{
@@ -298,7 +298,7 @@ class DlstatsHelper extends Controller
 	 * @return string		IP Address expanded
 	 * @access protected
 	 */
-	protected function DL_IPv6_ExpandNotation($Ip)
+	protected function dlstatsIPv6ExpandNotation($Ip)
 	{
 		if (strpos($Ip, '::') !== false)
 			$Ip = str_replace('::', str_repeat(':0', 8 - substr_count($Ip, ':')) . ':', $Ip);
@@ -318,9 +318,9 @@ class DlstatsHelper extends Controller
 	 * @return mixed				string      / array
 	 * @access protected
 	 */
-	protected function DL_IPv6_ToLong($Ip, $DatabaseParts = 1)
+	protected function dlstatsIPv6ToLong($Ip, $DatabaseParts = 1)
 	{
-		$Ip = $this->DL_IPv6_ExpandNotation($Ip);
+		$Ip = $this->dlstatsIPv6ExpandNotation($Ip);
 		$Parts = explode(':', $Ip);
 		$Ip = array('', '');
 		for ($i = 0; $i < 4; $i++)
@@ -343,21 +343,21 @@ class DlstatsHelper extends Controller
 	 * @return boolean
 	 * @access protected
 	 */
-	protected function DL_IPv6_InNetwork($UserIP, $net_addr = 0, $net_mask = 0)
+	protected function dlstatsIPv6InNetwork($UserIP, $net_addr = 0, $net_mask = 0)
 	{
 		if ($net_mask <= 0)
 		{
 			return false;
 		}
 		// UserIP to bin
-		$UserIP = $this->DL_IPv6_ExpandNotation($UserIP);
+		$UserIP = $this->dlstatsIPv6ExpandNotation($UserIP);
 		$Parts = explode(':', $UserIP);
 		$Ip = array('', '');
 		for ($i = 0; $i < 8; $i++)
 			$Ip[0] .= str_pad(base_convert($Parts[$i], 16, 2), 16, 0, STR_PAD_LEFT);
 		
 		// NetAddr to bin
-		$net_addr = $this->DL_IPv6_ExpandNotation($net_addr);
+		$net_addr = $this->dlstatsIPv6ExpandNotation($net_addr);
 		$Parts = explode(':', $net_addr);
 		for ($i = 0; $i < 8; $i++)
 			$Ip[1] .= str_pad(base_convert($Parts[$i], 16, 2), 16, 0, STR_PAD_LEFT);
@@ -376,7 +376,8 @@ class DlstatsHelper extends Controller
 	protected function CheckBE()
 	{
 		$strCookie = 'BE_USER_AUTH';
-		$hash = sha1(session_id() . $this->Environment->ip . $strCookie);
+		//$hash = sha1(session_id() . $this->Environment->ip . $strCookie);
+		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . $strCookie);
 		if ($this->Input->cookie($strCookie) == $hash)
 		{
 			$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
@@ -384,7 +385,8 @@ class DlstatsHelper extends Controller
 											->execute($hash, $strCookie);
 			if ($objSession->numRows && 
 				$objSession->sessionID == session_id() && 
-				$objSession->ip == $this->Environment->ip &&
+				//$objSession->ip == $this->Environment->ip &&
+				($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == $this->Environment->ip) && 
 			 	($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
 				$this->BE_Filter = true;
@@ -396,12 +398,12 @@ class DlstatsHelper extends Controller
 	}
 
 	/**
-	 * AnonymizeIP - Anonymize the last byte(s) of visitors IP addresses, if enabled
+	 * dlstatsAnonymizeIP - Anonymize the last byte(s) of visitors IP addresses, if enabled
 	 * 
 	 * @return mixed     string = IP Address anonymized, false for "no IP"
 	 * @access protected
 	 */
-	protected function AnonymizeIP()
+	protected function dlstatsAnonymizeIP()
 	{
 		if ($this->IP_Version === false)
 		{
@@ -421,7 +423,7 @@ class DlstatsHelper extends Controller
 				return implode('.', $arrIP);
 				break;
 			case "IPv6":
-				$arrIP = explode(':', $this->DL_IPv6_ExpandNotation($this->IP));
+				$arrIP = explode(':', $this->dlstatsIPv6ExpandNotation($this->IP));
 				$arrIP[7] = 0;
 				$arrIP[8] = 0;
 				return implode(':', $arrIP);
@@ -432,12 +434,12 @@ class DlstatsHelper extends Controller
 	}
 
 	/**
-	 * AnonymizeDomain - Anonymize the Domain of visitors, if enabled
+	 * dlstatsAnonymizeDomain - Anonymize the Domain of visitors, if enabled
 	 *
 	 * @return string     Domain anonymized, if DNS entry exists
 	 * @access protected
 	 */
-	protected function AnonymizeDomain()
+	protected function dlstatsAnonymizeDomain()
 	{
 		if ($this->IP_Version === false)
 		{
