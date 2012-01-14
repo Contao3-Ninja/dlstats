@@ -407,13 +407,13 @@ class DlstatsHelper extends Controller
 	{
 		if ($this->IP_Version === false)
 		{
-			return false;
+			return '0.0.0.0';
 		}
 		if (isset($GLOBALS['TL_CONFIG']['dlstat_disable_anonymized_ip']) && 
 				  $GLOBALS['TL_CONFIG']['dlstat_disable_anonymized_ip'] === true)
 		{
 			// Anonymize is disabled
-			return $this->IP;
+			return ($this->IP === false) ? '0.0.0.0' : $this->IP;
 		}
 		switch ($this->IP_Version)
 		{
@@ -429,7 +429,7 @@ class DlstatsHelper extends Controller
 				return implode(':', $arrIP);
 				break;
 			default:
-				return false;
+				return '0.0.0.0';
 		}
 	}
 
@@ -441,7 +441,7 @@ class DlstatsHelper extends Controller
 	 */
 	protected function dlstatsAnonymizeDomain()
 	{
-		if ($this->IP_Version === false)
+		if ($this->IP_Version === false || $this->IP === '0.0.0.0')
 		{
 			return '';
 		}
