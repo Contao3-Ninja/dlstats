@@ -114,12 +114,15 @@ class DlstatsHelper extends Controller
 		
 		// Test for IPv6
 		if (substr_count($UserIP, ":") < 2)
+			$this->IP_Version = false;
 			return false; // ::1 or 2001::0db8
 		if (substr_count($UserIP, "::") > 1)
+			$this->IP_Version = false;
 			return false; // one allowed
 		$groups = explode(':', $UserIP);
 		$num_groups = count($groups);
 		if (($num_groups > 8) || ($num_groups < 3))
+			$this->IP_Version = false;
 			return false;
 		$empty_groups = 0;
 		foreach ($groups as $group)
@@ -128,6 +131,7 @@ class DlstatsHelper extends Controller
 			if (! empty($group) && ! (is_numeric($group) && ($group == 0)))
 			{
 				if (! preg_match('#([a-fA-F0-9]{0,4})#', $group))
+					$this->IP_Version = false;
 					return false;
 			}
 			else
@@ -138,6 +142,7 @@ class DlstatsHelper extends Controller
 			$this->IP_Version = "IPv6";
 			return $this->IP_Version;
 		}
+		$this->IP_Version = false;
 		return false; // no (valid) IP Address
 	}
 
