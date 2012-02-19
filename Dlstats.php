@@ -5,7 +5,7 @@ if (! defined('TL_ROOT'))
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  * 
  * Modul Download Statistics
  *
@@ -17,7 +17,7 @@ if (! defined('TL_ROOT'))
  * ---------- Peter Koch (acenes) 2007-2009 ----------
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2011
+ * @copyright  Glen Langer (BugBuster) 2012
  * @author     BugBuster
  * @package    GLDLStats
  * @license    LGPL
@@ -27,7 +27,7 @@ if (! defined('TL_ROOT'))
 /**
  * Class Dlstats
  * 
- * @copyright  Glen Langer 2011
+ * @copyright  Glen Langer 2012
  * @author     Glen Langer 
  * @package    GLDLStats
  * @license    LGPL

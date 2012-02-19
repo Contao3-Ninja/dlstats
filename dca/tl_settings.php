@@ -1,7 +1,7 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  * 
  * Module Download Statistics
  *
@@ -15,7 +15,7 @@
  * Extends module tl_settings.
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2011
+ * @copyright  Glen Langer (BugBuster) 2012
  * @author     BugBuster
  * @package    GLDLStats
  * @license    LGPL
@@ -27,7 +27,7 @@
  */
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['__selector__'][]	= 'dlstats'; 
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']	   .= ';{dlstats_legend},dlstats'; 
-$GLOBALS['TL_DCA']['tl_settings']['subpalettes']['dlstats']		= 'dlstatdets,dlstat_disable_anonymized_ip'; 
+$GLOBALS['TL_DCA']['tl_settings']['subpalettes']['dlstats']		= 'dlstatdets'; 
 
 /**
  * Add field
@@ -43,6 +43,7 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatdets'] = array(
 	'inputType'	=> 'checkbox'
 );
 
+/*
 if ($this->User->isAdmin)
 {
     $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstat_disable_anonymized_ip'] = array(
@@ -56,6 +57,6 @@ if ($this->User->isAdmin)
             'eval'      => array('disabled'=>'true')
     );
 }
-
+*/
 
 ?>

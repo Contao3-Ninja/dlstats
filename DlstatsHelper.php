@@ -5,13 +5,13 @@ if (! defined('TL_ROOT'))
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  * 
  * Modul Download Statistics, Helperclass
  *
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2011
+ * @copyright  Glen Langer (BugBuster) 2012
  * @author     BugBuster
  * @package    GLDLStats
  * @license    LGPL
@@ -21,7 +21,7 @@ if (! defined('TL_ROOT'))
 /**
  * Class DlstatsHelper
  * 
- * @copyright  Glen Langer 2011
+ * @copyright  Glen Langer 2012
  * @author     Glen Langer 
  * @package    GLDLStats
  * @license    LGPL
@@ -414,8 +414,8 @@ class DlstatsHelper extends Controller
 		{
 			return '0.0.0.0';
 		}
-		if (isset($GLOBALS['TL_CONFIG']['dlstat_disable_anonymized_ip']) && 
-				  $GLOBALS['TL_CONFIG']['dlstat_disable_anonymized_ip'] === true)
+		if (isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp']) && 
+				  $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] === false)
 		{
 			// Anonymize is disabled
 			return ($this->IP === false) ? '0.0.0.0' : $this->IP;
@@ -450,8 +450,8 @@ class DlstatsHelper extends Controller
 		{
 			return '';
 		}
-		if (isset($GLOBALS['TL_CONFIG']['dlstat_disable_anonymized_ip']) && 
-				  $GLOBALS['TL_CONFIG']['dlstat_disable_anonymized_ip'] === true)
+		if (isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp']) && 
+				  $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] === false)
 		{
 			// Anonymize is disabled
 			$domain = gethostbyaddr($this->IP);

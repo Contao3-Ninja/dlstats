@@ -17,6 +17,5 @@
 $GLOBALS['TL_LANG']['tl_settings']['dlstats_legend'] = "Download statistics";
 $GLOBALS['TL_LANG']['tl_settings']['dlstats']        = array('Enable counting', 'Check to enable counting of downloads.');
 $GLOBALS['TL_LANG']['tl_settings']['dlstatdets']     = array('Enable detailed statistics', 'Check to enable logging all distinct downloads.');
-$GLOBALS['TL_LANG']['tl_settings']['dlstat_disable_anonymized_ip'] = array("Disable the anonymization of the IP address of visitors.","Check to disable the anonymization. Admin rights necessary! Note here your local privacy laws/guidelines!");
 
 ?>
