@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 /**
  * TL_ROOT/system/modules/dlstats/languages/de/tl_dlstatdets.php 
  * 
@@ -22,5 +22,3 @@ $GLOBALS['TL_LANG']['tl_dlstatdets']['username'] = array('Username', 'Username o
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_dlstatdets']['delete']	 = array('Delete', 'Delete this record.');
-
-?>

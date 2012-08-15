@@ -1,8 +1,5 @@
 <?php
 
-if (! defined('TL_ROOT'))
-	die('You can not access this file directly!');
-
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
@@ -23,6 +20,12 @@ if (! defined('TL_ROOT'))
  * @license    LGPL
  * @filesource
  */
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\DLStats;
+if (!defined('TL_ROOT')) die('You can not access this file directly!'); 
 
 /**
  * Class Dlstats
@@ -52,8 +55,9 @@ class Dlstats extends DlstatsHelper
 	 */
 	protected function __construct()
 	{
-		parent::__construct();
 		$this->import('Database');
+		parent::__construct();
+		
 	}
 
 	/**

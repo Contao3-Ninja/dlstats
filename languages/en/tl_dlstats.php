@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 /**
  * TL_ROOT/system/modules/dlstats/languages/de/tl_dlstats.php
  *
@@ -30,5 +30,3 @@ $GLOBALS['TL_LANG']['tl_dlstats']['details']	= array('Details', 'View details of
  */
 $GLOBALS['TL_LANG']['tl_dlstats']['no_key']      = 'No path/filename is specified (parameter 2)';
 $GLOBALS['TL_LANG']['tl_dlstats']['wrong_key']   = 'Faulty or incorrect tag name (parameter 1)';
-
-?>

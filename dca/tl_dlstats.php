@@ -8,10 +8,6 @@
  * Log file downloads done by the content elements Download and Downloads, and 
  * show statistics in the backend. 
  *
- *
- * ----- Derived from dlstats 1.0.0 (2009-06-11) -----
- * ---------- Peter Koch (acenes) 2007-2009 ----------
- * 
  * This is the data container array for table tl_dlstats.
  * 
  * PHP version 5

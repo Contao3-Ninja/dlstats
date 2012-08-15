@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 /**
  * TL_ROOT/system/modules/dlstats/languages/de/modules.php 
  * 
@@ -15,5 +15,3 @@
  * Back end modules
  */
 $GLOBALS['TL_LANG']['MOD']['dlstats'] = array('Download Stats', 'Download statistics.');
-
-?>

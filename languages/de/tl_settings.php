@@ -11,8 +11,6 @@
  * Translator: Glen Langer (BugBuster)
  */
  
-$GLOBALS['TL_LANG']['tl_settings']['dlstats_legend'] = "Download-Statistiken";
-$GLOBALS['TL_LANG']['tl_settings']['dlstats']        = array("Download-Statistiken aktivieren","Haken setzen, um die Aufstellung von Download-Statistiken zu aktivieren.");
-$GLOBALS['TL_LANG']['tl_settings']['dlstatdets']     = array("Detailierte Download-Statistiken aktivieren","Haken setzen, um die Aufstellung von genau detaillierten Download-Statistiken zu aktivieren.");
- 
-?>
+$GLOBALS['TL_LANG']['tl_settings']['dlstats_legend'] = "Downloadstatistik";
+$GLOBALS['TL_LANG']['tl_settings']['dlstats']        = array("Downloadstatistik aktivieren","Haken setzen, um die Aufstellung von Downloadstatistiken zu aktivieren.");
+$GLOBALS['TL_LANG']['tl_settings']['dlstatdets']     = array("Detailierte Downloadstatistiken aktivieren","Haken setzen, um die Aufstellung von genau detaillierten Downloadstatistiken zu aktivieren.");

@@ -15,5 +15,3 @@ $GLOBALS['TL_LANG']['tl_dlstatdets']['tstamp']   = array("Timestamp","Datum und 
 $GLOBALS['TL_LANG']['tl_dlstatdets']['ip']       = array("IP-Adresse","IP-Adresse des Download-Computers.");
 $GLOBALS['TL_LANG']['tl_dlstatdets']['username'] = array("Benutzername","Benutzername des Mitglieds, falls der Downloader angemeldet war.");
 $GLOBALS['TL_LANG']['tl_dlstatdets']['delete']   = array("Löschen","Diese Downloadaufzeichnung löschen");
- 
-?>
