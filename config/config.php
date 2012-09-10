@@ -26,8 +26,8 @@
  */
 $GLOBALS['BE_MOD']['content']['dlstats'] = array(
     'tables'      =>  array('tl_dlstats','tl_dlstatdets'),
-    'icon'        =>  'system/modules/dlstats/public/icon.png',
-    'stylesheet'  =>  'system/modules/dlstats/public/style.css'
+    'icon'        =>  'system/modules/dlstats/assets/icon.png',
+    'stylesheet'  =>  'system/modules/dlstats/assets/style.css'
 );
 
 /**
@@ -38,4 +38,3 @@ $GLOBALS['BE_MOD']['content']['dlstats'] = array(
 $GLOBALS['TL_HOOKS']['postDownload'][] = array('DLStats\Dlstats', 'logDownload');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('DLStats\ModuleDlstatsTag', 'DlstatsReplaceInsertTags');
 
-?>
