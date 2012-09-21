@@ -1,11 +1,12 @@
-<?php
+<?php 
+
 /**
  * TL_ROOT/system/modules/dlstats/languages/de/tl_dlstats.php
  *
  * Contao extension: dlstats
  * Language file for modules (en).
  * 
- * Copyright : &copy; 2011 
+ * Copyright : &copy; 2012 
  * License   : LGPL 
  * Author    : Glen Langer (BugBuster)
  * Translator: Glen Langer (BugBuster)

@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 /**
  * TL_ROOT/system/modules/dlstats/languages/de/tl_settings.php 
  * 

@@ -1,4 +1,5 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
+
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2011 Leo Feyer
@@ -12,7 +13,7 @@
  * Module configuration file.
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2011
+ * @copyright  Glen Langer (BugBuster) 2012
  * @author     BugBuster
  * @package    GLDLStats
  * @license    LGPL

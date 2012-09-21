@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 /**
  * Contao Open Source CMS
@@ -25,7 +25,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace BugBuster\DLStats;
-if (!defined('TL_ROOT')) die('You can not access this file directly!'); 
 
 /**
  * Class Dlstats
@@ -138,6 +137,3 @@ class Dlstats extends DlstatsHelper
 	}
 
 } // class Dlstats
-
-
-?>
