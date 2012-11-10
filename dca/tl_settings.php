@@ -43,20 +43,4 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatdets'] = array(
 	'inputType'	=> 'checkbox'
 );
 
-/*
-if ($this->User->isAdmin)
-{
-    $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstat_disable_anonymized_ip'] = array(
-            'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstat_disable_anonymized_ip'],
-            'inputType'	=> 'checkbox'
-    );
-} else {
-    $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstat_disable_anonymized_ip'] = array(
-            'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstat_disable_anonymized_ip'],
-            'inputType'	=> 'checkbox',
-            'eval'      => array('disabled'=>'true')
-    );
-}
-*/
-
 ?>
