@@ -1,21 +1,18 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
+
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  * 
  * Module Download Statistics
  *
  * Log file downloads done by the content elements Download and Downloads, and 
  * show statistics in the backend. 
  *
- *
- * ----- Derived from dlstats 1.0.0 (2009-06-11) -----
- * ---------- Peter Koch (acenes) 2007-2009 ----------
- * 
  * This is the data container array for table tl_dlstats.
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2011
+ * @copyright  Glen Langer (BugBuster) 2012
  * @author     BugBuster
  * @package    GLDLStats
  * @license    LGPL
@@ -144,4 +141,3 @@ class tl_dlstats extends Backend
 	
 } // class tl_dlstats
 
-?>

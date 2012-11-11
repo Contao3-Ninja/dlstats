@@ -1,4 +1,5 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
+
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
@@ -8,10 +9,6 @@
  * Log file downloads done by the content elements Download and Downloads, and 
  * show statistics in the backend. 
  *
- *
- * ----- Derived from dlstats 1.0.0 (2009-06-11) -----
- * ---------- Peter Koch (acenes) 2007-2009 ----------
- * 
  * Extends module tl_settings.
  * 
  * PHP version 5
@@ -43,20 +40,3 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatdets'] = array(
 	'inputType'	=> 'checkbox'
 );
 
-/*
-if ($this->User->isAdmin)
-{
-    $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstat_disable_anonymized_ip'] = array(
-            'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstat_disable_anonymized_ip'],
-            'inputType'	=> 'checkbox'
-    );
-} else {
-    $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstat_disable_anonymized_ip'] = array(
-            'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstat_disable_anonymized_ip'],
-            'inputType'	=> 'checkbox',
-            'eval'      => array('disabled'=>'true')
-    );
-}
-*/
-
-?>

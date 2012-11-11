@@ -1,8 +1,5 @@
 <?php
 
-if (! defined('TL_ROOT'))
-	die('You can not access this file directly!');
-
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2012 Leo Feyer
@@ -19,6 +16,11 @@ if (! defined('TL_ROOT'))
  */
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace BugBuster\DLStats;
+
+/**
  * Class DlstatsHelper
  * 
  * @copyright  Glen Langer 2012
@@ -26,7 +28,7 @@ if (! defined('TL_ROOT'))
  * @package    GLDLStats
  * @license    LGPL
  */
-class DlstatsHelper extends Controller
+class DlstatsHelper extends \Controller
 {
 
 	/**
@@ -159,15 +161,15 @@ class DlstatsHelper extends Controller
 		// Check if IP present
 		if ($UserIP === false)
 		{
-			if ($this->Environment->remoteAddr)
+			if (\Environment::get('remoteAddr'))
 			{
-				if (strpos($this->Environment->remoteAddr, ',') !== false) //first IP 
+				if (strpos(\Environment::get('remoteAddr') , ',') !== false) //first IP 
 				{
-					$this->IP = trim(substr($this->Environment->remoteAddr, 0, strpos($this->Environment->remoteAddr, ',')));
+					$this->IP = trim(substr(\Environment::get('remoteAddr') , 0, strpos(\Environment::get('remoteAddr') , ',')));
 				}
 				else
 				{
-					$this->IP = trim($this->Environment->remoteAddr);
+					$this->IP = trim(\Environment::get('remoteAddr'));
 				}
 			}
 			else
@@ -382,8 +384,8 @@ class DlstatsHelper extends Controller
 	{
 		$strCookie = 'BE_USER_AUTH';
 		//$hash = sha1(session_id() . $this->Environment->ip . $strCookie);
-		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . $strCookie);
-		if ($this->Input->cookie($strCookie) == $hash)
+		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
+		if (\Input::cookie($strCookie) == $hash)
 		{
 			$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
 											->limit(1)
@@ -391,7 +393,7 @@ class DlstatsHelper extends Controller
 			if ($objSession->numRows && 
 				$objSession->sessionID == session_id() && 
 				//$objSession->ip == $this->Environment->ip &&
-				($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == $this->Environment->ip) && 
+				($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == \Environment::get('ip')) && 
 			 	($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
 				$this->BE_Filter = true;
@@ -480,7 +482,7 @@ class DlstatsHelper extends Controller
 	protected function CheckBot()
 	{
 		// Import Helperclass ModuleBotDetection
-		$this->import('ModuleBotDetection');
+		$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection'); //Workaround for $this->ModuleBotDetection->...
 		//Call BD_CheckBotAgent
 		$test01 = $this->ModuleBotDetection->BD_CheckBotAgent();
 		if ($test01 === true)
@@ -507,4 +509,3 @@ class DlstatsHelper extends Controller
 	}
 }
 
-?>

@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 /**
  * TL_ROOT/system/modules/dlstats/languages/de/tl_dlstats.php 
  * 
@@ -30,5 +31,3 @@ $GLOBALS['TL_LANG']['tl_dlstats']['details']   = array("Details","Details dieser
  */
 $GLOBALS['TL_LANG']['tl_dlstats']['no_key']      = 'Kein Pfad/Dateiname angegeben (Parameter 2)';
 $GLOBALS['TL_LANG']['tl_dlstats']['wrong_key']   = 'Fehlerhafter oder falscher Tagname (Parameter 1)';
-
-?>

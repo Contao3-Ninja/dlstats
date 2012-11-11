@@ -1,11 +1,12 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php 
+
 /**
  * TL_ROOT/system/modules/dlstats/languages/de/tl_dlstatdets.php 
  * 
  * Contao extension: dlstats
  * Language file for modules (en).
  * 
- * Copyright : &copy; 2011 
+ * Copyright : &copy; 2012 
  * License   : LGPL 
  * Author    : Glen Langer (BugBuster)
  * Translator: Glen Langer (BugBuster)
@@ -22,5 +23,3 @@ $GLOBALS['TL_LANG']['tl_dlstatdets']['username'] = array('Username', 'Username o
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_dlstatdets']['delete']	 = array('Delete', 'Delete this record.');
-
-?>
