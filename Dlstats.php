@@ -65,12 +65,12 @@ class Dlstats extends DlstatsHelper
 	{
 		$this->_filename = $fileName;
 		
-		if (isset($GLOBALS['TL_CONFIG']['dlstats']) && $GLOBALS['TL_CONFIG']['dlstats'] === true)
+		if (isset($GLOBALS['TL_CONFIG']['dlstats']) && $GLOBALS['TL_CONFIG']['dlstats'] == true)
 		{
 			if ($this->DL_LOG === true)
 			{
 				$this->logDLStats();
-				if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) && $GLOBALS['TL_CONFIG']['dlstatdets'] === true)
+				if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) && $GLOBALS['TL_CONFIG']['dlstatdets'] == true)
 				{
 					$this->logDLStatDetails();
 				}
