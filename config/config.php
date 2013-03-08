@@ -22,17 +22,26 @@
  * @filesource
  */
 
+define('DLSTATS_VERSION', '2.3');
+define('DLSTATS_BUILD'  , '0');
+
 /**
  * -------------------------------------------------------------------------
  * BACK END MODULES
  * -------------------------------------------------------------------------
  */
+/*
 $GLOBALS['BE_MOD']['content']['dlstats'] = array(
 	'tables'		=>	array('tl_dlstats','tl_dlstatdets'),
 	'icon'			=>	'system/modules/dlstats/html/icon.png',
 	'stylesheet'	=>	'system/modules/dlstats/html/style.css'
+);*/
+$GLOBALS['BE_MOD']['content']['dlstats'] = array
+(
+        'callback'   => 'ModuleDlstatsStatistics',
+        'icon'       => 'system/modules/dlstats/html/icon.png',
+        'stylesheet' => 'system/modules/dlstats/html/mod_dlstatsstatistics_be.css',
 );
-
 /**
  * -------------------------------------------------------------------------
  * HOOKS
