@@ -15,7 +15,7 @@
  * Module configuration file.
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2011
+ * @copyright  Glen Langer (BugBuster) 2011..2013
  * @author     BugBuster
  * @package    GLDLStats
  * @license    LGPL
@@ -49,5 +49,15 @@ $GLOBALS['BE_MOD']['content']['dlstats'] = array
  */
 $GLOBALS['TL_HOOKS']['postDownload'][] = array('Dlstats', 'logDownload');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('ModuleDlstatsTag', 'DlstatsReplaceInsertTags');
+
+/**
+ * -------------------------------------------------------------------------
+ * syncCto Blacklists - Tables
+ * -------------------------------------------------------------------------
+ */
+$GLOBALS['SYC_CONFIG']['table_hidden'] = array_merge( (array) $GLOBALS['SYC_CONFIG']['table_hidden'], array(
+        'tl_dlstats',
+        'tl_dlstatdets',
+));
 
 ?>
