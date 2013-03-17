@@ -1,8 +1,7 @@
 <?php 
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
  * Module Download Statistics
  * 

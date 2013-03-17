@@ -1,7 +1,6 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
  * Module Download Statistics
  *
@@ -15,7 +14,7 @@
  * Extends module tl_settings.
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2012
+ * @copyright  Glen Langer (BugBuster) 2012..2013
  * @author     BugBuster
  * @package    GLDLStats
  * @license    LGPL

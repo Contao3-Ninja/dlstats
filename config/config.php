@@ -1,7 +1,6 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
  * Module Download Statistics
  *
@@ -30,12 +29,6 @@ define('DLSTATS_BUILD'  , '0');
  * BACK END MODULES
  * -------------------------------------------------------------------------
  */
-/*
-$GLOBALS['BE_MOD']['content']['dlstats'] = array(
-	'tables'		=>	array('tl_dlstats','tl_dlstatdets'),
-	'icon'			=>	'system/modules/dlstats/html/icon.png',
-	'stylesheet'	=>	'system/modules/dlstats/html/style.css'
-);*/
 $GLOBALS['BE_MOD']['content']['dlstats'] = array
 (
         'callback'   => 'ModuleDlstatsStatistics',

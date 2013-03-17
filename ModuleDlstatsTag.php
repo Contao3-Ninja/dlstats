@@ -1,13 +1,12 @@
 <?php if (! defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  *
  * Modul Dlstats Tag - Frontend for InsertTags
  *
  * PHP version 5
- * @copyright  Glen Langer 2012
+ * @copyright  Glen Langer 2012..2013
  * @author     Glen Langer 
  * @package    GLDLStats 
  * @license    LGPL 
@@ -17,7 +16,7 @@
 /**
  * Class ModuleDlstatsTag 
  *
- * @copyright  Glen Langer 2012
+ * @copyright  Glen Langer 2012..2013
  * @author     Glen Langer 
  * @package    GLDLStats
  * @license    LGPL 
