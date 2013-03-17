@@ -9,6 +9,7 @@
  * License   : LGPL 
  * Author    : Glen Langer (BugBuster)
  * Translator: Glen Langer (BugBuster) 
+ * Deprecated!
  */
  
 $GLOBALS['TL_LANG']['tl_dlstatdets']['tstamp']   = array("Timestamp","Datum und Zeitpunkt des Downloads.");

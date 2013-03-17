@@ -23,7 +23,7 @@
  */
 
 /**
- * Table tl_dlstats
+ * Table tl_dlstats, Deprecated
  */
 $GLOBALS['TL_DCA']['tl_dlstats'] = array
 (

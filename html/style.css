@@ -2,31 +2,41 @@
  * Backend stylesheet for dlstats
  */
  
-.dlstats-left
-{
+.dlstats-left {
 	display:block;
 	float:left;
 	white-space:nowrap;
 }
 
-.dlstats-timestamp
-{
+.dlstats-timestamp {
 	width:130px;
 } 
 
-.dlstats-downloads
-{
+.dlstats-downloads {
 	width:40px;
 	text-align:right;
 	padding:0 10px 0 0;
 }
 
-.dlstats-ip
-{
-	width:300px;
+.dlstats-ip {
+	width:400px;
 }
 
-.dlstatdets
-{
+.dlstatdets {
 	float: left;
 } 
+
+.dlstatdetailcontent {
+    overflow: hidden;
+    padding: 6px;
+    position: relative;
+    width: 678px;
+}
+
+.dlstatdetaillist {
+	border-bottom: 1px solid #E9E9E9;
+    overflow: hidden;
+    padding: 6px;
+    position: relative;
+    width: 678px;
+}

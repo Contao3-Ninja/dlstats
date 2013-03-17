@@ -29,4 +29,10 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads'] = 'Die letz
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['modname']      = 'dlstats Modul';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['footer']       = '';
 
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['wrong_parameter'] = 'Fehlerhafte oder falsche Parameter';
+
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp']   = "Datum / Uhrzeit";
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip']       = "IP-Adresse / Domain";
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username'] = "Benutzername";
+
 ?>

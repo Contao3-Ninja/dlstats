@@ -88,12 +88,12 @@
 		<table summary="Table lists records" class="mod_dlstatstatistics_be_table_max">
 			<tbody>
 			    <tr>
-					<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="4"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']; ?></td>
+					<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="5"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']; ?></td>
 				</tr>
 				<tr>
 				    <td style="width: 400px; padding-left: 2px; text-align: left;"   class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']; ?></td>
 				    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
-				    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
+				    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist"  colspan="2" ><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
 				    <td style="width: 120px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']; ?></td>
 				</tr>
 			<?php foreach ($this->arrTopDownloads AS $TopDownloads) : ?>
@@ -101,6 +101,7 @@
 				    <td style="padding-left: 2px; text-align: left;"   class="tl_file_list"><?php echo $TopDownloads[0]; ?></td>
 				    <td class="tl_file_list">&nbsp;</td>
 				    <td style="padding-left: 2px; text-align: right;"  class="tl_file_list"><?php echo $TopDownloads[1]; ?></td>
+				    <td class="tl_file_list" style="width: 22px; padding: 0 0 0 2px; text-align: left;"><a data-lightbox="details 760 600" title="Details" href="system/modules/dlstats/ModuleDlstatsStatisticsDetails.php?action=TopLastDownloads&amp;dlstatsid=<?php echo $TopDownloads[3]; ?>"><img width="14" height="16" alt="Details" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"></a></td>
 				    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><?php echo $TopDownloads[2]; ?></td>
 				</tr>	
 			<?php endforeach; ?>			
@@ -116,25 +117,26 @@
 		<table summary="Table lists records" class="mod_dlstatstatistics_be_table_max">
 			<tbody>
 			    <tr>
-					<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="4"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']; ?></td>
+					<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="5"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']; ?></td>
 				</tr>
 				<tr>
 				    <td style="width: 400px; padding-left: 2px; text-align: left;"   class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']; ?></td>
 				    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
-				    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
+				    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist" colspan="2"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
 				    <td style="width: 120px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']; ?></td>
 				</tr>
 			<?php foreach ($this->arrLastDownloads AS $LastDownloads) : ?>
 			<?php if ($LastDownloads[3] !== false) : ?>
 				<tr>
 					<td style="font-weight: bold; padding: 2px 0 3px; text-align: left;"><?php echo $LastDownloads[3]; ?></td>
-					<td colspan="3">&nbsp;</td>
+					<td colspan="4">&nbsp;</td>
 				</tr>
 			<?php endif; ?>
 				<tr>
 				    <td style="padding-left: 12px !important; text-align: left;"  class="tl_file_list"><?php echo $LastDownloads[1]; ?></td>
 				    <td class="tl_file_list">&nbsp;</td>
 				    <td style="padding-left: 2px; text-align: right;"  class="tl_file_list"><?php echo $LastDownloads[2]; ?></td>
+					<td class="tl_file_list" style="width: 22px; padding: 0 0 0 2px; text-align: left;"><a data-lightbox="details 760 600" title="Details" href="system/modules/dlstats/ModuleDlstatsStatisticsDetails.php?action=TopLastDownloads&amp;dlstatsid=<?php echo $LastDownloads[4]; ?>"><img width="14" height="16" alt="Details" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"></a></td>
 				    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><?php echo $LastDownloads[0]; ?></td>
 				</tr>	
 			<?php endforeach; ?>	

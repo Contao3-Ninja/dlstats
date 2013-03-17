@@ -1,4 +1,5 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
 /**
  * Contao Open Source CMS
  * Copyright (C) 2005-2011 Leo Feyer
@@ -23,7 +24,7 @@
  */
 
 /**
- * Table tl_dlstatdets
+ * Table tl_dlstatdets, Deprecated
  */
 $GLOBALS['TL_DCA']['tl_dlstatdets'] = array
 (

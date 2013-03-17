@@ -51,6 +51,7 @@ class ModuleDlstatsStatistics extends BackendModule
         $this->Template->href   = $this->getReferer(true);
         $this->Template->title  = specialchars($GLOBALS['TL_LANG']['MSC']['backBT']);
         $this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
+        $this->Template->theme  = $this->getTheme();
 
         $this->Template->arrStatMonth     = $this->getMonth();
         $this->Template->arrStatYear      = $this->getYear();
@@ -169,7 +170,7 @@ class ModuleDlstatsStatistics extends BackendModule
     protected function getTopDownloads($limit=20)
     {
         $arrTopDownloads = array();
-        $objTopDownloads = $this->Database->prepare("SELECT `tstamp`, `filename`, `downloads` 
+        $objTopDownloads = $this->Database->prepare("SELECT `tstamp`, `filename`, `downloads`, `id`
                                                      FROM `tl_dlstats`
                                                      ORDER BY `downloads` DESC")
                                           ->limit($limit)
@@ -181,7 +182,8 @@ class ModuleDlstatsStatistics extends BackendModule
             {
                 $arrTopDownloads[] = array( $objTopDownloads->filename
                                           , $this->getFormattedNumber($objTopDownloads->downloads,0)
-                                          , $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objTopDownloads->tstamp)
+                                          , $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objTopDownloads->tstamp)
+                                          , $objTopDownloads->id
                                           );
             }
         }
@@ -195,7 +197,7 @@ class ModuleDlstatsStatistics extends BackendModule
         $oldDate = '01.01.1970';
         $viewDate = false;
         $arrLastDownloads = array();
-        $objLastDownloads = $this->Database->prepare("SELECT `tstamp`, `filename`, `downloads` 
+        $objLastDownloads = $this->Database->prepare("SELECT `tstamp`, `filename`, `downloads`, `id`
                                                      FROM `tl_dlstats`
                                                      ORDER BY `tstamp` DESC, `filename`")
                                           ->limit($limit)
@@ -215,6 +217,7 @@ class ModuleDlstatsStatistics extends BackendModule
                                            , $objLastDownloads->filename
                                            , $this->getFormattedNumber($objLastDownloads->downloads,0)
                                            , $viewDate
+                                           , $objLastDownloads->id
                                            );
                 $oldDate = $newDate;
             }
