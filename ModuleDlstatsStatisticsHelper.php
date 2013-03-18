@@ -50,7 +50,7 @@ class ModuleDlstatsStatisticsHelper extends BackendModule
     {
         if (self::$instance == null)
         {
-            self::$instance = new BotStatisticsHelper();
+            self::$instance = new ModuleDlstatsStatisticsHelper();
         }
     
         return self::$instance;

@@ -54,3 +54,9 @@
   padding-left:6px !important;
   padding-right:6px !important;
 }
+
+.mod_dlstatstatistics_grey {
+	-moz-opacity:0.3;
+	opacity: 0.3;
+    filter: alpha(opacity=30); /* For IE8 and earlier */	
+}

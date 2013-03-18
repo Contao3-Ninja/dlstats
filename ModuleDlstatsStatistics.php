@@ -179,10 +179,12 @@ class ModuleDlstatsStatistics extends BackendModule
         {
             while ($objTopDownloads->next())
             {
+                $c4d = $this->check4details($objTopDownloads->id);
                 $arrTopDownloads[] = array( $objTopDownloads->filename
                                           , $this->getFormattedNumber($objTopDownloads->downloads,0)
                                           , $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objTopDownloads->tstamp)
                                           , $objTopDownloads->id
+                                          , $c4d
                                           );
             }
         }
@@ -212,11 +214,13 @@ class ModuleDlstatsStatistics extends BackendModule
                     $newDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objLastDownloads->tstamp);
                     $viewDate = $newDate;
                 }
+                $c4d = $this->check4details($objLastDownloads->id);
                 $arrLastDownloads[] = array( $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objLastDownloads->tstamp)
                                            , $objLastDownloads->filename
                                            , $this->getFormattedNumber($objLastDownloads->downloads,0)
                                            , $viewDate
                                            , $objLastDownloads->id
+                                           , $c4d 
                                            );
                 $oldDate = $newDate;
             }
@@ -224,4 +228,14 @@ class ModuleDlstatsStatistics extends BackendModule
         
         return $arrLastDownloads;
     }
+    
+    protected function check4details($id)
+    {
+        $objC4D = $this->Database->prepare("SELECT count(`id`)  AS num
+                                            FROM `tl_dlstatdets` 
+                                            WHERE `pid`=?")
+                                 ->execute($id);
+        return $objC4D->num;
+    }
+    
 }
