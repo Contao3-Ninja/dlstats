@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<base href="<?php echo $this->Environment->base ?>"></base>
+<title>Contao Open Source CMS - Contao Open Source CMS 3.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->getTheme(); ?>/basic.css" media="screen">
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->getTheme(); ?>/main.css" media="screen">
+<!--[if IE]><link rel="stylesheet" href="system/themes/default/iefixes.css"><![endif]-->
+<!--[if lt IE 9]><script src="assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" type="text/css" href="system/modules/dlstats/assets/style.css" media="all">
+</head>
+<body id="top">
+<div id="main">
+	<div class="dlstatdetailcontent" style="margin-left:auto;margin-right:auto;">
+<!-- DlstatsDetails::start -->
+<?php echo $this->DlstatsDetailList; ?>
+<!-- DlstatsDetails::stop -->
+	</div><!-- dlstatdetailcontent -->
+</div><!-- main -->
+</body>
+</html>

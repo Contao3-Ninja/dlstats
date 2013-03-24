@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Dlstats
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -26,9 +26,24 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Modules
-	'BugBuster\DLStats\ModuleDlstatsTag' => 'system/modules/dlstats/modules/ModuleDlstatsTag.php',
-	'BugBuster\DLStats\Dlstats'          => 'system/modules/dlstats/modules/Dlstats.php',
+	'BugBuster\DLStats\Dlstats'                        => 'system/modules/dlstats/modules/Dlstats.php',
+	'BugBuster\DLStats\ModuleDlstatsStatistics'        => 'system/modules/dlstats/modules/ModuleDlstatsStatistics.php',
+	'BugBuster\DLStats\ModuleDlstatsTag'               => 'system/modules/dlstats/modules/ModuleDlstatsTag.php',
+
+	// Public
+	'BugBuster\DLStats\ModuleDlstatsStatisticsDetails' => 'system/modules/dlstats/public/ModuleDlstatsStatisticsDetails.php',
 
 	// Classes
-	'BugBuster\DLStats\DlstatsHelper'    => 'system/modules/dlstats/classes/DlstatsHelper.php',
+	'BugBuster\DLStats\ModuleDlstatsStatisticsHelper'  => 'system/modules/dlstats/classes/ModuleDlstatsStatisticsHelper.php',
+	'BugBuster\DLStats\DlstatsHelper'                  => 'system/modules/dlstats/classes/DlstatsHelper.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'mod_dlstats_be_partial_details' => 'system/modules/dlstats/templates',
+	'mod_dlstats_be_statistics'      => 'system/modules/dlstats/templates',
 ));

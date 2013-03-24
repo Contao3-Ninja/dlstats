@@ -15,4 +15,4 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['dlstats'] = array('Download Stats', 'Download statistics.');
+$GLOBALS['TL_LANG']['MOD']['dlstats'] = array('Download Statistics', 'Download statistics.');
