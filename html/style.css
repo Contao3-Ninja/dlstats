@@ -23,7 +23,7 @@
 }
 
 .dlstatdets {
-	float: left;
+	width: 100%;
 } 
 
 .dlstatdetailcontent {
@@ -38,5 +38,12 @@
     overflow: hidden;
     padding: 6px;
     position: relative;
-    width: 678px;
+    width: 666px;
+}
+
+.dlstats-username {
+	word-break:break-all; 
+	word-wrap:break-word;
+	white-space: normal;
+	width: 120px;
 }
