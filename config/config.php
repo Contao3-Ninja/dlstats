@@ -21,8 +21,8 @@
  * @filesource
  */
 
-define('DLSTATS_VERSION', '2.3');
-define('DLSTATS_BUILD'  , '2');
+define('DLSTATS_VERSION', '2.4');
+define('DLSTATS_BUILD'  , '0');
 
 /**
  * -------------------------------------------------------------------------
