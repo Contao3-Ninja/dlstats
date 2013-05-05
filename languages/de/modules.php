@@ -12,4 +12,4 @@
  * Translator: Glen Langer (BugBuster)
  */
  
-$GLOBALS['TL_LANG']['MOD']['dlstats'] = array("Downloadstatistik","Dieses Modul stellt Downloadstatistiken dar.");
+$GLOBALS['TL_LANG']['MOD']['dlstats'] = array("Downloadstatistik","Dieses Modul erfasst Downloads und erstellt Statistiken.");

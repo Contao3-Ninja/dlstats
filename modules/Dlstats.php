@@ -73,10 +73,7 @@ class Dlstats extends DlstatsHelper
 			if ($this->DL_LOG === true)
 			{
 				$this->logDLStats();
-				if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) && $GLOBALS['TL_CONFIG']['dlstatdets'] == true)
-				{
-					$this->logDLStatDetails();
-				}
+				$this->logDLStatDetails();
 			}
 		}
 	}
@@ -110,30 +107,43 @@ class Dlstats extends DlstatsHelper
 	 */
 	protected function logDLStatDetails()
 	{
-		$username = '';
-		$strCookie = 'FE_USER_AUTH';
-		//$hash = sha1(session_id() . $this->IP . $ckie);
-		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->IP : '') . $strCookie);
-		if ($this->Input->cookie($strCookie) == $hash)
-		{
-			$qs = $this->Database->prepare("SELECT pid, tstamp, sessionID, ip FROM `tl_session` WHERE `hash`=? AND `name`=?")
-								 ->execute($hash, $strCookie);
-			if ($qs->next() && 
-				$qs->sessionID == session_id() && 
-				($GLOBALS['TL_CONFIG']['disableIpCheck'] || $qs->ip == $this->IP) && 
-				($qs->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
-			{
-				$qm = $this->Database->prepare("SELECT `username` FROM `tl_member` WHERE id=?")
-									 ->execute($qs->pid);
-				if ($qm->next())
-				{
-					$username = $qm->username;
-				}
-			} // if
-		} // if
-		$this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
-						->set(array('tstamp' => time(), 'pid' => $this->_statId, 'ip' => $this->dlstatsAnonymizeIP(), 'domain' => $this->dlstatsAnonymizeDomain(), 'username' => $username))
-						->execute();
+	    if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) 
+	           && $GLOBALS['TL_CONFIG']['dlstatdets'] == true
+	       )
+	    {
+	        //Maximum details for year & month statistic
+            $username = '';
+    		$strCookie = 'FE_USER_AUTH';
+    		//$hash = sha1(session_id() . $this->IP . $ckie);
+    		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->IP : '') . $strCookie);
+    		if (\Input::cookie($strCookie) == $hash)
+    		{
+    			$qs = $this->Database->prepare("SELECT pid, tstamp, sessionID, ip FROM `tl_session` WHERE `hash`=? AND `name`=?")
+    								 ->execute($hash, $strCookie);
+    			if ($qs->next() && 
+    				$qs->sessionID == session_id() && 
+    				($GLOBALS['TL_CONFIG']['disableIpCheck'] || $qs->ip == $this->IP) && 
+    				($qs->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
+    			{
+    				$qm = $this->Database->prepare("SELECT `username` FROM `tl_member` WHERE id=?")
+    									 ->execute($qs->pid);
+    				if ($qm->next())
+    				{
+    					$username = $qm->username;
+    				}
+    			} // if
+    		} // if
+    		$this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
+    						->set(array('tstamp' => time(), 'pid' => $this->_statId, 'ip' => $this->dlstatsAnonymizeIP(), 'domain' => $this->dlstatsAnonymizeDomain(), 'username' => $username))
+    						->execute();
+	    }
+	    else
+	    {
+	        //Minimum details for year & month statistic
+	        $this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
+                           ->set(array('tstamp' => time(), 'pid' => $this->_statId))
+	                       ->execute();
+	    }
 	}
 
 } // class Dlstats

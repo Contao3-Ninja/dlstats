@@ -19,7 +19,7 @@
  * @filesource
  */
 
-define('DLSTATS_VERSION', '3.1');
+define('DLSTATS_VERSION', '3.2');
 define('DLSTATS_BUILD'  , '0');
 
 /**

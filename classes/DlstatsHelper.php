@@ -116,16 +116,23 @@ class DlstatsHelper extends \Controller
 		
 		// Test for IPv6
 		if (substr_count($UserIP, ":") < 2)
+		{
 			$this->IP_Version = false;
-			return false; // ::1 or 2001::0db8
+			return false; 
+		}
+		// ::1 or 2001::0db8
 		if (substr_count($UserIP, "::") > 1)
+		{
 			$this->IP_Version = false;
 			return false; // one allowed
+		}
 		$groups = explode(':', $UserIP);
 		$num_groups = count($groups);
 		if (($num_groups > 8) || ($num_groups < 3))
+		{
 			$this->IP_Version = false;
 			return false;
+		}
 		$empty_groups = 0;
 		foreach ($groups as $group)
 		{
@@ -133,11 +140,15 @@ class DlstatsHelper extends \Controller
 			if (! empty($group) && ! (is_numeric($group) && ($group == 0)))
 			{
 				if (! preg_match('#([a-fA-F0-9]{0,4})#', $group))
+				{
 					$this->IP_Version = false;
 					return false;
+				}
 			}
 			else
+			{
 				++ $empty_groups;
+			}
 		}
 		if ($empty_groups < $num_groups)
 		{
@@ -422,17 +433,38 @@ class DlstatsHelper extends \Controller
 			// Anonymize is disabled
 			return ($this->IP === false) ? '0.0.0.0' : $this->IP;
 		}
+		// Anonymization is enabled, set default anonymization power
+		if ( !isset($GLOBALS['TL_CONFIG']['dlstatAnonymizeIP4']) )
+		{
+		    $GLOBALS['TL_CONFIG']['dlstatAnonymizeIP4'] = 1;
+		}
+		if ( !isset($GLOBALS['TL_CONFIG']['dlstatAnonymizeIP6']) )
+		{
+		    $GLOBALS['TL_CONFIG']['dlstatAnonymizeIP6'] = 2;
+		}
 		switch ($this->IP_Version)
 		{
 			case "IPv4":
-				$arrIP = explode('.', $this->IP);
+				$arrIP = explode('.', $this->IP); // 0..3
 				$arrIP[3] = 0;
+				if ($GLOBALS['TL_CONFIG']['dlstatAnonymizeIP4'] == 2)
+				{
+				    $arrIP[2] = 0;
+				}
 				return implode('.', $arrIP);
 				break;
 			case "IPv6":
-				$arrIP = explode(':', $this->dlstatsIPv6ExpandNotation($this->IP));
-				$arrIP[7] = 0;
-				$arrIP[8] = 0;
+				$arrIP = explode(':', $this->dlstatsIPv6ExpandNotation($this->IP)); // 0..7
+                $arrIP[7] = 0;
+				$arrIP[6] = 0;
+				if ($GLOBALS['TL_CONFIG']['dlstatAnonymizeIP6'] >= 3)
+				{
+				    $arrIP[5] = 0;
+				}
+				if ($GLOBALS['TL_CONFIG']['dlstatAnonymizeIP6'] == 4)
+				{
+				    $arrIP[4] = 0;
+				}
 				return implode(':', $arrIP);
 				break;
 			default:
@@ -460,11 +492,12 @@ class DlstatsHelper extends \Controller
 			return ($domain == $this->IP) ? '' : $domain;
 		}
 		// Anonymize is enabled
-		$arrURL = explode('.', gethostbyaddr($this->IP));
-		$tld  = array_pop($arrURL);
-		$host = array_pop($arrURL);
-		if (is_numeric($tld) === false)
+		$domain = gethostbyaddr($this->IP);
+		if ($domain != $this->IP) // bei Fehler/keiner Aufloesung kommt IP zurueck
 		{
+		    $arrURL = explode('.', $domain);
+		    $tld  = array_pop($arrURL);
+		    $host = array_pop($arrURL);
 			return (strlen($host)) ? $host . '.' . $tld : $tld;
 		}
 		else

@@ -31,6 +31,12 @@ class ModuleDlstatsStatistics extends \BackendModule
      * @var string
      */
     protected $strTemplate = 'mod_dlstats_be_statistics';
+    
+    /**
+     * Detailed Statistic
+     * @var boolean
+     */
+    protected $boolDetails = true;
 
     /**
      * Constructor
@@ -53,8 +59,11 @@ class ModuleDlstatsStatistics extends \BackendModule
         $this->loadLanguageFile('tl_dlstatstatistics_stat');
         
         $this->Template->href   = $this->getReferer(true);
-        $this->Template->title  = specialchars($GLOBALS['TL_LANG']['MSC']['backBT']);
-        $this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
+        $this->Template->status_counting = $this->getStatusCounting();
+        $this->Template->status_detailed = $this->getStatusDetailed();
+        $this->Template->status_anonymization = $this->getStatusAnonymization();
+        $this->Template->boolDetails = $this->boolDetails;
+        
         $this->Template->theme  = $this->getTheme();
 
         $this->Template->arrStatMonth     = $this->getMonth();
@@ -79,8 +88,56 @@ class ModuleDlstatsStatistics extends \BackendModule
     }
     
     /**
-     * Monatsstatistik
-     * @return array:
+     * Get Counting Status
+     * @return string
+     */
+    protected function getStatusCounting()
+    {
+        if ( isset($GLOBALS['TL_CONFIG']['dlstats']) 
+                && $GLOBALS['TL_CONFIG']['dlstats'] == true  
+           ) 
+        {
+            return '<span class="tl_green">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'].'</span>';
+        }
+        return '<span class="tl_red">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_deactivated'].'</span>';
+    }
+    
+    /**
+     * Get Detailed Logging Status
+     * @return string
+     */
+    protected function getStatusDetailed()
+    {
+        if ( isset($GLOBALS['TL_CONFIG']['dlstats']) 
+                && $GLOBALS['TL_CONFIG']['dlstats'] == true
+          && isset($GLOBALS['TL_CONFIG']['dlstatdets'])
+                && $GLOBALS['TL_CONFIG']['dlstatdets'] == true
+           )
+        {
+            return '<span class="tl_green">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'].'</span>';
+        }
+        $this->boolDetails = false;
+        return '<span class="tl_red">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_deactivated'].'</span>';
+    }
+    
+    /**
+     * Get Status Anonymization
+     * @return string
+     */
+    protected function getStatusAnonymization()
+    {
+        if ( isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp'])
+                && $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] == true
+        )
+        {
+            return $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'];
+        }
+        return $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_deactivated'];
+    }
+    
+    /**
+     * Monthly Statistics, last 12 Months
+     * @return array
      */
     protected function getMonth()
     {
@@ -109,8 +166,8 @@ class ModuleDlstatsStatistics extends \BackendModule
     }
     
     /**
-     * Jahresstatistik
-     * @return array:
+     * Years Statistic, last 12 years
+     * @return array
      */
     protected function getYear()
     {
@@ -137,6 +194,10 @@ class ModuleDlstatsStatistics extends \BackendModule
         return $arrYear;
     }
     
+    /**
+     * Total Downloads
+     * @return number
+     */
     protected function getTotalDownloads()
     {
         $totalDownloads = 0;
@@ -153,7 +214,11 @@ class ModuleDlstatsStatistics extends \BackendModule
         
         return $totalDownloads;
     }
-
+    
+    /**
+     * Get Startdate of detailed logging
+     * @return string    Date
+     */
     protected function getStartDate()
     {
         $StartDate = false;
@@ -171,6 +236,11 @@ class ModuleDlstatsStatistics extends \BackendModule
         return $StartDate;
     }
     
+    /**
+     * Get TOP Downloadlist
+     * @param number $limit    optional
+     * @return array    $arrTopDownloads
+     */
     protected function getTopDownloads($limit=20)
     {
         $arrTopDownloads = array();
@@ -197,6 +267,11 @@ class ModuleDlstatsStatistics extends \BackendModule
         return $arrTopDownloads;
     }
     
+    /**
+     * Get Last Downloadslist
+     * @param numbner $limit    optional
+     * @return array    $arrLastDownloads
+     */
     protected function getLastDownloads($limit=20)
     {
         $newDate = '02.02.1971';
@@ -234,6 +309,11 @@ class ModuleDlstatsStatistics extends \BackendModule
         return $arrLastDownloads;
     }
     
+    /**
+     * Get Number of Logged Details
+     * @param number $id    pid of file
+     * @return number
+     */
     protected function check4details($id)
     {
         $objC4D = $this->Database->prepare("SELECT count(`id`)  AS num

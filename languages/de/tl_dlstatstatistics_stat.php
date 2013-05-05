@@ -11,10 +11,15 @@
  * Translator: Glen Langer (BugBuster)
  */
  
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_counting']      = 'Downloads zählen';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_detailed']      = 'Detailerfassung';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_anonymization'] = 'Anonymisierung';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated']     = 'aktiviert';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_deactivated']   = 'deaktiviert';
+
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['no_data']         = 'Keine Statistik Daten vorhanden.';
-$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['no_data_details'] = 'Detaillierte Downloadstatistiken aktivieren für Jahres- und Monatsstatistik!';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['name']            = 'Downloadstatistik';
-$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['startdate']       = 'Zählung seit';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['startdate']       = 'Detailerfassung seit';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['reset']           = 'Rücksetzung';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['total_dl']        = 'Gesamtzahl Downloads';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero']            = 'Z&auml;hler und Statistiken auf 0 setzen.';
