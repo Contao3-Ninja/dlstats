@@ -81,31 +81,31 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
         $this->TemplatePartial->DlstatsDetailList  = '<div class="tl_header" style="">'."\n";
         
         $this->TemplatePartial->DlstatsDetailList .= '<table class="tl_header_table">
-            <tbody>
-                <tr>
-                    <td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename'].':</span> </td>
-                    <td>'.$arrDlstats['filename'].'</td>
-                </tr>
-                <tr>
-                    <td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download'].':</span> </td>
-                    <td>'.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrDlstats['tstamp']).'</td>
-                </tr>
-                <tr>
-                    <td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads'].':</span> </td>
-                    <td>'.$arrDlstats['downloads'].'</td>
-                </tr>
-            </tbody>
-            </table>
-        </div>'."\n";
-        
+	<tbody>
+		<tr>
+			<td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename'].':</span> </td>
+			<td>'.$arrDlstats['filename'].'</td>
+		</tr>
+		<tr>
+			<td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download'].':</span> </td>
+			<td>'.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrDlstats['tstamp']).'</td>
+		</tr>
+		<tr>
+			<td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads'].':</span> </td>
+			<td>'.$arrDlstats['downloads'].'</td>
+		</tr>
+	</tbody>
+	</table>
+</div>
+';
         $this->TemplatePartial->DlstatsDetailList .= '<div class="tl_content" style="">
-             <div class="dlstatdets">
-                <span class="dlstats-timestamp dlstats-left" style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp'].'</span>
-                <span class="dlstats-ip dlstats-left"        style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip'].'</span>
-                <span class="dlstats-username dlstats-left"  style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username'].'</span>
-            </div>
-        </div>'."\n";
-        
+	 <div class="dlstatdets">
+		<span class="dlstats-timestamp dlstats-left" style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp'].'</span>
+		<span class="dlstats-ip dlstats-left"        style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip'].'</span>
+		<span class="dlstats-username dlstats-left"  style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username'].'</span>
+	</div>
+</div>
+';
         $this->TemplatePartial->DlstatsDetailList .= '<div class="dlstatdetailcontent" style="">';
         $objDetails = $this->Database->prepare("SELECT `tstamp` , `ip` , `domain` , `username`
                                                 FROM `tl_dlstatdets`
@@ -127,10 +127,11 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
                     $un = $objDetails->username;
                 } 
                 $this->TemplatePartial->DlstatsDetailList .=  '<div class="dlstatdetaillist">
-                    <span class="dlstats-timestamp dlstats-left">'.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objDetails->tstamp).'</span>
-                    <span class="dlstats-ip        dlstats-left">'.$objDetails->ip.'<br>'.$objDetails->domain.'</span>
-                    <span class="dlstats-username  dlstats-left">'.$un.'</span>
-                </div>'."\n";
+	<span class="dlstats-timestamp dlstats-left">'.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objDetails->tstamp).'</span>
+	<span class="dlstats-ip        dlstats-left">'.$objDetails->ip.'<br>'.$objDetails->domain.'</span>
+	<span class="dlstats-username  dlstats-left">'.$un.'</span>
+</div>
+';
             }
         }
         
