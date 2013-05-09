@@ -20,7 +20,7 @@
  */
 
 define('DLSTATS_VERSION', '3.2');
-define('DLSTATS_BUILD'  , '0');
+define('DLSTATS_BUILD'  , '1');
 
 /**
  * -------------------------------------------------------------------------
