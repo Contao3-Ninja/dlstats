@@ -94,7 +94,7 @@ class Dlstats extends DlstatsHelper
 		}
 		else
 		{
-			$q = $this->Database->prepare("INSERT INTO `tl_dlstats` %s")
+			$q = $this->Database->prepare("INSERT IGNORE INTO `tl_dlstats` %s")
 								->set(array('tstamp' => time(), 'filename' => $this->_filename, 'downloads' => 1))
 								->execute();
 			$this->_statId = $q->insertId;
