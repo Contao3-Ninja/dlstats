@@ -117,7 +117,7 @@ class ModuleDlstatsStatistics extends \BackendModule
             return '<span class="tl_green">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'].'</span>';
         }
         $this->boolDetails = false;
-        return '<span class="tl_red">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_deactivated'].'</span>';
+        return '<span class="">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_deactivated'].'</span>';
     }
     
     /**
