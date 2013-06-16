@@ -20,7 +20,7 @@
 	<tbody>
 	<tr>
 	    <td style="width: 380px; padding-left: 2px;"                     class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['name']; ?></td>
-	    <td style="width: 120px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['startdate']; ?></td>
+	    <td style="width: 120px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo ($this->startdate) ? $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['startdate'] : ' '; ?></td>
 	    <td style="padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
 	    <td style="width: 80px;  padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['reset']; ?></td>
 	    <td style="width: 40px;  padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>

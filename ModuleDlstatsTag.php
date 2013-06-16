@@ -72,7 +72,7 @@ class ModuleDlstatsTag extends Frontend
 			$objDlstats = $this->Database->prepare("SELECT downloads" 
 												. " FROM tl_dlstats" 
 												. " WHERE filename=?")
-										->executeUncached($arrTag[2]);
+										->executeUncached(urldecode($arrTag[2]));
 			if ($objDlstats->numRows < 1)
 			{
 				return 0;
