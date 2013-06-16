@@ -72,13 +72,15 @@ class ModuleDlstatsTag extends \Frontend
 		{
 			$arrTag[2] = substr($arrTag[2], strpos($arrTag[2], 'file=') + 5);
 		}
-		$this->import('Database');
 		if ($arrTag[1] == 'totaldownloads')
 		{
-			$objDlstats = $this->Database->prepare("SELECT downloads" 
-												. " FROM tl_dlstats" 
-												. " WHERE filename=?")
-										->executeUncached($arrTag[2]);
+			$objDlstats = \Database::getInstance()->prepare("SELECT 
+                                                                    `downloads`
+                                                             FROM
+                                                                    `tl_dlstats`
+                                                             WHERE
+                                                                    `filename` = ?")
+                                    ->executeUncached(urldecode($arrTag[2]));
 			if ($objDlstats->numRows < 1)
 			{
 				return 0;
