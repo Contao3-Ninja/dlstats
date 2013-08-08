@@ -40,6 +40,7 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
     {
         $this->import('BackendUser', 'User');
         parent::__construct();
+        $this->loadLanguageFile('default'); // for $GLOBALS['TL_LANG']['MONTHS'][..]
     }
     
     
@@ -72,9 +73,38 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
                      'downloads' => $objDlstats->downloads);
     }
     
+    protected function getDlstatsMonth($dlstatsid)
+    {
+        $arrMonth = array();
+        $objMonth = $this->Database->prepare("SELECT 
+                                                FROM_UNIXTIME(tstamp, '%Y-%m') AS YM
+                                                , COUNT(`id`) AS SUMDL
+                                              FROM
+                                                `tl_dlstatdets`
+                                              WHERE
+                                                `pid`=?
+                                              GROUP BY YM
+                                              ORDER BY YM DESC")
+                                  ->limit(4)
+                                  ->execute($dlstatsid);
+        $intRows = $objMonth->numRows;
+        if ($intRows>0)
+        {
+            while ($objMonth->next())
+            {
+                $Y = substr($objMonth->YM, 0,4);
+                $M = (int)substr($objMonth->YM, -2);
+                $arrMonth[] = array($Y.' '.$GLOBALS['TL_LANG']['MONTHS'][($M - 1)], $this->getFormattedNumber($objMonth->SUMDL,0) );
+            }
+        }
+
+        return $arrMonth;
+    }
+    
     protected function getDlstatsDetailsTopLastDownloads($action,$dlstatsid)
     {
-        $arrDlstats = $this->getDlstats($dlstatsid);
+        $arrDlstats      = $this->getDlstats($dlstatsid);
+        $arrDlstatsMonth = $this->getDlstatsMonth($dlstatsid);
         
         $this->TemplatePartial = new \BackendTemplate('mod_dlstats_be_partial_details');
         
@@ -84,21 +114,39 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
 	<tbody>
 		<tr>
 			<td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename'].':</span> </td>
-			<td>'.$arrDlstats['filename'].'</td>
+			<td colspan="3">'.$arrDlstats['filename'].'</td>
 		</tr>
 		<tr>
 			<td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download'].':</span> </td>
 			<td>'.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrDlstats['tstamp']).'</td>
-		</tr>
-		<tr>
-			<td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads'].':</span> </td>
+			<td><span class="tl_label" style="padding-left: 16px; margin-right: 6px;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['total_dl'].':</span></td>
 			<td>'.$arrDlstats['downloads'].'</td>
 		</tr>
-	</tbody>
+        <tr><td style="line-height: 6px;" colspan="4">&nbsp;</td></tr>
+	    <tr>
+            <td><span class="tl_label">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads'].':&nbsp;<span title="'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['total_dl_month'].'"><sup style="font-weight:normal;">(?)</sup></span></span></td>
+			<td class="tl_label" style="width:     120px; padding-left:  2px; text-align: left;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['period'].':</td>
+			<td class="tl_label" style="min-width: 120px; padding-right: 6px; text-align: right;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads'].':</td>
+            <td>&nbsp;</td>
+		</tr>
+';
+	foreach ($arrDlstatsMonth AS $Month)
+		{
+			$this->TemplatePartial->DlstatsDetailList .= '<tr>
+			    <td>&nbsp;</td>
+			    <td style="padding-left: 2px; text-align: left;"  class="tl_file_list">'.$Month[0].'</td>
+			    <td style="padding-left: 2px; padding-right: 6px; text-align: right;" class="tl_file_list">'.$Month[1].'</td>
+                <td>&nbsp;</td>
+			</tr>
+';
+        }
+        $this->TemplatePartial->DlstatsDetailList .= '
+    </tbody>
 	</table>
 </div>
 ';
-        $this->TemplatePartial->DlstatsDetailList .= '<div class="tl_content" style="">
+
+        $this->TemplatePartial->DlstatsDetailList .= '<div class="tl_content" style="margin-top: 10px;">
 	 <div class="dlstatdets">
 		<span class="dlstats-timestamp dlstats-left" style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp'].'</span>
 		<span class="dlstats-ip dlstats-left"        style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip'].'</span>

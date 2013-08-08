@@ -30,6 +30,7 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']        = 'Dateiname'
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']   = 'Letzter Download';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']   = 'Downloads TOP 20';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads'] = 'Die letzten 20 Downloads';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['total_dl_month']    = 'Anzahl der Downloads in den letzten 4 Monaten';
 
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['modname']      = 'dlstats Modul';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['footer']       = '';

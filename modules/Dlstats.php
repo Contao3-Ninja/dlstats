@@ -60,7 +60,7 @@ class Dlstats extends DlstatsHelper
 	}
 
 	/**
-	 * Log the download
+	 * Log the download over $GLOBALS['TL_HOOKS']['postDownload']
 	 * @param	string	$fileName	Filename, Hook Parameter
 	 * @return void
 	 */
