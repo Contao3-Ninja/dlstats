@@ -19,7 +19,17 @@
 }
 
 .dlstats-ip {
-	width:400px;
+    word-break:break-all; 
+    word-wrap:break-word;
+    white-space: normal;
+	width:200px;
+}
+
+.dlstats-hostalias {
+    word-break:break-all; 
+    word-wrap:break-word;
+    white-space: normal;
+	width:200px;
 }
 
 .dlstatdets {

@@ -36,9 +36,13 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['modname']      = 'dlstats Modul
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['footer']       = '';
 
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['wrong_parameter'] = 'Fehlerhafte oder falsche Parameter';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['aliasnotfound']   = "Alias nicht gefunden";
 
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord'] = 'Details des Datensatzes anzeigen';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp']     = "Datum / Uhrzeit";
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip']         = "IP-Adresse / Domain";
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias']  = "Host / Seitenalias";
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username']   = "Benutzername";
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside'] = "Client-Seite";
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['serverside'] = "Server-Seite";
 

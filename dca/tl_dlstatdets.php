@@ -68,6 +68,14 @@ $GLOBALS['TL_DCA']['tl_dlstatdets'] = array
         'domain' => array
         (
             'sql'       => "varchar(64) NOT NULL default ''"
+        ),
+        'page_host' => array
+        (
+            'sql'       => "varchar(255) NOT NULL default ''"
+        ),
+        'page_id' => array
+        (
+            'sql'       => "int(10) unsigned NOT NULL default '0'"
         )
     )
 );

@@ -149,13 +149,14 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
         $this->TemplatePartial->DlstatsDetailList .= '<div class="tl_content" style="margin-top: 10px;">
 	 <div class="dlstatdets">
 		<span class="dlstats-timestamp dlstats-left" style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp'].'</span>
-		<span class="dlstats-ip dlstats-left"        style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip'].'</span>
+		<span class="dlstats-ip dlstats-left"        style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip'].'<span title="'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside'].'"><sup style="font-weight:normal;">(?)</sup></span></span>
+		<span class="dlstats-hostalias dlstats-left" style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias'].'<span title="'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['serverside'].'"><sup style="font-weight:normal;">(?)</sup></span></span>
 		<span class="dlstats-username dlstats-left"  style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username'].'</span>
 	</div>
 </div>
 ';
         $this->TemplatePartial->DlstatsDetailList .= '<div class="dlstatdetailcontent" style="">';
-        $objDetails = $this->Database->prepare("SELECT `tstamp` , `ip` , `domain` , `username`
+        $objDetails = $this->Database->prepare("SELECT `tstamp` , `ip` , `domain` , `username`, `page_host`, `page_id`
                                                 FROM `tl_dlstatdets`
                                                 WHERE `pid`=?
                                                 ORDER BY `id` DESC")
@@ -174,9 +175,13 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
                 {
                     $un = $objDetails->username;
                 } 
+                //Alias Name holen über ID
+                $page_alias = $this->getPageAliasById($objDetails->page_id);
+                
                 $this->TemplatePartial->DlstatsDetailList .=  '<div class="dlstatdetaillist">
 	<span class="dlstats-timestamp dlstats-left">'.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objDetails->tstamp).'</span>
 	<span class="dlstats-ip        dlstats-left">'.$objDetails->ip.'<br>'.$objDetails->domain.'</span>
+	<span class="dlstats-hostalias dlstats-left">'.$objDetails->page_host.'<br>'.$page_alias.'</span>
 	<span class="dlstats-username  dlstats-left">'.$un.'</span>
 </div>
 ';
@@ -185,9 +190,32 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
         
         $this->TemplatePartial->DlstatsDetailList .= '</div>'."\n";
         
-        
-        
         return $this->TemplatePartial->parse();
+    }
+    
+    protected function getPageAliasById($page_id)
+    {
+        if ($page_id == 0) 
+        {
+            return '';
+        }
+        $objAlias = $this->Database->prepare("SELECT
+                                                `alias`
+                                              FROM
+                                                `tl_page`
+                                              WHERE
+                                                `id`=?")
+                                  ->limit(1)
+                                  ->execute($page_id);
+        $intRows = $objAlias->numRows;
+        if ($intRows>0)
+        {
+            return $objAlias->alias;
+        }
+        else 
+        {
+            return $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['aliasnotfound'];
+        }
     }
     
     

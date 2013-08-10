@@ -107,6 +107,11 @@ class Dlstats extends DlstatsHelper
 	 */
 	protected function logDLStatDetails()
 	{
+	    //Host / Page ID ermitteln
+	    global $objPage;
+	    $pageId = $objPage->id; // ID der grad aufgerufenden Seite.
+	    $pageHost = \Environment::get('host'); // Host der grad aufgerufenden Seite.
+	    
 	    if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) 
 	           && $GLOBALS['TL_CONFIG']['dlstatdets'] == true
 	       )
@@ -133,15 +138,27 @@ class Dlstats extends DlstatsHelper
     				}
     			} // if
     		} // if
+
     		$this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
-    						->set(array('tstamp' => time(), 'pid' => $this->_statId, 'ip' => $this->dlstatsAnonymizeIP(), 'domain' => $this->dlstatsAnonymizeDomain(), 'username' => $username))
+    						->set(array('tstamp'    => time(), 
+    						            'pid'       => $this->_statId, 
+    						            'ip'        => $this->dlstatsAnonymizeIP(), 
+    						            'domain'    => $this->dlstatsAnonymizeDomain(), 
+    						            'username'  => $username,
+    						            'page_host' => $pageHost,
+    						            'page_id'   => $pageId
+    						            )
+    						        )
     						->execute();
 	    }
 	    else
 	    {
 	        //Minimum details for year & month statistic
 	        $this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
-                           ->set(array('tstamp' => time(), 'pid' => $this->_statId))
+                           ->set(array('tstamp'    => time(), 
+                                       'pid'       => $this->_statId
+                                      )
+                                   )
 	                       ->execute();
 	    }
 	}
