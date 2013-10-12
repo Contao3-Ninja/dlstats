@@ -23,7 +23,15 @@ namespace BugBuster\DLStats;
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require('../../../initialize.php');
+// ER2 / ER3 
+if (file_exists('../../../initialize.php'))
+{
+    require('../../../initialize.php');
+}
+else 
+{
+    require('../../../../../system/initialize.php');
+}
 
 /**
  * Class BotStatisticsDetails
