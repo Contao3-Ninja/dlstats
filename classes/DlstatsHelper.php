@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
- * Modul Download Statistics, Helperclass
+ * Module Download Statistics, Helperclass
  *
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2012
- * @author     BugBuster
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
  * @filesource
+ * @see	       https://github.com/BugBuster1701/dlstats
  */
 
 /**
@@ -23,8 +23,8 @@ namespace BugBuster\DLStats;
 /**
  * Class DlstatsHelper
  * 
- * @copyright  Glen Langer 2012
- * @author     Glen Langer 
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
  */

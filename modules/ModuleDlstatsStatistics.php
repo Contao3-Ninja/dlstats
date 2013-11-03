@@ -5,11 +5,12 @@
  * Module Download Statistics
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2011..2013
- * @author     BugBuster
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
  * @filesource
+ * @see	       https://github.com/BugBuster1701/dlstats
  */
 
 /**
@@ -20,8 +21,8 @@ namespace BugBuster\DLStats;
 /**
  * Class ModuleDlstatsStatistics
  *
- * @copyright  Glen Langer (BugBuster) 2011..2013
- * @author     BugBuster
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  */
 class ModuleDlstatsStatistics extends \BackendModule

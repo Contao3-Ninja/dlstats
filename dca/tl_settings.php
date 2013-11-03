@@ -1,8 +1,7 @@
 <?php 
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
  * Module Download Statistics
  *
@@ -12,11 +11,12 @@
  * Extends module tl_settings.
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2012
- * @author     BugBuster
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
  * @filesource
+ * @see	       https://github.com/BugBuster1701/dlstats
  */
 
 /**

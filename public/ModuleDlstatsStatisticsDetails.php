@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  *
- * Module BotStatistics Stat - Backend
- * Botstatistic details
- *  
- * @copyright  Glen Langer 2012 <http://www.contao.glen-langer.de>
+ * Modul Download Statistics Details - Backend
+ *
+ * 
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
  * @author     Glen Langer (BugBuster)
- * @package    BotStatistics
+ * @package    GLDLStats
  * @license    LGPL
  * @filesource
- * @see        https://github.com/BugBuster1701/botstatistics
+ * @see	       https://github.com/BugBuster1701/dlstats
  */
 
 /**
