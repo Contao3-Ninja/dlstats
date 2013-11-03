@@ -398,9 +398,10 @@ class DlstatsHelper extends \Controller
 		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
 		if (\Input::cookie($strCookie) == $hash)
 		{
-			$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
-											->limit(1)
-											->execute($hash, $strCookie);
+			$objSession = \Database::getInstance()
+                                ->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
+                                ->limit(1)
+                                ->execute($hash, $strCookie);
 			if ($objSession->numRows && 
 				$objSession->sessionID == session_id() && 
 				//$objSession->ip == $this->Environment->ip &&
@@ -514,6 +515,11 @@ class DlstatsHelper extends \Controller
 	 */
 	protected function CheckBot()
 	{
+	    if (!in_array('botdetection', \Config::getInstance()->getActiveModules() ))
+	    {
+	        //botdetection Modul fehlt, trotzdem zählen, Meldung kommt bereits per Hook
+	        return true;
+	    }
 		// Import Helperclass ModuleBotDetection
 		$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection'); //Workaround for $this->ModuleBotDetection->...
 		//Call BD_CheckBotAgent

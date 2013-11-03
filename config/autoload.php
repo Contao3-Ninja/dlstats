@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Dlstats
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -35,6 +35,7 @@ ClassLoader::addClasses(array
 
 	// Classes
 	'BugBuster\DLStats\ModuleDlstatsStatisticsHelper'  => 'system/modules/dlstats/classes/ModuleDlstatsStatisticsHelper.php',
+	'BugBuster\DLStats\DlstatsCheck'                   => 'system/modules/dlstats/classes/DlstatsCheck.php',
 	'BugBuster\DLStats\DlstatsHelper'                  => 'system/modules/dlstats/classes/DlstatsHelper.php',
 ));
 
@@ -44,6 +45,6 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_dlstats_be_partial_details' => 'system/modules/dlstats/templates',
 	'mod_dlstats_be_statistics'      => 'system/modules/dlstats/templates',
+	'mod_dlstats_be_partial_details' => 'system/modules/dlstats/templates',
 ));
