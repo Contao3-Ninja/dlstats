@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
- * Modul Download Statistics, Helperclass
+ * Module Download Statistics, Helperclass
  *
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2012
- * @author     BugBuster
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
  * @filesource
+ * @see	       https://github.com/BugBuster1701/dlstats
  */
 
 /**
@@ -23,8 +23,8 @@ namespace BugBuster\DLStats;
 /**
  * Class DlstatsHelper
  * 
- * @copyright  Glen Langer 2012
- * @author     Glen Langer 
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
  */
@@ -398,9 +398,10 @@ class DlstatsHelper extends \Controller
 		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
 		if (\Input::cookie($strCookie) == $hash)
 		{
-			$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
-											->limit(1)
-											->execute($hash, $strCookie);
+			$objSession = \Database::getInstance()
+                                ->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
+                                ->limit(1)
+                                ->execute($hash, $strCookie);
 			if ($objSession->numRows && 
 				$objSession->sessionID == session_id() && 
 				//$objSession->ip == $this->Environment->ip &&
@@ -514,6 +515,11 @@ class DlstatsHelper extends \Controller
 	 */
 	protected function CheckBot()
 	{
+	    if (!in_array('botdetection', \Config::getInstance()->getActiveModules() ))
+	    {
+	        //botdetection Modul fehlt, trotzdem zählen, Meldung kommt bereits per Hook
+	        return true;
+	    }
 		// Import Helperclass ModuleBotDetection
 		$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection'); //Workaround for $this->ModuleBotDetection->...
 		//Call BD_CheckBotAgent

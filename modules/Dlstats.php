@@ -1,24 +1,22 @@
 <?php 
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
  * Modul Download Statistics
  *
  * Log file downloads done by the content elements Download and Downloads, 
  * and show statistics in the backend. 
  *
- *
- * ----- Derived from dlstats 1.0.0 (2009-06-11) -----
- * ---------- Peter Koch (acenes) 2007-2009 ----------
  * 
  * PHP version 5
- * @copyright  Glen Langer (BugBuster) 2012
- * @author     BugBuster
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
+ * @author     Peter Koch (acenes) 2007-2009
  * @package    GLDLStats
  * @license    LGPL
  * @filesource
+ * @see	       https://github.com/BugBuster1701/dlstats
  */
 
 /**
@@ -29,8 +27,8 @@ namespace BugBuster\DLStats;
 /**
  * Class Dlstats
  * 
- * @copyright  Glen Langer 2012
- * @author     Glen Langer 
+ * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
  */
