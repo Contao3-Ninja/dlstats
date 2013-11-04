@@ -7,9 +7,6 @@
  * Log file downloads done by the content elements Download and Downloads 
  * and show statistics in the backend. 
  *
- *
- * ----- Derived from dlstats 1.0.0 (2009-06-11) -----
- * ---------- Peter Koch (acenes) 2007-2009 ----------
  * 
  * Module configuration file.
  * 
@@ -22,7 +19,7 @@
  */
 
 define('DLSTATS_VERSION', '2.4');
-define('DLSTATS_BUILD'  , '1');
+define('DLSTATS_BUILD'  , '2');
 
 /**
  * -------------------------------------------------------------------------
@@ -40,6 +37,7 @@ $GLOBALS['BE_MOD']['content']['dlstats'] = array
  * HOOKS
  * -------------------------------------------------------------------------
  */
+$GLOBALS['TL_HOOKS']['parseBackendTemplate'][]  = array('DlstatsCheck', 'checkExtensions');
 $GLOBALS['TL_HOOKS']['postDownload'][] = array('Dlstats', 'logDownload');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('ModuleDlstatsTag', 'DlstatsReplaceInsertTags');
 

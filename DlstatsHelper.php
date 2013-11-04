@@ -510,6 +510,12 @@ class DlstatsHelper extends Controller
 	protected function CheckBot()
 	{
 		// Import Helperclass ModuleBotDetection
+	    if (!in_array('botdetection', $this->Config->getActiveModules() ))
+	    {
+	        //botdetection Modul fehlt, trotzdem zählen, Meldung kommt bereits per Hook
+	        return true;
+	    }
+	    
 		$this->import('ModuleBotDetection');
 		//Call BD_CheckBotAgent
 		$test01 = $this->ModuleBotDetection->BD_CheckBotAgent();
