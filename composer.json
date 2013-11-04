@@ -15,7 +15,9 @@
 	"support":{
 		"issues":"https://github.com/BugBuster1701/dlstats/issues",
 		"irc":"irc://irc.freenode.org/contao.dev",
-		"source":"https://github.com/BugBuster1701/dlstats"
+		"source":"https://github.com/BugBuster1701/dlstats",
+		"wiki":"http://de.contaowiki.org/Dlstats",
+		"forum":"https://community.contao.org/de/forumdisplay.php?119-Sonstige-Erweiterungen"
 	},
 	"require":{
 		"php":">=5.3",
