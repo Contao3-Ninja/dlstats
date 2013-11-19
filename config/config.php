@@ -20,8 +20,8 @@
  * @see	       https://github.com/BugBuster1701/dlstats
  */
 
-define('DLSTATS_VERSION', '3.4');
-define('DLSTATS_BUILD'  , '3');
+define('DLSTATS_VERSION', '3.5');
+define('DLSTATS_BUILD'  , '0');
 
 /**
  * -------------------------------------------------------------------------

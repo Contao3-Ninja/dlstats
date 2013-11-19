@@ -50,6 +50,10 @@ class ModuleDlstatsStatistics extends \BackendModule
         {
             $this->setZero();
         }
+        if (\Input::get('act',true)=='delete')
+        {
+            $this->deleteCounter();
+        }
     }
     
     /**
@@ -85,6 +89,22 @@ class ModuleDlstatsStatistics extends \BackendModule
     {
         $this->Database->prepare("TRUNCATE TABLE tl_dlstatdets")->execute();
         $this->Database->prepare("TRUNCATE TABLE tl_dlstats")->execute();
+        return ;
+    }
+    
+    /**
+     * Delete a counter
+     */
+    protected function deleteCounter()
+    {
+        if ( is_null( \Input::get('dlstatsid',true) ) ) 
+        {
+            return ;
+        }
+        $this->Database->prepare("DELETE FROM tl_dlstatdets WHERE pid=?")
+                        ->execute(\Input::get('dlstatsid',true));
+        $this->Database->prepare("DELETE FROM tl_dlstats    WHERE  id=?")
+                        ->execute(\Input::get('dlstatsid',true));
         return ;
     }
     
