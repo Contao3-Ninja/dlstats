@@ -1,7 +1,7 @@
 {
 	"name":"bugbuster/dlstats",
 	"description":"Contao module, counts the number of file downloads ",
-	"keywords":["downloads","counter"],
+	"keywords":["contao","downloads","counter"],
 	"type":"contao-module",
 	"homepage":"http://www.contao.glen-langer.de",
 	"license":"LGPL-3.0+",
