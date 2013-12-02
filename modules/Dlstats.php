@@ -52,9 +52,7 @@ class Dlstats extends DlstatsHelper
 	 */
 	protected function __construct()
 	{
-		$this->import('Database');
 		parent::__construct();
-		
 	}
 
 	/**
@@ -82,19 +80,22 @@ class Dlstats extends DlstatsHelper
 	 */
 	protected function logDLStats()
 	{
-		$q = $this->Database->prepare("SELECT id FROM `tl_dlstats` WHERE `filename`=?")
-							->execute($this->_filename);
+		$q = \Database::getInstance()->prepare("SELECT id FROM `tl_dlstats` WHERE `filename`=?")
+                                     ->execute($this->_filename);
 		if ($q->next())
 		{
 			$this->_statId = $q->id;
-			$this->Database->prepare("UPDATE `tl_dlstats` SET `tstamp`=?, `downloads`=`downloads`+1 WHERE `id`=?")
-							->execute(time(), $this->_statId);
+			\Database::getInstance()->prepare("UPDATE `tl_dlstats` SET `tstamp`=?, `downloads`=`downloads`+1 WHERE `id`=?")
+                                    ->execute(time(), $this->_statId);
 		}
 		else
 		{
-			$q = $this->Database->prepare("INSERT IGNORE INTO `tl_dlstats` %s")
-								->set(array('tstamp' => time(), 'filename' => $this->_filename, 'downloads' => 1))
-								->execute();
+			$q = \Database::getInstance()->prepare("INSERT IGNORE INTO `tl_dlstats` %s")
+                                         ->set(array('tstamp' => time(), 
+                                                     'filename' => $this->_filename, 
+                                                     'downloads' => 1)
+                                              )
+                                         ->execute();
 			$this->_statId = $q->insertId;
 		} // if
 	}
@@ -121,15 +122,17 @@ class Dlstats extends DlstatsHelper
     		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->IP : '') . $strCookie);
     		if (\Input::cookie($strCookie) == $hash)
     		{
-    			$qs = $this->Database->prepare("SELECT pid, tstamp, sessionID, ip FROM `tl_session` WHERE `hash`=? AND `name`=?")
-    								 ->execute($hash, $strCookie);
+    			$qs = \Database::getInstance()->prepare("SELECT pid, tstamp, sessionID, ip 
+                                                         FROM `tl_session` WHERE `hash`=? AND `name`=?")
+                                              ->execute($hash, $strCookie);
     			if ($qs->next() && 
     				$qs->sessionID == session_id() && 
     				($GLOBALS['TL_CONFIG']['disableIpCheck'] || $qs->ip == $this->IP) && 
     				($qs->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
     			{
-    				$qm = $this->Database->prepare("SELECT `username` FROM `tl_member` WHERE id=?")
-    									 ->execute($qs->pid);
+    				$qm = \Database::getInstance()->prepare("SELECT `username` 
+                                                             FROM `tl_member` WHERE id=?")
+                                                  ->execute($qs->pid);
     				if ($qm->next())
     				{
     					$username = $qm->username;
@@ -137,27 +140,27 @@ class Dlstats extends DlstatsHelper
     			} // if
     		} // if
 
-    		$this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
-    						->set(array('tstamp'    => time(), 
-    						            'pid'       => $this->_statId, 
-    						            'ip'        => $this->dlstatsAnonymizeIP(), 
-    						            'domain'    => $this->dlstatsAnonymizeDomain(), 
-    						            'username'  => $username,
-    						            'page_host' => $pageHost,
-    						            'page_id'   => $pageId
-    						            )
-    						        )
-    						->execute();
+    		\Database::getInstance()->prepare("INSERT INTO `tl_dlstatdets` %s")
+            						->set(array('tstamp'    => time(), 
+            						            'pid'       => $this->_statId, 
+            						            'ip'        => $this->dlstatsAnonymizeIP(), 
+            						            'domain'    => $this->dlstatsAnonymizeDomain(), 
+            						            'username'  => $username,
+            						            'page_host' => $pageHost,
+            						            'page_id'   => $pageId
+            						            )
+            						        )
+                                    ->execute();
 	    }
 	    else
 	    {
 	        //Minimum details for year & month statistic
-	        $this->Database->prepare("INSERT INTO `tl_dlstatdets` %s")
-                           ->set(array('tstamp'    => time(), 
-                                       'pid'       => $this->_statId
-                                      )
-                                   )
-	                       ->execute();
+	        \Database::getInstance()->prepare("INSERT INTO `tl_dlstatdets` %s")
+                                    ->set(array('tstamp'    => time(), 
+                                                'pid'       => $this->_statId
+                                               )
+                                         )
+                                    ->execute();
 	    }
 	}
 
