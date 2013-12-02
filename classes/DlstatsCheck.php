@@ -68,6 +68,12 @@ class DlstatsCheck extends \System
     {
         if ($strTemplate == 'be_main')
         {
+            if ( isset($GLOBALS['TL_CONFIG']['dlstatDisableBotdetection']) &&
+                       $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] == true )
+            {
+                return $strContent;
+            }
+            
             if (!is_array($_SESSION["TL_INFO"]))
             {
                 $_SESSION["TL_INFO"] = array();
@@ -77,7 +83,7 @@ class DlstatsCheck extends \System
             $arrRequiredExtensions = array(
                     'BotDetection' => 'botdetection'
             );
-    
+            
             // required files
             $arrRequiredFiles = array(
                     'Modulname' => 'plugins/.....'

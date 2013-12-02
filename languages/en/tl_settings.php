@@ -19,6 +19,8 @@ $GLOBALS['TL_LANG']['tl_settings']['dlstats_legend'] = "Download statistics";
 $GLOBALS['TL_LANG']['tl_settings']['dlstats']        = array('Enable counting', 'Activate to counting of downloads.');
 $GLOBALS['TL_LANG']['tl_settings']['dlstatdets']     = array('Enable detailed logging and statistic', 'Activate to additional logging for IP, Domain and Member name.');
 
+$GLOBALS['TL_LANG']['tl_settings']['dlstatDisableBotdetection'] = array("Disable Bot Detection filtering", "Disable the filtering of counting by the extension Bot Detection");
+
 $GLOBALS['TL_LANG']['tl_settings']['dlstatAnonymizeIP4'] = array("Anonymization level for IPv4", "Here, you can change the level of anonymization for IPv4. Anonymize IP addresses in Contao must be activated.");
 $GLOBALS['TL_LANG']['tl_settings']['dlstatAnonymizeIP6'] = array("Anonymization level for IPv6", "Here, you can change the level of anonymization for IPv6. Anonymize IP addresses in Contao must be activated.");
 

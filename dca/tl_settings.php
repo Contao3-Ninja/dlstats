@@ -24,7 +24,7 @@
  */
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['__selector__'][]	= 'dlstats'; 
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']	   .= ';{dlstats_legend},dlstats'; 
-$GLOBALS['TL_DCA']['tl_settings']['subpalettes']['dlstats']		= 'dlstatdets,dlstatAnonymizeIP4,dlstatAnonymizeIP6'; 
+$GLOBALS['TL_DCA']['tl_settings']['subpalettes']['dlstats']		= 'dlstatdets,dlstatDisableBotdetection,dlstatAnonymizeIP4,dlstatAnonymizeIP6'; 
 
 /**
  * Add field
@@ -39,7 +39,15 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstats'] = array
 $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatdets'] = array
 (
 	'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstatdets'],
-	'inputType'	=> 'checkbox'
+	'inputType'	=> 'checkbox',
+    'eval'      => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatDisableBotdetection'] = array
+(
+        'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstatDisableBotdetection'],
+        'inputType'	=> 'checkbox',
+        'eval'      => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatAnonymizeIP4'] = array
