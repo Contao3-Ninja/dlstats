@@ -37,7 +37,7 @@
 				"":"system/modules/dlstats"
 			},
 			"runonce":[
-				"system/modules/dlstats/config/runonce.php"
+				"system/modules/dlstats/runonce/dlstatsrunonce.php"
 			]
 		}
 	}
