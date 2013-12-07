@@ -48,7 +48,9 @@ $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('DLStats\ModuleDlstatsTag', 
  * syncCto Blacklists - Tables
  * -------------------------------------------------------------------------
  */
-$GLOBALS['SYC_CONFIG']['table_hidden'] = array_merge( (array) $GLOBALS['SYC_CONFIG']['table_hidden'], array(
-        'tl_dlstats',
-        'tl_dlstatdets',
-));
+$GLOBALS['SYC_CONFIG']['table_hidden'] = array_merge( (array) $GLOBALS['SYC_CONFIG']['table_hidden'], 
+        array(
+            'tl_dlstats',
+            'tl_dlstatdets',
+        )
+);

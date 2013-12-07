@@ -65,10 +65,10 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
     
     protected function getDlstats($dlstatsid)
     {
-        $objDlstats = $this->Database->prepare("SELECT *
+        $objDlstats = \Database::getInstance()->prepare("SELECT *
                                                  FROM `tl_dlstats`
                                                  WHERE `id`=?")
-                           ->execute($dlstatsid);
+                                              ->execute($dlstatsid);
         return array('tstamp'    => $objDlstats->tstamp,
                      'filename'  => $objDlstats->filename,
                      'downloads' => $objDlstats->downloads);
@@ -77,17 +77,17 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
     protected function getDlstatsMonth($dlstatsid)
     {
         $arrMonth = array();
-        $objMonth = $this->Database->prepare("SELECT 
-                                                FROM_UNIXTIME(tstamp, '%Y-%m') AS YM
-                                                , COUNT(`id`) AS SUMDL
-                                              FROM
-                                                `tl_dlstatdets`
-                                              WHERE
-                                                `pid`=?
-                                              GROUP BY YM
-                                              ORDER BY YM DESC")
-                                  ->limit(4)
-                                  ->execute($dlstatsid);
+        $objMonth = \Database::getInstance()->prepare("SELECT 
+                                                        FROM_UNIXTIME(tstamp, '%Y-%m') AS YM
+                                                        , COUNT(`id`) AS SUMDL
+                                                      FROM
+                                                        `tl_dlstatdets`
+                                                      WHERE
+                                                        `pid`=?
+                                                      GROUP BY YM
+                                                      ORDER BY YM DESC")
+                                            ->limit(4)
+                                            ->execute($dlstatsid);
         $intRows = $objMonth->numRows;
         if ($intRows>0)
         {
@@ -157,12 +157,12 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
 </div>
 ';
         $this->TemplatePartial->DlstatsDetailList .= '<div class="dlstatdetailcontent" style="">';
-        $objDetails = $this->Database->prepare("SELECT `tstamp` , `ip` , `domain` , `username`, `page_host`, `page_id`
-                                                FROM `tl_dlstatdets`
-                                                WHERE `pid`=?
-                                                ORDER BY `id` DESC")
-                                     ->limit(1000)
-                                     ->execute($dlstatsid);
+        $objDetails = \Database::getInstance()->prepare("SELECT `tstamp` , `ip` , `domain` , `username`, `page_host`, `page_id`
+                                                         FROM `tl_dlstatdets`
+                                                         WHERE `pid`=?
+                                                         ORDER BY `id` DESC")
+                                              ->limit(1000)
+                                              ->execute($dlstatsid);
         $intRows = $objDetails->numRows;
         if ($intRows>0)
         {
@@ -200,14 +200,14 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
         {
             return '';
         }
-        $objAlias = $this->Database->prepare("SELECT
-                                                `alias`
-                                              FROM
-                                                `tl_page`
-                                              WHERE
-                                                `id`=?")
-                                  ->limit(1)
-                                  ->execute($page_id);
+        $objAlias = \Database::getInstance()->prepare("SELECT
+                                                         `alias`
+                                                       FROM
+                                                         `tl_page`
+                                                       WHERE
+                                                         `id`=?")
+                                            ->limit(1)
+                                            ->execute($page_id);
         $intRows = $objAlias->numRows;
         if ($intRows>0)
         {
@@ -218,8 +218,5 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
             return $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['aliasnotfound'];
         }
     }
-    
-    
-    
     
 }

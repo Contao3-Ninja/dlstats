@@ -518,10 +518,18 @@ class DlstatsHelper extends \Controller
 	    if (!in_array('botdetection', \Config::getInstance()->getActiveModules() ))
 	    {
 	        //botdetection Modul fehlt, trotzdem zählen, Meldung kommt bereits per Hook
-	        return true;
+	        return false; //fake: no bots found
+	    }
+	    if ( isset($GLOBALS['TL_CONFIG']['dlstatDisableBotdetection']) &&
+	               $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] == true )
+	    {
+	        //botdetection ist disabled for dlstats
+	        return false; //fake: no bots founds
 	    }
 		// Import Helperclass ModuleBotDetection
-		$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection'); //Workaround for $this->ModuleBotDetection->...
+		//$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
+		$this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
+		
 		//Call BD_CheckBotAgent
 		$test01 = $this->ModuleBotDetection->BD_CheckBotAgent();
 		if ($test01 === true)

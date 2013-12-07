@@ -23,7 +23,7 @@ namespace BugBuster\DLStats;
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-// ER2 / ER3 
+// ER2 / ER3 (symlink)
 if (file_exists('../../../initialize.php'))
 {
     require('../../../initialize.php');
