@@ -527,7 +527,9 @@ class DlstatsHelper extends \Controller
 	        return false; //fake: no bots founds
 	    }
 		// Import Helperclass ModuleBotDetection
-		$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection'); 
+		//$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
+		$this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
+		
 		//Call BD_CheckBotAgent
 		$test01 = $this->ModuleBotDetection->BD_CheckBotAgent();
 		if ($test01 === true)

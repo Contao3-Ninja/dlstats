@@ -32,7 +32,7 @@ namespace BugBuster\DLStats;
  * @package    GLDLStats
  * @license    LGPL
  */
-class Dlstats extends DlstatsHelper
+class Dlstats extends \DLStats\DlstatsHelper
 {
 
 	/**

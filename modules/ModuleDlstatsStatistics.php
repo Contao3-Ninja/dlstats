@@ -87,8 +87,8 @@ class ModuleDlstatsStatistics extends \BackendModule
      */
     protected function setZero()
     {
-        $this->Database->prepare("TRUNCATE TABLE tl_dlstatdets")->execute();
-        $this->Database->prepare("TRUNCATE TABLE tl_dlstats")->execute();
+        \Database::getInstance()->prepare("TRUNCATE TABLE tl_dlstatdets")->execute();
+        \Database::getInstance()->prepare("TRUNCATE TABLE tl_dlstats")->execute();
         return ;
     }
     
@@ -101,10 +101,10 @@ class ModuleDlstatsStatistics extends \BackendModule
         {
             return ;
         }
-        $this->Database->prepare("DELETE FROM tl_dlstatdets WHERE pid=?")
-                        ->execute(\Input::get('dlstatsid',true));
-        $this->Database->prepare("DELETE FROM tl_dlstats    WHERE  id=?")
-                        ->execute(\Input::get('dlstatsid',true));
+        \Database::getInstance()->prepare("DELETE FROM tl_dlstatdets WHERE pid=?")
+                                ->execute(\Input::get('dlstatsid',true));
+        \Database::getInstance()->prepare("DELETE FROM tl_dlstats    WHERE  id=?")
+                                ->execute(\Input::get('dlstatsid',true));
         return ;
     }
     
@@ -163,15 +163,15 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getMonth()
     {
         $arrMonth = array();
-        $objMonth = $this->Database->prepare("SELECT 
-                                                FROM_UNIXTIME(`tstamp`,'%Y-%m')  AS YM
-                                              , COUNT(`id`) AS SUMDL
-                                              FROM `tl_dlstatdets` 
-                                              WHERE 1 
-                                              GROUP BY YM
-                                              ORDER BY YM DESC")
-                                   ->limit(12)
-                                   ->execute();
+        $objMonth = \Database::getInstance()->prepare("SELECT 
+                                                         FROM_UNIXTIME(`tstamp`,'%Y-%m')  AS YM
+                                                       , COUNT(`id`) AS SUMDL
+                                                       FROM `tl_dlstatdets` 
+                                                       WHERE 1 
+                                                       GROUP BY YM
+                                                       ORDER BY YM DESC")
+                                            ->limit(12)
+                                            ->execute();
         $intRows = $objMonth->numRows;
         if ($intRows>0) 
         {
@@ -193,15 +193,15 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getYear()
     {
         $arrYear = array();
-        $objYear = $this->Database->prepare("SELECT
-                                                FROM_UNIXTIME(`tstamp`,'%Y')  AS Y
-                                              , COUNT(`id`) AS SUMDL
-                                              FROM `tl_dlstatdets`
-                                              WHERE 1
-                                              GROUP BY Y
-                                              ORDER BY Y DESC")
-                                  ->limit(12)
-                                  ->execute();
+        $objYear = \Database::getInstance()->prepare("SELECT
+                                                        FROM_UNIXTIME(`tstamp`,'%Y')  AS Y
+                                                      , COUNT(`id`) AS SUMDL
+                                                      FROM `tl_dlstatdets`
+                                                      WHERE 1
+                                                      GROUP BY Y
+                                                      ORDER BY Y DESC")
+                                           ->limit(12)
+                                           ->execute();
         $intRows = $objYear->numRows;
         if ($intRows>0)
         {
@@ -222,11 +222,11 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getTotalDownloads()
     {
         $totalDownloads = 0;
-        $objTODL = $this->Database->prepare("SELECT
-                                             SUM( `downloads` ) AS TOTALDOWNLOADS
-                                             FROM `tl_dlstats`
-                                             WHERE 1")
-                                  ->execute();
+        $objTODL = \Database::getInstance()->prepare("SELECT
+                                                      SUM( `downloads` ) AS TOTALDOWNLOADS
+                                                      FROM `tl_dlstats`
+                                                      WHERE 1")
+                                           ->execute();
         $intRows = $objTODL->numRows;
         if ($intRows>0)
         {
@@ -243,11 +243,11 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getStartDate()
     {
         $StartDate = false;
-        $objStartDate = $this->Database->prepare("SELECT 
-                                                  MIN(`tstamp`) AS YMD
-                                                  FROM `tl_dlstatdets`
-                                                  WHERE 1")
-                                       ->execute();
+        $objStartDate = \Database::getInstance()->prepare("SELECT 
+                                                           MIN(`tstamp`) AS YMD
+                                                           FROM `tl_dlstatdets`
+                                                           WHERE 1")
+                                                ->execute();
         if ($objStartDate->YMD != null)
         {
             $StartDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objStartDate->YMD);
@@ -265,11 +265,11 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getTopDownloads($limit=20)
     {
         $arrTopDownloads = array();
-        $objTopDownloads = $this->Database->prepare("SELECT `tstamp`, `filename`, `downloads`, `id`
-                                                     FROM `tl_dlstats`
-                                                     ORDER BY `downloads` DESC")
-                                          ->limit($limit)
-                                          ->execute();
+        $objTopDownloads = \Database::getInstance()->prepare("SELECT `tstamp`, `filename`, `downloads`, `id`
+                                                              FROM `tl_dlstats`
+                                                              ORDER BY `downloads` DESC")
+                                                   ->limit($limit)
+                                                   ->execute();
         $intRows = $objTopDownloads->numRows;
         if ($intRows>0)
         {
@@ -299,11 +299,11 @@ class ModuleDlstatsStatistics extends \BackendModule
         $oldDate = '01.01.1970';
         $viewDate = false;
         $arrLastDownloads = array();
-        $objLastDownloads = $this->Database->prepare("SELECT `tstamp`, `filename`, `downloads`, `id`
-                                                     FROM `tl_dlstats`
-                                                     ORDER BY `tstamp` DESC, `filename`")
-                                          ->limit($limit)
-                                          ->execute();
+        $objLastDownloads = \Database::getInstance()->prepare("SELECT `tstamp`, `filename`, `downloads`, `id`
+                                                               FROM `tl_dlstats`
+                                                               ORDER BY `tstamp` DESC, `filename`")
+                                                    ->limit($limit)
+                                                    ->execute();
         $intRows = $objLastDownloads->numRows;
         if ($intRows>0)
         {
@@ -312,7 +312,7 @@ class ModuleDlstatsStatistics extends \BackendModule
                 $viewDate = false;
                 if ($oldDate != $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objLastDownloads->tstamp)) 
                 {
-                    $newDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objLastDownloads->tstamp);
+                    $newDate  = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objLastDownloads->tstamp);
                     $viewDate = $newDate;
                 }
                 $c4d = $this->check4details($objLastDownloads->id);
@@ -337,10 +337,10 @@ class ModuleDlstatsStatistics extends \BackendModule
      */
     protected function check4details($id)
     {
-        $objC4D = $this->Database->prepare("SELECT count(`id`)  AS num
-                                            FROM `tl_dlstatdets`
-                                            WHERE `pid`=?")
-                                 ->execute($id);
+        $objC4D = \Database::getInstance()->prepare("SELECT count(`id`)  AS num
+                                                     FROM `tl_dlstatdets`
+                                                     WHERE `pid`=?")
+                                          ->execute($id);
         return $objC4D->num;
     }
     
