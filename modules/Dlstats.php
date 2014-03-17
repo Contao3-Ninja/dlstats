@@ -147,7 +147,8 @@ class Dlstats extends \DLStats\DlstatsHelper
             						            'domain'    => $this->dlstatsAnonymizeDomain(), 
             						            'username'  => $username,
             						            'page_host' => $pageHost,
-            						            'page_id'   => $pageId
+            						            'page_id'   => $pageId,
+            						            'browser_lang' => $this->dlstatsGetLang()
             						            )
             						        )
                                     ->execute();

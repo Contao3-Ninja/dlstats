@@ -1,11 +1,11 @@
 <?php 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2014 Leo Feyer
  * 
  * Module Download Statistics
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -21,7 +21,7 @@ namespace BugBuster\DLStats;
 /**
  * Class ModuleDlstatsStatistics
  *
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  */
@@ -38,6 +38,9 @@ class ModuleDlstatsStatistics extends \BackendModule
      * @var boolean
      */
     protected $boolDetails = true;
+    
+    protected $intTopDownloadLimit  = 20;
+    protected $intLastDownloadLimit = 20;
 
     /**
      * Constructor
@@ -45,6 +48,17 @@ class ModuleDlstatsStatistics extends \BackendModule
     public function __construct()
     {
         parent::__construct();
+        
+        if ( isset($GLOBALS['TL_CONFIG']['dlstatTopDownloads']) 
+         && intval($GLOBALS['TL_CONFIG']['dlstatTopDownloads']) >0)
+        {
+            $this->intTopDownloadLimit = intval($GLOBALS['TL_CONFIG']['dlstatTopDownloads']);
+        }
+        if ( isset($GLOBALS['TL_CONFIG']['dlstatLastDownloads'])
+                && intval($GLOBALS['TL_CONFIG']['dlstatLastDownloads']) >0)
+        {
+            $this->intLastDownloadLimit = intval($GLOBALS['TL_CONFIG']['dlstatLastDownloads']);
+        }
 
         if (\Input::get('act',true)=='zero') 
         {
@@ -75,8 +89,13 @@ class ModuleDlstatsStatistics extends \BackendModule
         $this->Template->arrStatYear      = $this->getYear();
         $this->Template->totalDownloads   = $this->getTotalDownloads();
         $this->Template->startdate        = $this->getStartDate();
-        $this->Template->arrTopDownloads  = $this->getTopDownloads();
-        $this->Template->arrLastDownloads = $this->getLastDownloads();
+        $this->Template->arrTopDownloads  = $this->getTopDownloads($this->intTopDownloadLimit);
+        $this->Template->arrLastDownloads = $this->getLastDownloads($this->intLastDownloadLimit);
+        
+        $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']   = 
+            sprintf($GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']  , $this->intTopDownloadLimit);
+        $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads'] = 
+            sprintf($GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads'], $this->intLastDownloadLimit);
         
         $this->Template->dlstats_version  = $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['modname'] . ' ' . DLSTATS_VERSION .'.'. DLSTATS_BUILD;
 

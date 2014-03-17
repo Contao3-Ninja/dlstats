@@ -152,12 +152,12 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
 		<span class="dlstats-timestamp dlstats-left" style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp'].'</span>
 		<span class="dlstats-ip dlstats-left"        style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip'].'<span title="'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside'].'"><sup style="font-weight:normal;">(?)</sup></span></span>
 		<span class="dlstats-hostalias dlstats-left" style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias'].'<span title="'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['serverside'].'"><sup style="font-weight:normal;">(?)</sup></span></span>
-		<span class="dlstats-username dlstats-left"  style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username'].'</span>
+		<span class="dlstats-username dlstats-left"  style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username'].'<span title="'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['browserlang'].'"><sup style="font-weight:normal;">(?)</sup></span></span>
 	</div>
 </div>
 ';
         $this->TemplatePartial->DlstatsDetailList .= '<div class="dlstatdetailcontent" style="">';
-        $objDetails = \Database::getInstance()->prepare("SELECT `tstamp` , `ip` , `domain` , `username`, `page_host`, `page_id`
+        $objDetails = \Database::getInstance()->prepare("SELECT `tstamp` , `ip` , `domain` , `username`, `page_host`, `page_id`, `browser_lang`
                                                          FROM `tl_dlstatdets`
                                                          WHERE `pid`=?
                                                          ORDER BY `id` DESC")
@@ -166,6 +166,10 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
         $intRows = $objDetails->numRows;
         if ($intRows>0)
         {
+            $languages = array();
+            include_once TL_ROOT . '/system/config/languages.php';
+            $languages['unknown'] = 'unknown language';
+            
             while ($objDetails->next())
             {
                 if ($objDetails->username == '')
@@ -178,12 +182,18 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
                 } 
                 //Alias Name holen über ID
                 $page_alias = $this->getPageAliasById($objDetails->page_id);
+                // Kürzel in Name übersetzen
+              
+                if (array_key_exists($objDetails->browser_lang, $languages))
+                {
+                    $objDetails->browser_lang = $languages[$objDetails->browser_lang];
+                }
                 
                 $this->TemplatePartial->DlstatsDetailList .=  '<div class="dlstatdetaillist">
 	<span class="dlstats-timestamp dlstats-left">'.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objDetails->tstamp).'</span>
 	<span class="dlstats-ip        dlstats-left">'.$objDetails->ip.'<br>'.$objDetails->domain.'</span>
 	<span class="dlstats-hostalias dlstats-left">'.$objDetails->page_host.'<br>'.$page_alias.'</span>
-	<span class="dlstats-username  dlstats-left">'.$un.'</span>
+	<span class="dlstats-username  dlstats-left"><span class="dlstats-wb">'.$un.'</span><br>'.$objDetails->browser_lang.'</span>
 </div>
 ';
             }

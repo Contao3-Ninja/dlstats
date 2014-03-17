@@ -77,6 +77,10 @@ $GLOBALS['TL_DCA']['tl_dlstatdets'] = array
         'page_id' => array
         (
             'sql'       => "int(10) unsigned NOT NULL default '0'"
+        ),
+        'browser_lang' => array
+        (
+             'sql'       => "varchar(10) NOT NULL default ''"
         )
     )
 );

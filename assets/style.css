@@ -52,8 +52,11 @@
 }
 
 .dlstats-username {
-    word-break:break-all; 
     word-wrap:break-word;
     white-space: normal;
-    width: 120px;
-} 
+    width: 130px;
+}
+
+.dlstats-wb {
+	word-break:break-all;
+}

@@ -30,3 +30,6 @@ $GLOBALS['TL_LANG']['tl_settings']['dlstats']['anonip4'][2] = 'Oktetts: 2';
 $GLOBALS['TL_LANG']['tl_settings']['dlstats']['anonip6'][2] = 'Blöcke: 2 (Contao Default)';
 $GLOBALS['TL_LANG']['tl_settings']['dlstats']['anonip6'][3] = 'Blöcke: 3';
 $GLOBALS['TL_LANG']['tl_settings']['dlstats']['anonip6'][4] = 'Blöcke: 4';
+
+$GLOBALS['TL_LANG']['tl_settings']['dlstatTopDownloads']  = array("Anzahl der Top Downloads", "In der Statistik die Anzahl der Top Downloads");
+$GLOBALS['TL_LANG']['tl_settings']['dlstatLastDownloads'] = array("Anzahl der letzten Downloads", "In der Statistik die Anzahl der letzten Downloads");

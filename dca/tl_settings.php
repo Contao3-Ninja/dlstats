@@ -24,7 +24,7 @@
  */
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['__selector__'][]	= 'dlstats'; 
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']	   .= ';{dlstats_legend},dlstats'; 
-$GLOBALS['TL_DCA']['tl_settings']['subpalettes']['dlstats']		= 'dlstatdets,dlstatDisableBotdetection,dlstatAnonymizeIP4,dlstatAnonymizeIP6'; 
+$GLOBALS['TL_DCA']['tl_settings']['subpalettes']['dlstats']		= 'dlstatdets,dlstatDisableBotdetection,dlstatAnonymizeIP4,dlstatAnonymizeIP6,dlstatTopDownloads,dlstatLastDownloads'; 
 
 /**
  * Add field
@@ -68,4 +68,20 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatAnonymizeIP6'] = array
     'options'   => array(2, 3, 4),
     'reference' => &$GLOBALS['TL_LANG']['tl_settings']['dlstats']['anonip6'],
     'eval'      => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatTopDownloads'] = array
+(
+        'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstatTopDownloads'],
+        'inputType'	=> 'text',
+        'default'	=> '20',
+        'eval'		=> array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dlstatLastDownloads'] = array
+(
+        'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['dlstatLastDownloads'],
+        'inputType'	=> 'text',
+        'default'	=> '20',
+        'eval'		=> array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 );

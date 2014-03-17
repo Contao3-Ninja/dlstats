@@ -1,7 +1,7 @@
 <?php 
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2014 Leo Feyer
  * 
  * Module Download Statistics
  *
@@ -12,7 +12,7 @@
  * Module configuration file.
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -20,8 +20,14 @@
  * @see	       https://github.com/BugBuster1701/dlstats
  */
 
-define('DLSTATS_VERSION', '3.5');
+define('DLSTATS_VERSION', '3.7');
 define('DLSTATS_BUILD'  , '0');
+
+/**
+ * Defaults, you can overwrite this in Backend -> System -> Settings
+ */
+$GLOBALS['TL_CONFIG']['dlstatTopDownloads']  = 20;
+$GLOBALS['TL_CONFIG']['dlstatLastDownloads'] = 20;
 
 /**
  * -------------------------------------------------------------------------

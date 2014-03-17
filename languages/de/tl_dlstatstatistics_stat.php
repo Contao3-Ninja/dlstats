@@ -30,8 +30,8 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['period']          = 'Zeitraum';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']       = 'Downloads';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']        = 'Dateiname';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']   = 'Letzter Download';
-$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']   = 'Downloads TOP 20';
-$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads'] = 'Die letzten 20 Downloads';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']   = 'Downloads TOP %s';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads'] = 'Die letzten %s Downloads';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['total_dl_month']    = 'Anzahl der Downloads in den letzten 4 Monaten';
 
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['modname']      = 'dlstats Modul';
@@ -44,7 +44,7 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord'] = 'Details des Dat
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp']     = "Datum / Uhrzeit";
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip']         = "IP-Adresse / Domain";
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias']  = "Host / Seitenalias";
-$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username']   = "Benutzername";
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['username']   = "Benutzer / Sprache";
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside'] = "Client-Seite";
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['serverside'] = "Server-Seite";
-
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['browserlang'] = "Browser Sprache";
