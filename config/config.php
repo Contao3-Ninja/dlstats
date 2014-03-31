@@ -60,3 +60,15 @@ $GLOBALS['SYC_CONFIG']['table_hidden'] = array_merge( (array) $GLOBALS['SYC_CONF
             'tl_dlstatdets',
         )
 );
+
+$GLOBALS['SYC_CONFIG']['local_blacklist'] = array_merge( (array) $GLOBALS['SYC_CONFIG']['local_blacklist'], 
+        array(
+            'dlstatAnonymizeIP4',
+            'dlstatAnonymizeIP6',
+            'dlstatdets',
+            'dlstatDisableBotdetection',
+            'dlstatLastDownloads',
+            'dlstats',
+            'dlstatTopDownloads'
+        )
+);
