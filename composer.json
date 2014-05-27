@@ -22,7 +22,7 @@
 	"require":{
 		"php":">=5.3",
 		"contao/core":">=3,<4",
-		"contao-community-alliance/composer-installer":"*",
+		"contao-community-alliance/composer-plugin": "*",
 		"bugbuster/botdetection":"~3.1"
 	},
 	"autoload":{
@@ -37,7 +37,7 @@
 				"":"system/modules/dlstats"
 			},
 			"runonce":[
-				"system/modules/dlstats/runonce/dlstatsrunonce.php"
+				"runonce/dlstatsrunonce.php"
 			]
 		}
 	}
