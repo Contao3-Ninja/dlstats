@@ -23,15 +23,20 @@ namespace BugBuster\DLStats;
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-// ER2 / ER3 (symlink)
-if (file_exists('../../../initialize.php'))
+
+$dir = __DIR__;
+ 
+while ($dir != '.' && $dir != '/' && !is_file($dir . '/system/initialize.php'))
 {
-    require('../../../initialize.php');
+    $dir = dirname($dir);
 }
-else 
+ 
+if (!is_file($dir . '/system/initialize.php'))
 {
-    require('../../../../../system/initialize.php');
+    echo 'Could not find initialize.php!';
+    exit(1);
 }
+require($dir . '/system/initialize.php');
 
 /**
  * Class BotStatisticsDetails
