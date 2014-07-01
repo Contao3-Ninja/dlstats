@@ -21,7 +21,7 @@
  */
 
 define('DLSTATS_VERSION', '3.7');
-define('DLSTATS_BUILD'  , '0');
+define('DLSTATS_BUILD'  , '4');
 
 /**
  * Defaults, you can overwrite this in Backend -> System -> Settings

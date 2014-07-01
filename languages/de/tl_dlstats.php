@@ -1,19 +1,17 @@
-<?php 
-
+<?php
 /**
- * TL_ROOT/system/modules/dlstats/languages/de/tl_dlstats.php 
- * 
- * Contao extension: dlstats
- * Language file for modules (de)
- * 
- * Copyright : &copy; 2011 
- * License   : LGPL 
- * Author    : Glen Langer (BugBuster)
- * Translator: Glen Langer (BugBuster)
+ * Translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ *
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao-dlstats/language/de/
+ *
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ *
+ * last-updated: 2014-07-01T22:43:59+02:00
  */
 
-/**
- * Errorlog FE Modul
- */
-$GLOBALS['TL_LANG']['tl_dlstats']['no_key']      = 'Kein Pfad/Dateiname angegeben (Parameter 2)';
-$GLOBALS['TL_LANG']['tl_dlstats']['wrong_key']   = 'Fehlerhafter oder falscher Tag-Name (Parameter 1)';
+
+$GLOBALS['TL_LANG']['tl_dlstats']['no_key']    = 'Kein Pfad/Dateiname angegeben (Parameter 2)';
+$GLOBALS['TL_LANG']['tl_dlstats']['wrong_key'] = 'Fehlerhafter oder falscher Tag-Name (Parameter 1)';
+
