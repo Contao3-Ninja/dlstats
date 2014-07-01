@@ -16,4 +16,4 @@
  * Errorlog FE Modul
  */
 $GLOBALS['TL_LANG']['tl_dlstats']['no_key']      = 'Kein Pfad/Dateiname angegeben (Parameter 2)';
-$GLOBALS['TL_LANG']['tl_dlstats']['wrong_key']   = 'Fehlerhafter oder falscher Tagname (Parameter 1)';
+$GLOBALS['TL_LANG']['tl_dlstats']['wrong_key']   = 'Fehlerhafter oder falscher Tag-Name (Parameter 1)';

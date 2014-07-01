@@ -36,6 +36,12 @@
 			"sources":{
 				"":"system/modules/dlstats"
 			},
+			"transifex": {
+				"project": "contao-dlstats",
+				"prefix": "master-",
+				"languages_cto": "languages",
+				"languages_tx": ".tx"
+			},
 			"runonce":[
 				"runonce/dlstatsrunonce.php"
 			]
