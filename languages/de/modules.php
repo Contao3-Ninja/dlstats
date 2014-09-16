@@ -8,10 +8,11 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2013-11-03T22:22:35+01:00
+ * last-updated: 2014-09-13T21:54:55+02:00
  */
 
-
+$GLOBALS['TL_LANG']['FMD']['testip']['0']  = 'IP Debug Modul';
+$GLOBALS['TL_LANG']['FMD']['testip']['1']  = 'IP Debug Modul, Anzeige der wichtigsten IP Werte.';
 $GLOBALS['TL_LANG']['MOD']['dlstats']['0'] = 'Downloadstatistik';
 $GLOBALS['TL_LANG']['MOD']['dlstats']['1'] = 'Dieses Modul erfasst Downloads und erstellt Statistiken.';
 

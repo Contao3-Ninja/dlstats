@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Dlstats
  * @link    https://contao.org
@@ -28,6 +28,7 @@ ClassLoader::addClasses(array
 	// Modules
 	'BugBuster\DLStats\Dlstats'                        => 'system/modules/dlstats/modules/Dlstats.php',
 	'BugBuster\DLStats\ModuleDlstatsStatistics'        => 'system/modules/dlstats/modules/ModuleDlstatsStatistics.php',
+	'BugBuster\DLStats\DlstatsTestIP'                  => 'system/modules/dlstats/modules/DlstatsTestIP.php',
 	'BugBuster\DLStats\ModuleDlstatsTag'               => 'system/modules/dlstats/modules/ModuleDlstatsTag.php',
 
 	// Public
@@ -47,4 +48,5 @@ TemplateLoader::addFiles(array
 (
 	'mod_dlstats_be_statistics'      => 'system/modules/dlstats/templates',
 	'mod_dlstats_be_partial_details' => 'system/modules/dlstats/templates',
+	'mod_dlstats_fe_test_ip'         => 'system/modules/dlstats/templates',
 ));

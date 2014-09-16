@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2014 Leo Feyer
  * 
  * Module Download Statistics, Helperclass
  *
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -76,7 +76,7 @@ class DlstatsHelper extends \Controller
 	/**
 	 * Initialize the object
 	 */
-	protected function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->CheckIP();
@@ -94,7 +94,7 @@ class DlstatsHelper extends \Controller
 	 * @return void
 	 * @access protected
 	 */
-	protected function setDL_LOG()
+	public function setDL_LOG()
 	{
 		if ($this->IP_Filter === true || $this->BE_Filter === true || $this->BOT_Filter === true)
 		{
@@ -103,6 +103,180 @@ class DlstatsHelper extends \Controller
 	
 	}
 
+	/**
+	 * IP Check
+	 * Set IP, detect the IP version and calls the method CheckIPv4 respectively CheckIPv6.
+	 *
+	 * @param string   User IP, optional for tests
+	 * @return boolean true when bot found over IP
+	 * @access protected
+	 */
+	public function CheckIP($UserIP = false)
+	{
+	    // Check if IP present
+	    if ($UserIP === false)
+	    {
+	        $tempIP = $this->dlstatsGetUserIP();
+	        if ($tempIP != false)
+	        {
+	            $this->IP = $tempIP;
+	        }
+	        else
+	        {
+	            return false; // No IP, no search.
+	        }
+	    }
+	    else
+	    {
+	        $this->IP = $UserIP;
+	    }
+	    // IPv4 or IPv6 ?
+	    switch ($this->CheckIPVersion($this->IP))
+	    {
+	    	case "IPv4":
+	    	    if ($this->CheckIPv4($this->IP) === true)
+	    	    {
+	    	        $this->IP_Filter = true;
+	    	        return $this->IP_Filter;
+	    	    }
+	    	    break;
+	    	case "IPv6":
+	    	    if ($this->CheckIPv6($this->IP) === true)
+	    	    {
+	    	        $this->IP_Filter = true;
+	    	        return $this->IP_Filter;
+	    	    }
+	    	    break;
+	    	default:
+	    	    $this->IP_Filter = false;
+	    	    return $this->IP_Filter;
+	    	    break;
+	    }
+	    $this->IP_Filter = false;
+	    return $this->IP_Filter;
+	}
+	
+	/**
+	 * BE Login Check
+	 * basiert auf Frontend.getLoginStatus
+	 *
+	 * @return boolean
+	 * @access protected
+	 */
+	public function CheckBE()
+	{
+	    $strCookie = 'BE_USER_AUTH';
+	    //$hash = sha1(session_id() . $this->Environment->ip . $strCookie);
+	    $hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
+	    if (\Input::cookie($strCookie) == $hash)
+	    {
+	        $objSession = \Database::getInstance()
+                	        ->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
+                	        ->limit(1)
+                	        ->execute($hash, $strCookie);
+	        if ($objSession->numRows &&
+	            $objSession->sessionID == session_id() &&
+	            //$objSession->ip == $this->Environment->ip &&
+	            ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == \Environment::get('ip')) &&
+	            ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
+	        {
+	            $this->BE_Filter = true;
+	            return $this->BE_Filter;
+	        }
+	    }
+	    $this->BE_Filter = false;
+	    return $this->BE_Filter;
+	}
+	
+	/**
+	 * Bot Check
+	 *
+	 * @return mixed    true or string if Bot found, false if not
+	 * @access protected
+	 */
+	public function CheckBot()
+	{
+	    if (!in_array('botdetection', \Config::getInstance()->getActiveModules() ))
+	    {
+	        //botdetection Modul fehlt, trotzdem zählen, Meldung kommt bereits per Hook
+	        return false; //fake: no bots found
+	    }
+	    if ( isset($GLOBALS['TL_CONFIG']['dlstatDisableBotdetection']) &&
+	        $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] == true )
+	    {
+	        //botdetection ist disabled for dlstats
+	        return false; //fake: no bots founds
+	    }
+	    // Import Helperclass ModuleBotDetection
+	    //$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
+	    $this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
+	
+	    //Call BD_CheckBotAgent
+	    $test01 = $this->ModuleBotDetection->BD_CheckBotAgent();
+	    if ($test01 === true)
+	    {
+	        $this->BOT_Filter = true;
+	        return $this->BOT_Filter;
+	    }
+	    //Call BD_CheckBotIP
+	    $test02 = $this->ModuleBotDetection->BD_CheckBotIP();
+	    if ($test02 === true)
+	    {
+	        $this->BOT_Filter = true;
+	        return $this->BOT_Filter;
+	    }
+	    //Call BD_CheckBotAgentAdvanced
+	    $test03 = $this->ModuleBotDetection->BD_CheckBotAgentAdvanced();
+	    if ($test03 !== false)
+	    {
+	        $this->BOT_Filter = true;
+	        return $test03; // Bot Name
+	    }
+	    // No Bots found
+	    return false;
+	}
+	
+	/**
+	 * Set _lang over Environment::get('httpAcceptLanguage')
+	 * 
+	 * @return boolean     true
+	 */
+	public function dlstatsSetLang()
+	{
+	    $array = \Environment::get('httpAcceptLanguage');
+
+	    $this->_lang = str_replace('-', '_', $array[0]);
+	     
+	    if(empty($this->_lang) || strlen($this->_lang) < 2)
+	    {
+	        $this->_lang = 'unknown';
+	    }
+	    return true;
+	}
+	
+	/**
+	 * Get _lang 
+	 * 
+	 * @return string
+	 */
+	public function dlstatsGetLang() { return $this->_lang; }
+	
+	/**
+	 * Get IP_Version
+	 * 
+	 * @return string
+	 */
+	public function dlstatsGetIpVersion() { return $this->IP_Version; }
+	
+	/**
+	 * Get IP
+	 * 
+	 * @return string
+	 */
+	public function dlstatsGetIp() { return $this->IP; }
+	
+	//////////////////////// protected functions \\\\\\\\\\\\\\\\\\\\\\\\
+	
 	/**
 	 * IP =  IPv4 or IPv6 ?
 	 *
@@ -164,65 +338,6 @@ class DlstatsHelper extends \Controller
 		}
 		$this->IP_Version = false;
 		return false; // no (valid) IP Address
-	}
-
-	/**
-	 * IP Check
-	 * Set IP, detect the IP version and calls the method CheckIPv4 respectively CheckIPv6.
-	 * 
-	 * @param string   User IP, optional for tests
-	 * @return boolean true when bot found over IP
-	 * @access protected
-	 */
-	protected function CheckIP($UserIP = false)
-	{
-		// Check if IP present
-		if ($UserIP === false)
-		{
-			if (\Environment::get('remoteAddr'))
-			{
-				if (strpos(\Environment::get('remoteAddr') , ',') !== false) //first IP 
-				{
-					$this->IP = trim(substr(\Environment::get('remoteAddr') , 0, strpos(\Environment::get('remoteAddr') , ',')));
-				}
-				else
-				{
-					$this->IP = trim(\Environment::get('remoteAddr'));
-				}
-			}
-			else
-			{
-				return false; // No IP, no search.
-			}
-		}
-		else
-		{
-			$this->IP = $UserIP;
-		}
-		// IPv4 or IPv6 ?
-		switch ($this->CheckIPVersion($this->IP))
-		{
-			case "IPv4":
-				if ($this->CheckIPv4($this->IP) === true)
-				{
-					$this->IP_Filter = true;
-					return $this->IP_Filter;
-				}
-				break;
-			case "IPv6":
-				if ($this->CheckIPv6($this->IP) === true)
-				{
-					$this->IP_Filter = true;
-					return $this->IP_Filter;
-				}
-				break;
-			default:
-				$this->IP_Filter = false;
-				return $this->IP_Filter;
-				break;
-		}
-		$this->IP_Filter = false;
-		return $this->IP_Filter;
 	}
 
 	/**
@@ -391,37 +506,7 @@ class DlstatsHelper extends \Controller
 		return (substr_compare($Ip[0], $Ip[1], 0, $net_mask) === 0);
 	}
 
-	/**
-	 * BE Login Check
-	 * basiert auf Frontend.getLoginStatus
-	 * 
-	 * @return boolean
-	 * @access protected
-	 */
-	protected function CheckBE()
-	{
-		$strCookie = 'BE_USER_AUTH';
-		//$hash = sha1(session_id() . $this->Environment->ip . $strCookie);
-		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
-		if (\Input::cookie($strCookie) == $hash)
-		{
-			$objSession = \Database::getInstance()
-                                ->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
-                                ->limit(1)
-                                ->execute($hash, $strCookie);
-			if ($objSession->numRows && 
-				$objSession->sessionID == session_id() && 
-				//$objSession->ip == $this->Environment->ip &&
-				($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == \Environment::get('ip')) && 
-			 	($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
-			{
-				$this->BE_Filter = true;
-				return $this->BE_Filter;
-			}
-		}
-		$this->BE_Filter = false;
-		return $this->BE_Filter;
-	}
+
 
 	/**
 	 * dlstatsAnonymizeIP - Anonymize the last byte(s) of visitors IP addresses, if enabled
@@ -513,77 +598,48 @@ class DlstatsHelper extends \Controller
 			return '';
 		}
 	}
-
+	
 	/**
-	 * Bot Check
+	 * Get User IP
 	 * 
-	 * @return mixed    true or string if Bot found, false if not
-	 * @access protected
+	 * @return string
 	 */
-	protected function CheckBot()
+	protected function dlstatsGetUserIP()
 	{
-	    if (!in_array('botdetection', \Config::getInstance()->getActiveModules() ))
-	    {
-	        //botdetection Modul fehlt, trotzdem zählen, Meldung kommt bereits per Hook
-	        return false; //fake: no bots found
-	    }
-	    if ( isset($GLOBALS['TL_CONFIG']['dlstatDisableBotdetection']) &&
-	               $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] == true )
-	    {
-	        //botdetection ist disabled for dlstats
-	        return false; //fake: no bots founds
-	    }
-		// Import Helperclass ModuleBotDetection
-		//$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
-		$this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
-		
-		//Call BD_CheckBotAgent
-		$test01 = $this->ModuleBotDetection->BD_CheckBotAgent();
-		if ($test01 === true)
-		{
-			$this->BOT_Filter = true;
-			return $this->BOT_Filter;
-		}
-		//Call BD_CheckBotIP
-		$test02 = $this->ModuleBotDetection->BD_CheckBotIP();
-		if ($test02 === true)
-		{
-			$this->BOT_Filter = true;
-			return $this->BOT_Filter;
-		}
-		//Call BD_CheckBotAgentAdvanced
-		$test03 = $this->ModuleBotDetection->BD_CheckBotAgentAdvanced();
-		if ($test03 !== false)
-		{
-			$this->BOT_Filter = true;
-			return $test03; // Bot Name
-		}
-		// No Bots found
-		return false;
+        $UserIP = \Environment::get('ip');
+        if (strpos($UserIP, ',') !== false) //first IP
+        {
+            $UserIP = trim( substr($UserIP, 0, strpos($UserIP, ',') ) );
+        }
+        if ( true === $this->dlstatsIsPrivateIP($UserIP) &&
+             false === empty($_SERVER['HTTP_X_FORWARDED_FOR'])
+	       ) 
+        {
+        	//second try
+            $HTTPXFF = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            $_SERVER['HTTP_X_FORWARDED_FOR'] = '';
+            
+            $UserIP = \Environment::get('ip');
+            if (strpos($UserIP, ',') !== false) //first IP
+            {
+                $UserIP = trim( substr($UserIP, 0, strpos($UserIP, ',') ) );
+            }
+            $_SERVER['HTTP_X_FORWARDED_FOR'] = $HTTPXFF;
+        }
+        return $UserIP;
 	}
-	
-	protected function dlstatsSetLang()
+    
+	/**
+	 * Check if an IP address is from private or reserved ranges.
+	 * 
+	 * @param string $UserIP
+	 * @return boolean         true = private/reserved
+	 */
+	protected function dlstatsIsPrivateIP($UserIP = false)
 	{
-	    $array = \Environment::get('httpAcceptLanguage');
-	    /*
-	    for($i = 0; $i < count($array); $i++) {
-	        //Konqueror
-	        $array[$i] = str_replace(" ", null, $array[$i]);
-	        $array[$i] = substr($array[$i], 0, 2);
-	        $array[$i] = strtolower($array[$i]);
-	    }
-	    $array = array_unique($array);
-	    $this->_lang = strtoupper($array[0]);
-	    */
-	    $this->_lang = str_replace('-', '_', $array[0]);
-	    
-	    if(empty($this->_lang) || strlen($this->_lang) < 2)
-	    {
-	        $this->_lang = 'unknown';
-	    }
-	    return true;
+	    return !filter_var($UserIP, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
 	}
+
 	
-	protected function dlstatsGetLang() { return $this->_lang; }
 }
 

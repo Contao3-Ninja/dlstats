@@ -21,7 +21,7 @@
  */
 
 define('DLSTATS_VERSION', '3.7');
-define('DLSTATS_BUILD'  , '4');
+define('DLSTATS_BUILD'  , '5');
 
 /**
  * Defaults, you can overwrite this in Backend -> System -> Settings
@@ -72,3 +72,10 @@ $GLOBALS['SYC_CONFIG']['local_blacklist'] = array_merge( (array) $GLOBALS['SYC_C
             'dlstatTopDownloads'
         )
 );
+
+/**
+ * -------------------------------------------------------------------------
+ * FRONT END MODULES ONLY FOR DEBUGGING
+ * -------------------------------------------------------------------------
+ */
+$GLOBALS['FE_MOD']['DlstatTestDebug']['testip'] = 'DLStats\DlstatsTestIP';

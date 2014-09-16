@@ -50,7 +50,7 @@ class Dlstats extends \DLStats\DlstatsHelper
 	/**
 	 * Initialize the object
 	 */
-	protected function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 	}

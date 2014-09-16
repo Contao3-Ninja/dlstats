@@ -15,3 +15,5 @@
 $GLOBALS['TL_LANG']['MOD']['dlstats']['0'] = 'Download Statistics';
 $GLOBALS['TL_LANG']['MOD']['dlstats']['1'] = 'Download statistics.';
 
+$GLOBALS['TL_LANG']['FMD']['testip']['0'] = 'IP Debug Module';
+$GLOBALS['TL_LANG']['FMD']['testip']['1'] = 'IP Debug Module, display the IP key values​​.';

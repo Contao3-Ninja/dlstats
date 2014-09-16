@@ -8,11 +8,11 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-07-01T22:43:29+02:00
+ * last-updated: 2014-07-01T23:26:10+02:00
  */
 
-
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['aliasnotfound']        = 'エイリアスがありません';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['browserlang']          = 'ブラウザーの言語';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside']           = 'クライアント側';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']            = 'ダウンロード';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']      = 'ダウンロードの回数の上位%s';

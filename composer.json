@@ -23,13 +23,13 @@
 		"php":">=5.3",
 		"contao/core":">=3,<4",
 		"contao-community-alliance/composer-plugin": "*",
-		"bugbuster/botdetection":"~3.1"
+		"bugbuster/botdetection":">3.2.1"
 	},
 	"autoload":{
 		"classmap":[""]
 	},
 	"replace":{
-		"contao-legacy/dlstats":"*"
+		"contao-legacy/dlstats":"self.version"
 	},
 	"extra":{
 		"contao":{
