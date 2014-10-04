@@ -75,7 +75,7 @@ $GLOBALS['SYC_CONFIG']['local_blacklist'] = array_merge( (array) $GLOBALS['SYC_C
 
 /**
  * -------------------------------------------------------------------------
- * FRONT END MODULES ONLY FOR DEBUGGING
+ * FRONT END MODULES ONLY FOR DEBUGGING 
  * -------------------------------------------------------------------------
  */
-$GLOBALS['FE_MOD']['DlstatTestDebug']['testip'] = 'DLStats\DlstatsTestIP';
+//$GLOBALS['FE_MOD']['DlstatTestDebug']['testip'] = 'DLStats\DlstatsTestIP';
