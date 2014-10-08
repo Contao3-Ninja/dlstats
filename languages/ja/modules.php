@@ -8,10 +8,11 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-07-01T22:43:29+02:00
+ * last-updated: 2014-07-01T23:26:10+02:00
  */
 
-
+$GLOBALS['TL_LANG']['FMD']['testip']['0']  = 'IPデバッグモジュール';
+$GLOBALS['TL_LANG']['FMD']['testip']['1']  = 'IPデバッグモジュールは、IPのキーの値を表示します。';
 $GLOBALS['TL_LANG']['MOD']['dlstats']['0'] = 'ダウンロードの統計';
 $GLOBALS['TL_LANG']['MOD']['dlstats']['1'] = 'ダウンロード統計です。';
 
