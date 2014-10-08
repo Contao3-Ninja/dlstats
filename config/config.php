@@ -20,8 +20,8 @@
  * @see	       https://github.com/BugBuster1701/dlstats
  */
 
-define('DLSTATS_VERSION', '3.7');
-define('DLSTATS_BUILD'  , '5');
+define('DLSTATS_VERSION', '3.8');
+define('DLSTATS_BUILD'  , '0');
 
 /**
  * Defaults, you can overwrite this in Backend -> System -> Settings
