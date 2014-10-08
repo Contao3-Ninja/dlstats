@@ -1,6 +1,6 @@
 
 <div class="tl_formbody_edit" style="padding-top:18px">
-  <table class="mod_dlstatstatistics_be_table_max">
+  <table class="tl_listing">
     <tbody>
       <tr>
         <td><span class="tl_label"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_counting']; ?>:</span><?php echo $this->status_counting; ?></td>
@@ -14,7 +14,7 @@
 <p><?php echo $this->getMessages(false); ?></p>
 <?php if ($this->totalDownloads == 0) : ?>
 <div class="tl_formbody_edit">
-	<table summary="Table lists records" class="mod_dlstatstatistics_be_table_max">
+	<table summary="Table lists records" class="tl_listing">
 	<tbody>
 	<tr>
 	    <td class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['no_data']; ?></td>
@@ -24,7 +24,7 @@
 </div>
 <?php else: ?>
 <div class="tl_formbody_edit">
-	<table summary="Table lists records" class="mod_dlstatstatistics_be_table_max">
+	<table summary="Table lists records" class="tl_listing">
 	<tbody>
 	<tr>
 	    <td style="width: 340px; padding-left: 2px;"                     class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['name']; ?></td>
@@ -50,7 +50,7 @@
 </div>
 <?php if (count($this->arrStatMonth) > 0) : ?>
 <div class="tl_formbody_edit">
-	<div class="mod_dlstatstatistics_be_I">
+	<div class="tl_listing">
 		<div class="mod_dlstatstatistics_be_year">
 			<table summary="Table lists records" class="mod_dlstatstatistics_be_table">
 			  	<tbody>
@@ -68,7 +68,7 @@
 			</table>
 		</div>	
 		<div class="mod_dlstatstatistics_be_month">
-			<table summary="Table lists records" class="mod_dlstatstatistics_be_table">
+			<table summary="Table lists records" class="mod_dlstatstatistics_be_table" style="margin-left: auto;">
 			  	<tbody>
 			    <tr>
 					<td class="tl_folder_tlist" style="width:     120px; padding-left:   2px; text-align: left;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['period']; ?></td>
@@ -90,7 +90,7 @@
 <!-- Top 20 Begin -->
 <div class="tl_formbody_edit">
 	<div class="limit_height h110 block" style="height: 110px;">
-		<table summary="Table lists records" class="mod_dlstatstatistics_be_table_max">
+		<table summary="Table lists records" class="tl_listing">
 			<tbody>
 			    <tr>
 					<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="5"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']; ?></td>
@@ -122,7 +122,7 @@
 <!-- Last Downlods Top 20 Begin -->
 <div class="tl_formbody_edit">
 	<div class="limit_height h110 block" style="height: 110px;">
-		<table summary="Table lists records" class="mod_dlstatstatistics_be_table_max">
+		<table summary="Table lists records" class="tl_listing">
 			<tbody>
 			    <tr>
 					<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="5"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']; ?></td>
