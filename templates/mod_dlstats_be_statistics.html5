@@ -13,149 +13,190 @@
 <hr>
 <p><?php echo $this->getMessages(false); ?></p>
 <?php if ($this->totalDownloads == 0) : ?>
-<div class="tl_formbody_edit">
-	<table summary="Table lists records" class="tl_listing">
-	<tbody>
-	<tr>
-	    <td class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['no_data']; ?></td>
-	</tr>
-	</tbody>
-	</table>
-</div>
+	<div class="tl_formbody_edit">
+		<table summary="Table lists records" class="tl_listing">
+		<tbody>
+		<tr>
+		    <td class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['no_data']; ?></td>
+		</tr>
+		</tbody>
+		</table>
+	</div>
 <?php else: ?>
-<div class="tl_formbody_edit">
-	<table summary="Table lists records" class="tl_listing">
-	<tbody>
-	<tr>
-	    <td style="width: 340px; padding-left: 2px;"                     class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['name']; ?></td>
-	    <td style="width: 160px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo ($this->boolDetails && $this->startdate) ? $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['startdate'] : ' '; ?></td>
-	    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
-	    <td style="width: 80px;  padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['reset']; ?></td>
-	    <td style="width: 40px;  padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
-	</tr>
-	<tr>
-	    <td style="padding-left: 2px;"                     class="tl_file_list"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['total_dl'] . ": "; ?><?php echo $this->totalDownloads; ?></td>
-	    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><?php echo ($this->boolDetails && $this->startdate) ? $this->startdate : ''; ?></td>
-	    <td style="padding-left: 2px; text-align: center;" class="tl_file_list">&nbsp;</td>
-	    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><a href="contao/main.php?do=dlstats&amp;act=zero" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_confirm']; ?>')) return false; Backend.getScrollOffset();"><img src="system/modules/dlstats/assets/down0.gif" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero']; ?>" height="16" width="16"></a></td>
-	    <td style="padding-left: 2px; text-align: center;" class="tl_file_list">&nbsp;</td>
-	</tr>
-	<tr>
-	    <td colspan="5">
-	    	&nbsp;
-	    </td>
-	</tr>
-	</tbody>
-	</table>
-</div>
-<?php if (count($this->arrStatMonth) > 0) : ?>
-<div class="tl_formbody_edit">
-	<div class="tl_listing">
-		<div class="mod_dlstatstatistics_be_year">
-			<table summary="Table lists records" class="mod_dlstatstatistics_be_table">
-			  	<tbody>
-			    <tr>
-					<td class="tl_folder_tlist" style="width:     120px; padding-left:   2px; text-align: left;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['period']; ?></td>
-					<td class="tl_folder_tlist" style="min-width: 120px; padding-right: 15px; text-align: right;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
-				</tr>
-			<?php foreach ($this->arrStatYear AS $Year) : ?>
-				<tr>
-				    <td style="padding-left: 2px; text-align: left;"  class="tl_file_list"><?php echo $Year[0]; ?></td>
-				    <td style="padding-left: 2px; text-align: right;" class="tl_file_list"><?php echo $Year[1]; ?></td>
-				</tr>	
-			<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>	
-		<div class="mod_dlstatstatistics_be_month">
-			<table summary="Table lists records" class="mod_dlstatstatistics_be_table" style="margin-left: auto;">
-			  	<tbody>
-			    <tr>
-					<td class="tl_folder_tlist" style="width:     120px; padding-left:   2px; text-align: left;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['period']; ?></td>
-					<td class="tl_folder_tlist" style="min-width: 120px; padding-right: 15px; text-align: right;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
-				</tr>
-			<?php foreach ($this->arrStatMonth AS $Month) : ?>
-				<tr>
-				    <td style="padding-left: 2px; text-align: left;"  class="tl_file_list"><?php echo $Month[0]; ?></td>
-				    <td style="padding-left: 2px; text-align: right;" class="tl_file_list"><?php echo $Month[1]; ?></td>
-				</tr>	
-			<?php endforeach; ?>
+	<div class="tl_formbody_edit">
+		<table summary="Table lists records" class="tl_listing">
+		<tbody>
+		<tr>
+		    <td style="width: 340px; padding-left: 2px;"                     class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['name']; ?></td>
+		    <td style="width: 160px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo ($this->boolDetails && $this->startdate) ? $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['startdate'] : ' '; ?></td>
+		    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
+		    <td style="width: 80px;  padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['reset']; ?></td>
+		    <td style="width: 40px;  padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
+		</tr>
+		<tr>
+		    <td style="padding-left: 2px;"                     class="tl_file_list"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['total_dl'] . ": "; ?><?php echo $this->totalDownloads; ?></td>
+		    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><?php echo ($this->boolDetails && $this->startdate) ? $this->startdate : ''; ?></td>
+		    <td style="padding-left: 2px; text-align: center;" class="tl_file_list">&nbsp;</td>
+		    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><a href="contao/main.php?do=dlstats&amp;act=zero" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_confirm']; ?>')) return false; Backend.getScrollOffset();"><img src="system/modules/dlstats/assets/down0.gif" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero']; ?>" height="16" width="16"></a></td>
+		    <td style="padding-left: 2px; text-align: center;" class="tl_file_list">&nbsp;</td>
+		</tr>
+		<tr>
+		    <td colspan="5">
+		    	&nbsp;
+		    </td>
+		</tr>
+		</tbody>
+		</table>
+	</div>
+	<?php if (count($this->arrStatMonth) > 0) : ?>
+	<div class="tl_formbody_edit">
+		<div class="tl_listing">
+			<div class="mod_dlstatstatistics_be_year">
+				<table summary="Table lists records" class="mod_dlstatstatistics_be_table">
+				  	<tbody>
+				    <tr>
+						<td class="tl_folder_tlist" style="width:     120px; padding-left:   2px; text-align: left;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['period']; ?></td>
+						<td class="tl_folder_tlist" style="min-width: 120px; padding-right: 15px; text-align: right;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
+					</tr>
+				<?php foreach ($this->arrStatYear AS $Year) : ?>
+					<tr>
+					    <td style="padding-left: 2px; text-align: left;"  class="tl_file_list"><?php echo $Year[0]; ?></td>
+					    <td style="padding-left: 2px; text-align: right;" class="tl_file_list"><?php echo $Year[1]; ?></td>
+					</tr>	
+				<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>	
+			<div class="mod_dlstatstatistics_be_month">
+				<table summary="Table lists records" class="mod_dlstatstatistics_be_table" style="margin-left: auto;">
+				  	<tbody>
+				    <tr>
+						<td class="tl_folder_tlist" style="width:     120px; padding-left:   2px; text-align: left;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['period']; ?></td>
+						<td class="tl_folder_tlist" style="min-width: 120px; padding-right: 15px; text-align: right;"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
+					</tr>
+				<?php foreach ($this->arrStatMonth AS $Month) : ?>
+					<tr>
+					    <td style="padding-left: 2px; text-align: left;"  class="tl_file_list"><?php echo $Month[0]; ?></td>
+					    <td style="padding-left: 2px; text-align: right;" class="tl_file_list"><?php echo $Month[1]; ?></td>
+					</tr>	
+				<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<?php endif; //arrStatMonth ?>
+	<div style="clear:left;"></div><hr>
+	<!-- Top 20 Begin -->
+	<div class="tl_formbody_edit">
+		<div class="limit_height h110 block" style="height: 110px;">
+			<table summary="Table lists records" class="tl_listing">
+				<tbody>
+				    <tr>
+						<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="5"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']; ?></td>
+					</tr>
+					<tr>
+					    <td style="width: 400px; padding-left: 2px; text-align: left;"   class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']; ?></td>
+					    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
+					    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist"  colspan="2" ><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
+					    <td style="width: 120px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']; ?></td>
+					</tr>
+				<?php foreach ($this->arrTopDownloads AS $TopDownloads) : ?>
+					<tr>
+					    <td style="padding-left: 2px; text-align: left; word-break:break-all; word-wrap:break-word;"   class="tl_file_list"><?php echo $TopDownloads[0]; ?></td>
+					    <td class="tl_file_list">&nbsp;</td>
+					    <td style="padding-left: 2px; text-align: right;"  class="tl_file_list"><?php echo $TopDownloads[1]; ?></td>
+					    <td class="tl_file_list" style="width: 36px; padding: 0 0 0 2px; text-align: left;"><?php if ($TopDownloads[4] > 0 && $this->boolDetails) : ?><a onclick="Backend.openModalIframe({'width':780,'height':600,'title':'Details','url':this.href});return false" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>"  href="system/modules/dlstats/public/ModuleDlstatsStatisticsDetails.php?action=TopLastDownloads&amp;dlstatsid=<?php echo $TopDownloads[3]; ?>"><img width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"></a><?php else: ?><img class="mod_dlstatstatistics_grey" width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"><?php endif; ?>
+					    <?php if ($TopDownloads[4] > 0) : ?>
+					    	<a onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_confirm_single']; ?>')) return false; Backend.getScrollOffset();" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" href="contao/main.php?do=dlstats&amp;act=delete&amp;dlstatsid=<?php echo $TopDownloads[3]; ?>"><img height="16" width="14" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/delete.gif"></a>
+					    <?php endif; ?></td>
+					    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><?php echo $TopDownloads[2]; ?></td>
+					</tr>	
+				<?php endforeach; ?>			
 				</tbody>
 			</table>
 		</div>
 	</div>
-</div>
-<div style="clear:left;"></div><hr>
-<?php endif; //no_data_details ?>
-<!-- Top 20 Begin -->
-<div class="tl_formbody_edit">
-	<div class="limit_height h110 block" style="height: 110px;">
-		<table summary="Table lists records" class="tl_listing">
-			<tbody>
-			    <tr>
-					<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="5"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']; ?></td>
-				</tr>
-				<tr>
-				    <td style="width: 400px; padding-left: 2px; text-align: left;"   class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']; ?></td>
-				    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
-				    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist"  colspan="2" ><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
-				    <td style="width: 120px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']; ?></td>
-				</tr>
-			<?php foreach ($this->arrTopDownloads AS $TopDownloads) : ?>
-				<tr>
-				    <td style="padding-left: 2px; text-align: left; word-break:break-all; word-wrap:break-word;"   class="tl_file_list"><?php echo $TopDownloads[0]; ?></td>
-				    <td class="tl_file_list">&nbsp;</td>
-				    <td style="padding-left: 2px; text-align: right;"  class="tl_file_list"><?php echo $TopDownloads[1]; ?></td>
-				    <td class="tl_file_list" style="width: 36px; padding: 0 0 0 2px; text-align: left;"><?php if ($TopDownloads[4] > 0 && $this->boolDetails) : ?><a onclick="Backend.openModalIframe({'width':780,'height':600,'title':'Details','url':this.href});return false" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>"  href="system/modules/dlstats/public/ModuleDlstatsStatisticsDetails.php?action=TopLastDownloads&amp;dlstatsid=<?php echo $TopDownloads[3]; ?>"><img width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"></a><?php else: ?><img class="mod_dlstatstatistics_grey" width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"><?php endif; ?>
-				    <?php if ($TopDownloads[4] > 0) : ?>
-				    	<a onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_confirm_single']; ?>')) return false; Backend.getScrollOffset();" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" href="contao/main.php?do=dlstats&amp;act=delete&amp;dlstatsid=<?php echo $TopDownloads[3]; ?>"><img height="16" width="14" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/delete.gif"></a>
-				    <?php endif; ?></td>
-				    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><?php echo $TopDownloads[2]; ?></td>
-				</tr>	
-			<?php endforeach; ?>			
-			</tbody>
-		</table>
+	<!-- Top 20 End   -->
+	<div style="clear:left;"></div><hr>
+	<!-- Last Downlods Top 20 Begin -->
+	<div class="tl_formbody_edit">
+		<div class="limit_height h110 block" style="height: 110px;">
+			<table summary="Table lists records" class="tl_listing">
+				<tbody>
+				    <tr>
+						<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="5"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']; ?></td>
+					</tr>
+					<tr>
+					    <td style="width: 400px; padding-left: 2px; text-align: left;"   class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']; ?></td>
+					    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
+					    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist" colspan="2"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
+					    <td style="width: 120px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']; ?></td>
+					</tr>
+				<?php foreach ($this->arrLastDownloads AS $LastDownloads) : ?>
+				<?php if ($LastDownloads[3] !== false) : ?>
+					<tr>
+						<td style="font-weight: bold; padding: 2px 0 3px; text-align: left;"><?php echo $LastDownloads[3]; ?></td>
+						<td colspan="4">&nbsp;</td>
+					</tr>
+				<?php endif; ?>
+					<tr>
+					    <td style="padding-left: 12px !important; text-align: left; word-break:break-all; word-wrap:break-word;"  class="tl_file_list"><?php echo $LastDownloads[1]; ?></td>
+					    <td class="tl_file_list">&nbsp;</td>
+					    <td style="padding-left: 2px; text-align: right;"  class="tl_file_list"><?php echo $LastDownloads[2]; ?></td>
+						<td class="tl_file_list" style="width: 36px; padding: 0 0 0 2px; text-align: left;"><?php if ($LastDownloads[5] > 0 && $this->boolDetails) : ?><a onclick="Backend.openModalIframe({'width':780,'height':600,'title':'Details','url':this.href});return false" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>"  href="system/modules/dlstats/public/ModuleDlstatsStatisticsDetails.php?action=TopLastDownloads&amp;dlstatsid=<?php echo $LastDownloads[4]; ?>"><img width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"></a><?php else: ?><img class="mod_dlstatstatistics_grey" width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"><?php endif; ?>
+					    <?php if ($TopDownloads[4] > 0) : ?>
+					    	<a onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_confirm_single']; ?>')) return false; Backend.getScrollOffset();" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" href="contao/main.php?do=dlstats&amp;act=delete&amp;dlstatsid=<?php echo $LastDownloads[4]; ?>"><img height="16" width="14" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/delete.gif"></a>
+					    <?php endif; ?></td>
+					    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><?php echo $LastDownloads[0]; ?></td>
+					</tr>	
+				<?php endforeach; ?>	
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
-<!-- Top 20 End   -->
-<div style="clear:left;"></div><hr>
-<!-- Last Downlods Top 20 Begin -->
-<div class="tl_formbody_edit">
-	<div class="limit_height h110 block" style="height: 110px;">
-		<table summary="Table lists records" class="tl_listing">
-			<tbody>
-			    <tr>
-					<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="5"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']; ?></td>
-				</tr>
-				<tr>
-				    <td style="width: 400px; padding-left: 2px; text-align: left;"   class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']; ?></td>
-				    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
-				    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist" colspan="2"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
-				    <td style="width: 120px; padding-left: 2px; text-align: center;" class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']; ?></td>
-				</tr>
-			<?php foreach ($this->arrLastDownloads AS $LastDownloads) : ?>
-			<?php if ($LastDownloads[3] !== false) : ?>
-				<tr>
-					<td style="font-weight: bold; padding: 2px 0 3px; text-align: left;"><?php echo $LastDownloads[3]; ?></td>
-					<td colspan="4">&nbsp;</td>
-				</tr>
-			<?php endif; ?>
-				<tr>
-				    <td style="padding-left: 12px !important; text-align: left; word-break:break-all; word-wrap:break-word;"  class="tl_file_list"><?php echo $LastDownloads[1]; ?></td>
-				    <td class="tl_file_list">&nbsp;</td>
-				    <td style="padding-left: 2px; text-align: right;"  class="tl_file_list"><?php echo $LastDownloads[2]; ?></td>
-					<td class="tl_file_list" style="width: 36px; padding: 0 0 0 2px; text-align: left;"><?php if ($LastDownloads[5] > 0 && $this->boolDetails) : ?><a onclick="Backend.openModalIframe({'width':780,'height':600,'title':'Details','url':this.href});return false" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>"  href="system/modules/dlstats/public/ModuleDlstatsStatisticsDetails.php?action=TopLastDownloads&amp;dlstatsid=<?php echo $LastDownloads[4]; ?>"><img width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"></a><?php else: ?><img class="mod_dlstatstatistics_grey" width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"><?php endif; ?>
-				    <?php if ($TopDownloads[4] > 0) : ?>
-				    	<a onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_confirm_single']; ?>')) return false; Backend.getScrollOffset();" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" href="contao/main.php?do=dlstats&amp;act=delete&amp;dlstatsid=<?php echo $LastDownloads[4]; ?>"><img height="16" width="14" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/delete.gif"></a>
-				    <?php endif; ?></td>
-				    <td style="padding-left: 2px; text-align: center;" class="tl_file_list"><?php echo $LastDownloads[0]; ?></td>
-				</tr>	
-			<?php endforeach; ?>	
-			</tbody>
-		</table>
+	<!-- Last Downlods Top 20 End   -->
+	<div style="clear:left;"></div><hr>
+
+	<!-- Last 30 Calendar Days Begin -->
+	<div class="tl_formbody_edit">
+		<div class="limit_height h110 block" style="height: 110px;">
+			<table summary="Table lists records" class="tl_listing">
+				<tbody>
+				    <tr>
+						<td class="tl_folder_tlist" style="padding-left: 2px; text-align: center;" colspan="4"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_30_calendar_days']; ?></td>
+					</tr>
+					<tr>
+					    <td style="width: 400px; padding-left: 2px; text-align: left;"   class="tl_folder_tlist"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']; ?></td>
+					    <td style="              padding-left: 2px; text-align: center;" class="tl_folder_tlist">&nbsp;</td>
+					    <td style="width: 100px; padding-left: 2px; text-align: right;"  class="tl_folder_tlist" colspan="2"><?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']; ?></td>
+					</tr>
+				<?php foreach ($this->arrCalendarDayDownloads AS $CalendarDayDownloads) : ?>
+				<?php if ($CalendarDayDownloads[0] !== false) : ?>
+					<tr>
+						<td style="font-weight: bold; padding: 2px 0 3px; text-align: left;"><?php echo $CalendarDayDownloads[0]; ?></td>
+						<td colspan="3">&nbsp;</td>
+					</tr>
+				<?php endif; ?>
+					<tr>
+					    <td style="padding-left: 12px !important; text-align: left; word-break:break-all; word-wrap:break-word;"  class="tl_file_list"><?php echo $CalendarDayDownloads[1]; ?></td>
+					    <td class="tl_file_list">&nbsp;</td>
+					    <td style="padding-left: 2px; text-align: right;"  class="tl_file_list"><?php echo $CalendarDayDownloads[2]; ?></td>
+						<td class="tl_file_list" style="width: 36px; padding: 0 0 0 2px; text-align: left;"><?php if ($CalendarDayDownloads[4] > 0 && $this->boolDetails) : ?><a onclick="Backend.openModalIframe({'width':780,'height':600,'title':'Details','url':this.href});return false" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>"  href="system/modules/dlstats/public/ModuleDlstatsStatisticsDetails.php?action=TopLastDownloads&amp;dlstatsid=<?php echo $CalendarDayDownloads[3]; ?>"><img width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"></a><?php else: ?><img class="mod_dlstatstatistics_grey" width="14" height="16" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['showRecord']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/show.gif"><?php endif; ?>
+					    <?php if ($TopDownloads[4] > 0) : ?>
+					    	<a onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_confirm_single']; ?>')) return false; Backend.getScrollOffset();" title="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" href="contao/main.php?do=dlstats&amp;act=delete&amp;dlstatsid=<?php echo $CalendarDayDownloads[3]; ?>"><img height="16" width="14" alt="<?php echo $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['zero_single']; ?>" src="system/themes/<?php echo $this->theme; ?>/images/delete.gif"></a>
+					    <?php endif; ?></td>
+					</tr>	
+				<?php endforeach; ?>	
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
-<!-- Last Downlods Top 20 End   -->
+	<!-- Last 30 Calendar Days End -->
+
+
+
+
 <?php endif; //no_data ?>
 <div style="clear:left;"></div><hr>
 <div class="mod_dlstatstatistics_be_version">

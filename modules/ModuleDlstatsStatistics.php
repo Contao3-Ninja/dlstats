@@ -41,6 +41,7 @@ class ModuleDlstatsStatistics extends \BackendModule
     
     protected $intTopDownloadLimit  = 20;
     protected $intLastDownloadLimit = 20;
+    protected $intCalendarDaysLimit = 30;
 
     /**
      * Constructor
@@ -91,11 +92,14 @@ class ModuleDlstatsStatistics extends \BackendModule
         $this->Template->startdate        = $this->getStartDate();
         $this->Template->arrTopDownloads  = $this->getTopDownloads($this->intTopDownloadLimit);
         $this->Template->arrLastDownloads = $this->getLastDownloads($this->intLastDownloadLimit);
+        $this->Template->arrCalendarDayDownloads = $this->getCalendarDayDownloads($this->intCalendarDaysLimit);
         
         $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']   = 
             sprintf($GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']  , $this->intTopDownloadLimit);
         $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads'] = 
             sprintf($GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads'], $this->intLastDownloadLimit);
+        $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_30_calendar_days'] =
+            sprintf($GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_30_calendar_days'], $this->intCalendarDaysLimit);
         
         $this->Template->dlstats_version  = $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['modname'] . ' ' . DLSTATS_VERSION .'.'. DLSTATS_BUILD;
 
@@ -361,6 +365,52 @@ class ModuleDlstatsStatistics extends \BackendModule
                                                      WHERE `pid`=?")
                                           ->execute($id);
         return $objC4D->num;
+    }
+    
+    /**
+     * Get Calendar Day Downloads
+     * 
+     * @param number $limit optional
+     * @return array $arrCalendarDayDownloads
+     */
+    protected function getCalendarDayDownloads($limit=30)
+    {
+        $newDate = '02.02.1971';
+        $oldDate = '01.01.1970';
+        $arrCalendarDayDownloads = array();
+        $CalendarDays = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-$limit, date("Y") ) );
+        $objCalendarDayDownloads = \Database::getInstance()
+                                    ->prepare("SELECT dl.`id`
+                                                    , FROM_UNIXTIME(det.`tstamp`,GET_FORMAT(DATE,'ISO')) as datum
+                                                    , count(dl.`filename`) as downloads
+                                                    , dl.`filename`
+                                                FROM `tl_dlstats` dl
+                                                INNER JOIN `tl_dlstatdets` det on dl.id = det.pid
+                                                WHERE FROM_UNIXTIME(det.`tstamp`,GET_FORMAT(DATE,'ISO')) >=?
+                                                GROUP BY dl.`id`, datum
+                                                ORDER BY datum DESC, `filename`")
+                                    ->execute($CalendarDays);
+
+        while ($objCalendarDayDownloads->next())
+        {
+            $viewDate = false;
+            if ($oldDate != $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($objCalendarDayDownloads->datum) ) )
+            {
+                $newDate  = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($objCalendarDayDownloads->datum) );
+                $viewDate = $newDate;
+            }
+            $c4d = $this->check4details($objCalendarDayDownloads->id);
+            $arrCalendarDayDownloads[] = array( 
+                                      $viewDate
+                                    , $objCalendarDayDownloads->filename
+                                    , $this->getFormattedNumber($objCalendarDayDownloads->downloads,0)
+                                    , $objCalendarDayDownloads->id
+                                    , $c4d
+                                );
+            $oldDate = $newDate;
+        }
+         
+        return $arrCalendarDayDownloads;
     }
     
 }

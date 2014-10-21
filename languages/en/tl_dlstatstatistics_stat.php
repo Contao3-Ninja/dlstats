@@ -21,6 +21,7 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']             = 'Filen
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias']            = 'Host / Page alias';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip']                   = 'IP address / Domain';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']    = 'The last %s downloads';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_30_calendar_days'] = 'Downloads per day in the last %s calendar days';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_download']        = 'Last Download';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['modname']              = 'dlstats Module';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['name']                 = 'Download statistics';
