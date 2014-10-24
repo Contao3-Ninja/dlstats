@@ -10,7 +10,13 @@
     </tbody>
   </table>
 </div>
+<?php if ($this->dlstats_hook_panels): ?>
+	<?php foreach ($this->dlstats_hook_panels as $panel): ?>
+		<?php echo $panel; ?>
+    <?php endforeach; ?>
+<?php else: ?>
 <hr>
+<?php endif; ?>
 <p><?php echo $this->getMessages(false); ?></p>
 <?php if ($this->totalDownloads == 0) : ?>
 	<div class="tl_formbody_edit">

@@ -102,6 +102,8 @@ class ModuleDlstatsStatistics extends \BackendModule
             sprintf($GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_30_calendar_days'], $this->intCalendarDaysLimit);
         
         $this->Template->dlstats_version  = $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['modname'] . ' ' . DLSTATS_VERSION .'.'. DLSTATS_BUILD;
+        
+        $this->Template->dlstats_hook_panels = $this->addStatisticPanelLineHook();
 
     }
     
@@ -413,4 +415,30 @@ class ModuleDlstatsStatistics extends \BackendModule
         return $arrCalendarDayDownloads;
     }
     
+    /**
+     * Hook: addStatisticPanelLine
+     * Search for registered DLSTATS HOOK: addStatisticPanelLine
+     *
+     * @return    string    HTML5 sourcecode | false
+     * <code>
+     * <!-- output minimum -->
+     * <div class="tl_panel">
+     *  <!-- <p>hello world</p> -->
+     * </div>
+     * </code>
+     */
+    protected function addStatisticPanelLineHook()
+    {
+        if (isset($GLOBALS['TL_DLSTATS_HOOKS']['addStatisticPanelLine'])
+            && is_array($GLOBALS['TL_DLSTATS_HOOKS']['addStatisticPanelLine']))
+        {
+            foreach ($GLOBALS['TL_DLSTATS_HOOKS']['addStatisticPanelLine'] as $callback)
+            {
+                $this->import($callback[0]);
+                $result[] = $this->$callback[0]->$callback[1]();
+            }
+            return $result;
+        }
+        return false;
+    }
 }
