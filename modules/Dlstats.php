@@ -118,7 +118,7 @@ class Dlstats extends \DLStats\DlstatsHelper
 	        //Maximum details for year & month statistic
             $username = '';
     		$strCookie = 'FE_USER_AUTH';
-    		//$hash = sha1(session_id() . $this->IP . $ckie);
+
     		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->IP : '') . $strCookie);
     		if (\Input::cookie($strCookie) == $hash)
     		{
