@@ -84,8 +84,6 @@ class DlstatsHelper extends \Controller
 		$this->CheckBot();
 		$this->setDL_LOG();
 		$this->dlstatsSetLang();
-	
-		//$this->log("DLSTAT_DEBUG: IPV:".$this->IP_Version." IPF:".(0+$this->IP_Filter)." BEF:".(0 + $this->BE_Filter) ." Bot:".(0+$this->BOT_Filter)."" , "DlstatsHelper", TL_CONFIGURATION );
 	}
 
 	/**
