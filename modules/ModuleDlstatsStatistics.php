@@ -140,7 +140,7 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getStatusCounting()
     {
         if ( isset($GLOBALS['TL_CONFIG']['dlstats']) 
-                && $GLOBALS['TL_CONFIG']['dlstats'] == true  
+                && (bool) $GLOBALS['TL_CONFIG']['dlstats'] === true  
            ) 
         {
             return '<span class="tl_green">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'].'</span>';
@@ -155,9 +155,9 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getStatusDetailed()
     {
         if ( isset($GLOBALS['TL_CONFIG']['dlstats']) 
-                && $GLOBALS['TL_CONFIG']['dlstats'] == true
+                && (bool) $GLOBALS['TL_CONFIG']['dlstats'] === true
           && isset($GLOBALS['TL_CONFIG']['dlstatdets'])
-                && $GLOBALS['TL_CONFIG']['dlstatdets'] == true
+                && (bool) $GLOBALS['TL_CONFIG']['dlstatdets'] === true
            )
         {
             return '<span class="tl_green">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'].'</span>';
@@ -173,7 +173,7 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getStatusAnonymization()
     {
         if ( isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp'])
-                && $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] == true
+                && (bool) $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] === true
         )
         {
             return $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'];
@@ -273,7 +273,7 @@ class ModuleDlstatsStatistics extends \BackendModule
                                                            FROM `tl_dlstatdets`
                                                            WHERE 1")
                                                 ->execute();
-        if ($objStartDate->YMD != null)
+        if ($objStartDate->YMD !== null)
         {
             $StartDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objStartDate->YMD);
             
