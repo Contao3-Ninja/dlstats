@@ -64,7 +64,8 @@ class Dlstats extends \DLStats\DlstatsHelper
 	{
 		$this->_filename = $fileName;
 		
-		if (isset($GLOBALS['TL_CONFIG']['dlstats']) && $GLOBALS['TL_CONFIG']['dlstats'] == true)
+		if (isset($GLOBALS['TL_CONFIG']['dlstats']) && 
+           (bool) $GLOBALS['TL_CONFIG']['dlstats'] === true)
 		{
 			if ($this->DL_LOG === true)
 			{
@@ -112,7 +113,7 @@ class Dlstats extends \DLStats\DlstatsHelper
 	    $pageHost = \Environment::get('host'); // Host der grad aufgerufenden Seite.
 	    
 	    if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) 
-	           && $GLOBALS['TL_CONFIG']['dlstatdets'] == true
+	           && (bool) $GLOBALS['TL_CONFIG']['dlstatdets'] === true
 	       )
 	    {
 	        //Maximum details for year & month statistic
