@@ -115,7 +115,7 @@ class DlstatsHelper extends \Controller
 	    if ($UserIP === false)
 	    {
 	        $tempIP = $this->dlstatsGetUserIP();
-	        if ($tempIP != false)
+	        if ($tempIP !== false)
 	        {
 	            $this->IP = $tempIP;
 	        }
@@ -200,7 +200,7 @@ class DlstatsHelper extends \Controller
 	        return false; //fake: no bots found
 	    }
 	    if ( isset($GLOBALS['TL_CONFIG']['dlstatDisableBotdetection']) &&
-	        $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] == true )
+            (bool) $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] === true )
 	    {
 	        //botdetection ist disabled for dlstats
 	        return false; //fake: no bots founds
@@ -519,7 +519,7 @@ class DlstatsHelper extends \Controller
 			return '0.0.0.0';
 		}
 		if (isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp']) && 
-				  $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] == false)
+           (bool) $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] === false)
 		{
 			// Anonymize is disabled
 			return ($this->IP === false) ? '0.0.0.0' : $this->IP;
@@ -576,7 +576,7 @@ class DlstatsHelper extends \Controller
 			return '';
 		}
 		if (isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp']) && 
-				  $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] == false)
+           (bool) $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] === false)
 		{
 			// Anonymize is disabled
 			$domain = gethostbyaddr($this->IP);
