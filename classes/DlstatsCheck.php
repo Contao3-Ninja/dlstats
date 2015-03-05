@@ -84,11 +84,6 @@ class DlstatsCheck extends \System
                     'BotDetection' => 'botdetection'
             );
             
-            // required files
-            $arrRequiredFiles = array(
-                    'Modulname' => 'plugins/.....'
-            );
-    
             // check for required extensions
             foreach ($arrRequiredExtensions as $key => $val)
             {
@@ -104,23 +99,6 @@ class DlstatsCheck extends \System
                     }
                 }
             }
-    
-            // check for required files
-            /*
-            foreach ($arrRequiredFiles as $key => $val)
-            {
-                if (!file_exists(TL_ROOT . '/' . $val))
-                {
-                    $_SESSION["TL_INFO"] = array_merge($_SESSION["TL_INFO"], array($val => 'Please install the required file/extension <strong>' . $key . '</strong>'));
-                }
-                else
-                {
-                    if (is_array($_SESSION["TL_INFO"]) && key_exists($val, $_SESSION["TL_INFO"]))
-                    {
-                        unset($_SESSION["TL_INFO"][$val]);
-                    }
-                }
-            }*/
         }
     
         return $strContent;
