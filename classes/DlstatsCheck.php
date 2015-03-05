@@ -49,7 +49,7 @@ class DlstatsCheck extends \System
      */
     public static function getInstance()
     {
-        if (self::$instance == null)
+        if (self::$instance === null)
         {
             self::$instance = new DlstatsCheck();
         }
@@ -69,7 +69,7 @@ class DlstatsCheck extends \System
         if ($strTemplate == 'be_main')
         {
             if ( isset($GLOBALS['TL_CONFIG']['dlstatDisableBotdetection']) &&
-                       $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] == true )
+                (bool) $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] === true )
             {
                 return $strContent;
             }
