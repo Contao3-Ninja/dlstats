@@ -271,6 +271,12 @@ class DlstatsHelper extends \Controller
 	 */
 	public function dlstatsGetIp() { return $this->IP; }
 	
+	
+	public function checkMultipleDownload()
+	{
+	    //getBlockingIP($this->IP), wenn ja, dann blockieren
+	}
+	
 	//////////////////////// protected functions \\\\\\\\\\\\\\\\\\\\\\\\
 	
 	/**
@@ -637,5 +643,21 @@ class DlstatsHelper extends \Controller
 	}
 
 	
+	protected function setBlockingIP($UserIP = false)
+	{
+	    if ($UserIP === false)
+	    {
+	        $UserIP = $this->IP;
+	    }
+	    //TODO write in DB
+	}
+	protected function getBlockingIP($UserIP = false)
+	{
+	    if ($UserIP === false)
+	    {
+	        $UserIP = $this->IP;
+	    }
+	    //TODO read in DB
+	}
 }
 

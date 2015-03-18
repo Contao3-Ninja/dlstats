@@ -52,7 +52,7 @@ class Dlstats extends \DLStats\DlstatsHelper
 	 */
 	public function __construct()
 	{
-		parent::__construct();
+		parent::__construct(); // DlstatsHelper check methods
 	}
 
 	/**
