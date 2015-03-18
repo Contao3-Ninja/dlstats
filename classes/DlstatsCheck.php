@@ -6,7 +6,7 @@
  * Module Download Statistics
  * Check the required extensions 
  * 
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2013 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -22,7 +22,7 @@ namespace BugBuster\DLStats;
 /**
  * Class DlstatsCheck
  *
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2013 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  */

@@ -11,7 +11,7 @@
  * This is the data container array for table tl_dlstats.
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2013 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL

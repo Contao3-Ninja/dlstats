@@ -6,7 +6,7 @@
  * Modul Download Statistics Details - Backend
  *
  * 
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2013 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -40,7 +40,7 @@ require($dir . '/system/initialize.php');
 /**
  * Class BotStatisticsDetails
  *
- * @copyright  Glen Langer 2012 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2012 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  */

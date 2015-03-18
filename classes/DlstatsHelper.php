@@ -7,7 +7,7 @@
  *
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2014 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -23,7 +23,7 @@ namespace BugBuster\DLStats;
 /**
  * Class DlstatsHelper
  * 
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2013 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
