@@ -164,7 +164,6 @@ class DlstatsHelper extends \Controller
 	public function CheckBE()
 	{
 	    $strCookie = 'BE_USER_AUTH';
-	    //$hash = sha1(session_id() . $this->Environment->ip . $strCookie);
 	    $hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
 	    if (\Input::cookie($strCookie) == $hash)
 	    {
@@ -206,7 +205,6 @@ class DlstatsHelper extends \Controller
 	        return false; //fake: no bots founds
 	    }
 	    // Import Helperclass ModuleBotDetection
-	    //$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
 	    $this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
 	
 	    //Call BD_CheckBotAgent
