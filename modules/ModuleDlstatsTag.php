@@ -1,12 +1,12 @@
 <?php 
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  *
  * Modul Dlstats Tag - Frontend for InsertTags
  *
  * PHP version 5
- * @copyright  Glen Langer 2011..2013 <http://contao.ninja>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL

@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-07-01T23:26:10+02:00
+ * last-updated: 2015-07-01T23:26:10+02:00
  */
 
 $GLOBALS['TL_LANG']['FMD']['testip']['0']  = 'Модуль отладки IP';
