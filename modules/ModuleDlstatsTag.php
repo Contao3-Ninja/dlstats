@@ -51,7 +51,7 @@ class ModuleDlstatsTag extends \Frontend
 	 * @return mixed    integer on downloads, false on wrong Insert-Tag or wrong parameters
 	 * @access public
 	 */
-	public function DlstatsReplaceInsertTags($strTag)
+	public function dlstatsReplaceInsertTags($strTag)
 	{
 		$arrTag = trimsplit('::', $strTag);
 		if ($arrTag[0] != 'dlstats')

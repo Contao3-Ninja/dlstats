@@ -47,7 +47,7 @@ $GLOBALS['BE_MOD']['content']['dlstats'] = array
  */
 $GLOBALS['TL_HOOKS']['parseBackendTemplate'][]  = array('DLStats\DlstatsCheck', 'checkExtensions');
 $GLOBALS['TL_HOOKS']['postDownload'][] = array('DLStats\Dlstats', 'logDownload');
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('DLStats\ModuleDlstatsTag', 'DlstatsReplaceInsertTags');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('DLStats\ModuleDlstatsTag', 'dlstatsReplaceInsertTags');
 
 /**
  * -------------------------------------------------------------------------
