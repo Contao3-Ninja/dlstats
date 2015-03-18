@@ -79,10 +79,10 @@ class DlstatsHelper extends \Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->CheckIP();
-		$this->CheckBE();
-		$this->CheckBot();
-		$this->setDL_LOG();
+		$this->checkIP();
+		$this->checkBE();
+		$this->checkBot();
+		$this->setDlLog();
 		$this->dlstatsSetLang();
 	}
 
@@ -92,7 +92,7 @@ class DlstatsHelper extends \Controller
 	 * @return void
 	 * @access protected
 	 */
-	public function setDL_LOG()
+	public function setDlLog()
 	{
 		if ($this->IP_Filter === true || $this->BE_Filter === true || $this->BOT_Filter === true)
 		{
@@ -109,7 +109,7 @@ class DlstatsHelper extends \Controller
 	 * @return boolean true when bot found over IP
 	 * @access protected
 	 */
-	public function CheckIP($UserIP = false)
+	public function checkIP($UserIP = false)
 	{
 	    // Check if IP present
 	    if ($UserIP === false)
@@ -129,17 +129,17 @@ class DlstatsHelper extends \Controller
 	        $this->IP = $UserIP;
 	    }
 	    // IPv4 or IPv6 ?
-	    switch ($this->CheckIPVersion($this->IP))
+	    switch ($this->checkIPVersion($this->IP))
 	    {
 	    	case "IPv4":
-	    	    if ($this->CheckIPv4($this->IP) === true)
+	    	    if ($this->checkIPv4($this->IP) === true)
 	    	    {
 	    	        $this->IP_Filter = true;
 	    	        return $this->IP_Filter;
 	    	    }
 	    	    break;
 	    	case "IPv6":
-	    	    if ($this->CheckIPv6($this->IP) === true)
+	    	    if ($this->checkIPv6($this->IP) === true)
 	    	    {
 	    	        $this->IP_Filter = true;
 	    	        return $this->IP_Filter;
@@ -161,7 +161,7 @@ class DlstatsHelper extends \Controller
 	 * @return boolean
 	 * @access protected
 	 */
-	public function CheckBE()
+	public function checkBE()
 	{
 	    $strCookie = 'BE_USER_AUTH';
 	    $hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
@@ -191,7 +191,7 @@ class DlstatsHelper extends \Controller
 	 * @return mixed    true or string if Bot found, false if not
 	 * @access protected
 	 */
-	public function CheckBot()
+	public function checkBot()
 	{
 	    if (!in_array('botdetection', \Config::getInstance()->getActiveModules() ))
 	    {
@@ -282,7 +282,7 @@ class DlstatsHelper extends \Controller
 	 * 						"IPv6" : IPv6 Address
 	 * @access protected
 	 */
-	protected function CheckIPVersion($UserIP = false)
+	protected function checkIPVersion($UserIP = false)
 	{
 		// Test for IPv4
 		if (ip2long($UserIP) !== false)
@@ -343,7 +343,7 @@ class DlstatsHelper extends \Controller
 	 * @return boolean true when own IP found in localconfig definitions
 	 * @access protected
 	 */
-	protected function CheckIPv6($UserIP = false)
+	protected function checkIPv6($UserIP = false)
 	{
 		// Check if IP present
 		if ($UserIP === false)
@@ -376,7 +376,7 @@ class DlstatsHelper extends \Controller
 	 * @return boolean true when own IP found in localconfig definitions
 	 * @access protected
 	 */
-	protected function CheckIPv4($UserIP = false)
+	protected function checkIPv4($UserIP = false)
 	{
 		// Check if IP present
 		if ($UserIP === false)
