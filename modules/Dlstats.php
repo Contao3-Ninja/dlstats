@@ -108,8 +108,7 @@ class Dlstats extends \DLStats\DlstatsHelper
 	protected function logDLStatDetails()
 	{
 	    //Host / Page ID ermitteln
-	    global $objPage;
-	    $pageId = $objPage->id; // ID der grad aufgerufenden Seite.
+	    $pageId = $GLOBALS['objPage']->id; // ID der grad aufgerufenden Seite.
 	    $pageHost = \Environment::get('host'); // Host der grad aufgerufenden Seite.
 	    
 	    if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) 
