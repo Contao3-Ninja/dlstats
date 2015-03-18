@@ -42,8 +42,8 @@ class DlstatsTestIP extends \Module
 	 * Generate module
 	 */
 	public function compile()
-	{   //TESTS, only with patch in Environment class
-	    //if ($strKey == 'ip') { static::$arrCache[$strKey] = static::$strKey(); return static::$arrCache[$strKey];} 
+	{   //TESTS, only with patch in 
+	    //Environment class: if ($strKey == 'ip') { static::$arrCache[$strKey] = static::$strKey(); return static::$arrCache[$strKey];} 
 	    //141.39.2.1    : $_SERVER['REMOTE_ADDR'] = '141.39.2.1'; $_SERVER['HTTP_X_FORWARDED_FOR'] = '192.168.17.144';
 	    //92.168.17.144 : $_SERVER['REMOTE_ADDR'] = '141.39.2.1'; $_SERVER['HTTP_X_FORWARDED_FOR'] = '92.168.17.144';
 	    //141.39.2.1 :    $_SERVER['REMOTE_ADDR'] = '141.39.2.1'; 
