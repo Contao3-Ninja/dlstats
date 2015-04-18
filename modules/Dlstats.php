@@ -68,7 +68,7 @@ class Dlstats extends \DLStats\DlstatsHelper
            (bool) $GLOBALS['TL_CONFIG']['dlstats'] === true)
 		{
 			if (true  === $this->DL_LOG &&
-			    false === $this->checkMultipleDownload() 
+			    false === $this->checkMultipleDownload($fileName) 
                )
 			{
 				$this->logDLStats();

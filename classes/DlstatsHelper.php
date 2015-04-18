@@ -272,9 +272,9 @@ class DlstatsHelper extends \Controller
 	public function dlstatsGetIp() { return $this->IP; }
 	
 	
-	public function checkMultipleDownload()
+	public function checkMultipleDownload($fileName)
 	{
-	    return $this->getBlockingStatus($this->IP, $this->_filename);
+	    return $this->getBlockingStatus($this->IP, $fileName);
 	}
 	
 	//////////////////////// protected functions \\\\\\\\\\\\\\\\\\\\\\\\
@@ -688,6 +688,7 @@ class DlstatsHelper extends \Controller
                                 ")
                     ->executeUncached(10);
 	    
+	    $IPHash = bin2hex(sha1($UserIP,true)); // sha1 20 Zeichen, bin2hex 40 zeichen
 	    //Test ob Blocking gesetzt ist
 	    $objBlockingIP = \Database::getInstance()
                             ->prepare("SELECT
@@ -699,7 +700,7 @@ class DlstatsHelper extends \Controller
                                         AND 
                                             dlstats_filename = ?
                                         ")
-                            ->executeUncached($UserIP, $filename);
+                            ->executeUncached($IPHash, $filename);
 	    if ($objBlockingIP->numRows < 1)
 	    {
 	        return false;
