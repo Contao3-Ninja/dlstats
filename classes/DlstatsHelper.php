@@ -658,7 +658,7 @@ class DlstatsHelper extends \Controller
 	    // Insert
 	    $arrSet = array
 	    (
-	        'dlstats_tstamp'   => time(),
+	        'dlstats_tstamp'   => date('Y-m-d H:i:s'),
 	        'dlstats_ip'       => $IPHash,
 	        'dlstats_filename' => $filename
 	    );
