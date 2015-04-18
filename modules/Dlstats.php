@@ -67,7 +67,9 @@ class Dlstats extends \DLStats\DlstatsHelper
 		if (isset($GLOBALS['TL_CONFIG']['dlstats']) && 
            (bool) $GLOBALS['TL_CONFIG']['dlstats'] === true)
 		{
-			if ($this->DL_LOG === true)
+			if (true  === $this->DL_LOG &&
+			    false === $this->checkMultipleDownload() 
+               )
 			{
 				$this->logDLStats();
 				$this->logDLStatDetails();
@@ -99,6 +101,7 @@ class Dlstats extends \DLStats\DlstatsHelper
                                          ->execute();
 			$this->_statId = $q->insertId;
 		} // if
+		$this->setBlockingIP($this->IP, $this->_filename);
 	}
 
 	/**

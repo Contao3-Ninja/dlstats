@@ -274,7 +274,7 @@ class DlstatsHelper extends \Controller
 	
 	public function checkMultipleDownload()
 	{
-	    //getBlockingIP($this->IP), wenn ja, dann blockieren
+	    return $this->getBlockingStatus($this->IP, $this->_filename);
 	}
 	
 	//////////////////////// protected functions \\\\\\\\\\\\\\\\\\\\\\\\
@@ -643,21 +643,68 @@ class DlstatsHelper extends \Controller
 	}
 
 	
-	protected function setBlockingIP($UserIP = false)
+	protected function setBlockingIP($UserIP = false, $filename = false)
 	{
 	    if ($UserIP === false)
 	    {
 	        $UserIP = $this->IP;
 	    }
-	    //TODO write in DB
+	    if ($filename === false) 
+	    {
+	    	$filename = 'no_filename';
+	    }
+	    $IPHash = bin2hex(sha1($UserIP,true)); // sha1 20 Zeichen, bin2hex 40 zeichen
+	   
+	    // Insert
+	    $arrSet = array
+	    (
+	        'dlstats_tstamp'   => time(),
+	        'dlstats_ip'       => $IPHash,
+	        'dlstats_filename' => $filename
+	    );
+	    \Database::getInstance()
+            	    ->prepare("INSERT IGNORE INTO tl_dlstats_blocker %s")
+            	    ->set($arrSet)
+            	    ->executeUncached();
 	}
-	protected function getBlockingIP($UserIP = false)
+	
+	protected function getBlockingStatus($UserIP = false, $filename = false)
 	{
 	    if ($UserIP === false)
 	    {
 	        $UserIP = $this->IP;
 	    }
-	    //TODO read in DB
+	    if ($filename === false)
+	    {
+	        $filename = 'no_filename';
+	    }
+	    
+	    //Delete All Old Blocker Entries (>10s)
+	    \Database::getInstance()
+            	    ->prepare("DELETE FROM
+                                    tl_dlstats_blocker
+                                WHERE
+                                    CURRENT_TIMESTAMP - INTERVAL ? SECOND > dlstats_tstamp
+                                ")
+                    ->executeUncached(10);
+	    
+	    //Test ob Blocking gesetzt ist
+	    $objBlockingIP = \Database::getInstance()
+                            ->prepare("SELECT
+                                            id
+                                        FROM
+                                            tl_dlstats_blocker
+                                        WHERE
+                                            dlstats_ip = ?
+                                        AND 
+                                            dlstats_filename = ?
+                                        ")
+                            ->executeUncached($UserIP, $filename);
+	    if ($objBlockingIP->numRows < 1)
+	    {
+	        return false;
+	    }
+	    return true;	    
 	}
 }
 
