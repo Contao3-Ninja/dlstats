@@ -1,7 +1,7 @@
 <?php 
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  * 
  * Modul Download Statistics
  *
@@ -10,7 +10,7 @@
  *
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @author     Peter Koch (acenes) 2007-2009
  * @package    GLDLStats
@@ -27,7 +27,7 @@ namespace BugBuster\DLStats;
 /**
  * Class Dlstats
  * 
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -52,7 +52,7 @@ class Dlstats extends \DLStats\DlstatsHelper
 	 */
 	public function __construct()
 	{
-		parent::__construct();
+		parent::__construct(); // DlstatsHelper check methods
 	}
 
 	/**
@@ -64,9 +64,12 @@ class Dlstats extends \DLStats\DlstatsHelper
 	{
 		$this->_filename = $fileName;
 		
-		if (isset($GLOBALS['TL_CONFIG']['dlstats']) && $GLOBALS['TL_CONFIG']['dlstats'] == true)
+		if (isset($GLOBALS['TL_CONFIG']['dlstats']) && 
+           (bool) $GLOBALS['TL_CONFIG']['dlstats'] === true)
 		{
-			if ($this->DL_LOG === true)
+			if (true  === $this->DL_LOG &&
+			    false === $this->checkMultipleDownload($fileName) 
+               )
 			{
 				$this->logDLStats();
 				$this->logDLStatDetails();
@@ -98,6 +101,7 @@ class Dlstats extends \DLStats\DlstatsHelper
                                          ->execute();
 			$this->_statId = $q->insertId;
 		} // if
+		$this->setBlockingIP($this->IP, $this->_filename);
 	}
 
 	/**
@@ -107,18 +111,17 @@ class Dlstats extends \DLStats\DlstatsHelper
 	protected function logDLStatDetails()
 	{
 	    //Host / Page ID ermitteln
-	    global $objPage;
-	    $pageId = $objPage->id; // ID der grad aufgerufenden Seite.
+	    $pageId = $GLOBALS['objPage']->id; // ID der grad aufgerufenden Seite.
 	    $pageHost = \Environment::get('host'); // Host der grad aufgerufenden Seite.
 	    
 	    if (isset($GLOBALS['TL_CONFIG']['dlstatdets']) 
-	           && $GLOBALS['TL_CONFIG']['dlstatdets'] == true
+	           && (bool) $GLOBALS['TL_CONFIG']['dlstatdets'] === true
 	       )
 	    {
 	        //Maximum details for year & month statistic
             $username = '';
     		$strCookie = 'FE_USER_AUTH';
-    		//$hash = sha1(session_id() . $this->IP . $ckie);
+
     		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->IP : '') . $strCookie);
     		if (\Input::cookie($strCookie) == $hash)
     		{

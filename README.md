@@ -2,6 +2,8 @@ Contao Module dlstats
 =====================
 [![Latest Stable Version](https://poser.pugx.org/bugbuster/dlstats/v/stable.svg)](https://packagist.org/packages/bugbuster/dlstats) [![Total Downloads](https://poser.pugx.org/bugbuster/dlstats/downloads.svg)](https://packagist.org/packages/bugbuster/dlstats) [![Latest Unstable Version](https://poser.pugx.org/bugbuster/dlstats/v/unstable.svg)](https://packagist.org/packages/bugbuster/dlstats) [![License](https://poser.pugx.org/bugbuster/dlstats/license.svg)](https://packagist.org/packages/bugbuster/dlstats)
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a1783611-1fc3-4040-a824-18de2d97c3ea/small.png)](https://insight.sensiolabs.com/projects/a1783611-1fc3-4040-a824-18de2d97c3ea)
+
 ## About
 
 Contao module, counts the number of file downloads

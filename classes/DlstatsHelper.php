@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2014 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  * 
  * Module Download Statistics, Helperclass
  *
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -23,7 +23,7 @@ namespace BugBuster\DLStats;
 /**
  * Class DlstatsHelper
  * 
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -79,13 +79,11 @@ class DlstatsHelper extends \Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->CheckIP();
-		$this->CheckBE();
-		$this->CheckBot();
-		$this->setDL_LOG();
+		$this->checkIP();
+		$this->checkBE();
+		$this->checkBot();
+		$this->setDlLog();
 		$this->dlstatsSetLang();
-	
-		//$this->log("DLSTAT_DEBUG: IPV:".$this->IP_Version." IPF:".(0+$this->IP_Filter)." BEF:".(0 + $this->BE_Filter) ." Bot:".(0+$this->BOT_Filter)."" , "DlstatsHelper", TL_CONFIGURATION );
 	}
 
 	/**
@@ -94,7 +92,7 @@ class DlstatsHelper extends \Controller
 	 * @return void
 	 * @access protected
 	 */
-	public function setDL_LOG()
+	public function setDlLog()
 	{
 		if ($this->IP_Filter === true || $this->BE_Filter === true || $this->BOT_Filter === true)
 		{
@@ -111,13 +109,13 @@ class DlstatsHelper extends \Controller
 	 * @return boolean true when bot found over IP
 	 * @access protected
 	 */
-	public function CheckIP($UserIP = false)
+	public function checkIP($UserIP = false)
 	{
 	    // Check if IP present
 	    if ($UserIP === false)
 	    {
 	        $tempIP = $this->dlstatsGetUserIP();
-	        if ($tempIP != false)
+	        if ($tempIP !== false)
 	        {
 	            $this->IP = $tempIP;
 	        }
@@ -131,17 +129,17 @@ class DlstatsHelper extends \Controller
 	        $this->IP = $UserIP;
 	    }
 	    // IPv4 or IPv6 ?
-	    switch ($this->CheckIPVersion($this->IP))
+	    switch ($this->checkIPVersion($this->IP))
 	    {
 	    	case "IPv4":
-	    	    if ($this->CheckIPv4($this->IP) === true)
+	    	    if ($this->checkIPv4($this->IP) === true)
 	    	    {
 	    	        $this->IP_Filter = true;
 	    	        return $this->IP_Filter;
 	    	    }
 	    	    break;
 	    	case "IPv6":
-	    	    if ($this->CheckIPv6($this->IP) === true)
+	    	    if ($this->checkIPv6($this->IP) === true)
 	    	    {
 	    	        $this->IP_Filter = true;
 	    	        return $this->IP_Filter;
@@ -163,10 +161,9 @@ class DlstatsHelper extends \Controller
 	 * @return boolean
 	 * @access protected
 	 */
-	public function CheckBE()
+	public function checkBE()
 	{
 	    $strCookie = 'BE_USER_AUTH';
-	    //$hash = sha1(session_id() . $this->Environment->ip . $strCookie);
 	    $hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
 	    if (\Input::cookie($strCookie) == $hash)
 	    {
@@ -194,7 +191,7 @@ class DlstatsHelper extends \Controller
 	 * @return mixed    true or string if Bot found, false if not
 	 * @access protected
 	 */
-	public function CheckBot()
+	public function checkBot()
 	{
 	    if (!in_array('botdetection', \Config::getInstance()->getActiveModules() ))
 	    {
@@ -202,13 +199,12 @@ class DlstatsHelper extends \Controller
 	        return false; //fake: no bots found
 	    }
 	    if ( isset($GLOBALS['TL_CONFIG']['dlstatDisableBotdetection']) &&
-	        $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] == true )
+            (bool) $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] === true )
 	    {
 	        //botdetection ist disabled for dlstats
 	        return false; //fake: no bots founds
 	    }
 	    // Import Helperclass ModuleBotDetection
-	    //$this->import('\BotDetection\ModuleBotDetection','ModuleBotDetection');
 	    $this->ModuleBotDetection = new \BotDetection\ModuleBotDetection();
 	
 	    //Call BD_CheckBotAgent
@@ -275,6 +271,12 @@ class DlstatsHelper extends \Controller
 	 */
 	public function dlstatsGetIp() { return $this->IP; }
 	
+	
+	public function checkMultipleDownload($fileName)
+	{
+	    return $this->getBlockingStatus($this->IP, $fileName);
+	}
+	
 	//////////////////////// protected functions \\\\\\\\\\\\\\\\\\\\\\\\
 	
 	/**
@@ -286,7 +288,7 @@ class DlstatsHelper extends \Controller
 	 * 						"IPv6" : IPv6 Address
 	 * @access protected
 	 */
-	protected function CheckIPVersion($UserIP = false)
+	protected function checkIPVersion($UserIP = false)
 	{
 		// Test for IPv4
 		if (ip2long($UserIP) !== false)
@@ -347,7 +349,7 @@ class DlstatsHelper extends \Controller
 	 * @return boolean true when own IP found in localconfig definitions
 	 * @access protected
 	 */
-	protected function CheckIPv6($UserIP = false)
+	protected function checkIPv6($UserIP = false)
 	{
 		// Check if IP present
 		if ($UserIP === false)
@@ -380,7 +382,7 @@ class DlstatsHelper extends \Controller
 	 * @return boolean true when own IP found in localconfig definitions
 	 * @access protected
 	 */
-	protected function CheckIPv4($UserIP = false)
+	protected function checkIPv4($UserIP = false)
 	{
 		// Check if IP present
 		if ($UserIP === false)
@@ -521,7 +523,7 @@ class DlstatsHelper extends \Controller
 			return '0.0.0.0';
 		}
 		if (isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp']) && 
-				  $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] == false)
+           (bool) $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] === false)
 		{
 			// Anonymize is disabled
 			return ($this->IP === false) ? '0.0.0.0' : $this->IP;
@@ -578,7 +580,7 @@ class DlstatsHelper extends \Controller
 			return '';
 		}
 		if (isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp']) && 
-				  $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] == false)
+           (bool) $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] === false)
 		{
 			// Anonymize is disabled
 			$domain = gethostbyaddr($this->IP);
@@ -641,5 +643,69 @@ class DlstatsHelper extends \Controller
 	}
 
 	
+	protected function setBlockingIP($UserIP = false, $filename = false)
+	{
+	    if ($UserIP === false)
+	    {
+	        $UserIP = $this->IP;
+	    }
+	    if ($filename === false) 
+	    {
+	    	$filename = 'no_filename';
+	    }
+	    $IPHash = bin2hex(sha1($UserIP,true)); // sha1 20 Zeichen, bin2hex 40 zeichen
+	   
+	    // Insert
+	    $arrSet = array
+	    (
+	        'dlstats_tstamp'   => date('Y-m-d H:i:s'),
+	        'dlstats_ip'       => $IPHash,
+	        'dlstats_filename' => $filename
+	    );
+	    \Database::getInstance()
+            	    ->prepare("INSERT IGNORE INTO tl_dlstats_blocker %s")
+            	    ->set($arrSet)
+            	    ->executeUncached();
+	}
+	
+	protected function getBlockingStatus($UserIP = false, $filename = false)
+	{
+	    if ($UserIP === false)
+	    {
+	        $UserIP = $this->IP;
+	    }
+	    if ($filename === false)
+	    {
+	        $filename = 'no_filename';
+	    }
+	    
+	    //Delete All Old Blocker Entries (>10s)
+	    \Database::getInstance()
+            	    ->prepare("DELETE FROM
+                                    tl_dlstats_blocker
+                                WHERE
+                                    CURRENT_TIMESTAMP - INTERVAL ? SECOND > dlstats_tstamp
+                                ")
+                    ->executeUncached(10);
+	    
+	    $IPHash = bin2hex(sha1($UserIP,true)); // sha1 20 Zeichen, bin2hex 40 zeichen
+	    //Test ob Blocking gesetzt ist
+	    $objBlockingIP = \Database::getInstance()
+                            ->prepare("SELECT
+                                            id
+                                        FROM
+                                            tl_dlstats_blocker
+                                        WHERE
+                                            dlstats_ip = ?
+                                        AND 
+                                            dlstats_filename = ?
+                                        ")
+                            ->executeUncached($IPHash, $filename);
+	    if ($objBlockingIP->numRows < 1)
+	    {
+	        return false;
+	    }
+	    return true;	    
+	}
 }
 

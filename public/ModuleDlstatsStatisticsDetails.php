@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  *
  * Modul Download Statistics Details - Backend
  *
  * 
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -33,15 +33,14 @@ while ($dir != '.' && $dir != '/' && !is_file($dir . '/system/initialize.php'))
  
 if (!is_file($dir . '/system/initialize.php'))
 {
-    echo 'Could not find initialize.php!';
-    exit(1);
+    throw new \ErrorException('Could not find initialize.php!',2,1,basename(__FILE__),__LINE__);
 }
 require($dir . '/system/initialize.php');
 
 /**
  * Class BotStatisticsDetails
  *
- * @copyright  Glen Langer 2012 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2012 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    BotStatistics
  */

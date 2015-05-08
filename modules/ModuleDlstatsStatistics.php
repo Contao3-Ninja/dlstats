@@ -1,11 +1,11 @@
 <?php 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2014 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  * 
  * Module Download Statistics
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -21,7 +21,7 @@ namespace BugBuster\DLStats;
 /**
  * Class ModuleDlstatsStatistics
  *
- * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  */
@@ -140,7 +140,7 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getStatusCounting()
     {
         if ( isset($GLOBALS['TL_CONFIG']['dlstats']) 
-                && $GLOBALS['TL_CONFIG']['dlstats'] == true  
+                && (bool) $GLOBALS['TL_CONFIG']['dlstats'] === true  
            ) 
         {
             return '<span class="tl_green">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'].'</span>';
@@ -155,9 +155,9 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getStatusDetailed()
     {
         if ( isset($GLOBALS['TL_CONFIG']['dlstats']) 
-                && $GLOBALS['TL_CONFIG']['dlstats'] == true
+                && (bool) $GLOBALS['TL_CONFIG']['dlstats'] === true
           && isset($GLOBALS['TL_CONFIG']['dlstatdets'])
-                && $GLOBALS['TL_CONFIG']['dlstatdets'] == true
+                && (bool) $GLOBALS['TL_CONFIG']['dlstatdets'] === true
            )
         {
             return '<span class="tl_green">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'].'</span>';
@@ -173,7 +173,7 @@ class ModuleDlstatsStatistics extends \BackendModule
     protected function getStatusAnonymization()
     {
         if ( isset($GLOBALS['TL_CONFIG']['privacyAnonymizeIp'])
-                && $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] == true
+                && (bool) $GLOBALS['TL_CONFIG']['privacyAnonymizeIp'] === true
         )
         {
             return $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['status_activated'];
@@ -273,7 +273,7 @@ class ModuleDlstatsStatistics extends \BackendModule
                                                            FROM `tl_dlstatdets`
                                                            WHERE 1")
                                                 ->execute();
-        if ($objStartDate->YMD != null)
+        if ($objStartDate->YMD !== null)
         {
             $StartDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objStartDate->YMD);
             

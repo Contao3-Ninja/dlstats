@@ -1,12 +1,12 @@
 <?php 
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  *
  * Module Download Statistics Helper
  *
  * PHP version 5
- * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2012..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -22,7 +22,7 @@ namespace BugBuster\DLStats;
 /**
  * Class ModuleDlstatsStatisticsHelper
  *
- * @copyright  Glen Langer 2012..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2012..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  */
@@ -55,7 +55,7 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
      */
     public static function getInstance()
     {
-        if (self::$instance == null)
+        if (self::$instance === null)
         {
             self::$instance = new ModuleDlstatsStatisticsHelper();
         }

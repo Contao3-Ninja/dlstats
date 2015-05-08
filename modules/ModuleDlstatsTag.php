@@ -1,12 +1,12 @@
 <?php 
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  *
  * Modul Dlstats Tag - Frontend for InsertTags
  *
  * PHP version 5
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -51,7 +51,7 @@ class ModuleDlstatsTag extends \Frontend
 	 * @return mixed    integer on downloads, false on wrong Insert-Tag or wrong parameters
 	 * @access public
 	 */
-	public function DlstatsReplaceInsertTags($strTag)
+	public function dlstatsReplaceInsertTags($strTag)
 	{
 		$arrTag = trimsplit('::', $strTag);
 		if ($arrTag[0] != 'dlstats')

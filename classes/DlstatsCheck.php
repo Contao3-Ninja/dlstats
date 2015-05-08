@@ -1,12 +1,12 @@
 <?php 
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  *
  * Module Download Statistics
  * Check the required extensions 
  * 
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -22,7 +22,7 @@ namespace BugBuster\DLStats;
 /**
  * Class DlstatsCheck
  *
- * @copyright  Glen Langer 2011..2013 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  */
@@ -49,7 +49,7 @@ class DlstatsCheck extends \System
      */
     public static function getInstance()
     {
-        if (self::$instance == null)
+        if (self::$instance === null)
         {
             self::$instance = new DlstatsCheck();
         }
@@ -69,7 +69,7 @@ class DlstatsCheck extends \System
         if ($strTemplate == 'be_main')
         {
             if ( isset($GLOBALS['TL_CONFIG']['dlstatDisableBotdetection']) &&
-                       $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] == true )
+                (bool) $GLOBALS['TL_CONFIG']['dlstatDisableBotdetection'] === true )
             {
                 return $strContent;
             }
@@ -84,11 +84,6 @@ class DlstatsCheck extends \System
                     'BotDetection' => 'botdetection'
             );
             
-            // required files
-            $arrRequiredFiles = array(
-                    'Modulname' => 'plugins/.....'
-            );
-    
             // check for required extensions
             foreach ($arrRequiredExtensions as $key => $val)
             {
@@ -104,23 +99,6 @@ class DlstatsCheck extends \System
                     }
                 }
             }
-    
-            // check for required files
-            /*
-            foreach ($arrRequiredFiles as $key => $val)
-            {
-                if (!file_exists(TL_ROOT . '/' . $val))
-                {
-                    $_SESSION["TL_INFO"] = array_merge($_SESSION["TL_INFO"], array($val => 'Please install the required file/extension <strong>' . $key . '</strong>'));
-                }
-                else
-                {
-                    if (is_array($_SESSION["TL_INFO"]) && key_exists($val, $_SESSION["TL_INFO"]))
-                    {
-                        unset($_SESSION["TL_INFO"][$val]);
-                    }
-                }
-            }*/
         }
     
         return $strContent;

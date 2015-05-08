@@ -1,7 +1,7 @@
 <?php 
 
 /**
- * Contao Open Source CMS, Copyright (C) 2005-2014 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  * 
  * Module Download Statistics
  *
@@ -12,7 +12,7 @@
  * Module configuration file.
  * 
  * PHP version 5
- * @copyright  Glen Langer 2011..2014 <http://www.contao.glen-langer.de>
+ * @copyright  Glen Langer 2011..2015 <http://contao.ninja>
  * @author     Glen Langer (BugBuster)
  * @package    GLDLStats
  * @license    LGPL
@@ -21,7 +21,7 @@
  */
 
 define('DLSTATS_VERSION', '3.8');
-define('DLSTATS_BUILD'  , '0');
+define('DLSTATS_BUILD'  , '1');
 
 /**
  * Defaults, you can overwrite this in Backend -> System -> Settings
@@ -47,7 +47,7 @@ $GLOBALS['BE_MOD']['content']['dlstats'] = array
  */
 $GLOBALS['TL_HOOKS']['parseBackendTemplate'][]  = array('DLStats\DlstatsCheck', 'checkExtensions');
 $GLOBALS['TL_HOOKS']['postDownload'][] = array('DLStats\Dlstats', 'logDownload');
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('DLStats\ModuleDlstatsTag', 'DlstatsReplaceInsertTags');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('DLStats\ModuleDlstatsTag', 'dlstatsReplaceInsertTags');
 
 /**
  * -------------------------------------------------------------------------
