@@ -307,6 +307,7 @@ class ModuleDlstatsStatistics extends \BackendModule
                                           , $objTopDownloads->id
                                           , $c4d
                                           , $objTopDownloads->downloads //no formatted number for sorting
+                                          , $objTopDownloads->tstamp //for sorting
                                           );
             }
         }
@@ -348,6 +349,8 @@ class ModuleDlstatsStatistics extends \BackendModule
                                            , $viewDate
                                            , $objLastDownloads->id
                                            , $c4d
+                                           , $objLastDownloads->downloads // for sorting
+                                           , $objLastDownloads->tstamp // for sorting
                                            );
                 $oldDate = $newDate;
             }
@@ -396,12 +399,14 @@ class ModuleDlstatsStatistics extends \BackendModule
 
         while ($objCalendarDayDownloads->next())
         {
+            /*
             $viewDate = false;
             if ($oldDate != $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($objCalendarDayDownloads->datum) ) )
             {
                 $newDate  = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($objCalendarDayDownloads->datum) );
                 $viewDate = $newDate;
-            }
+            }*/
+            $viewDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($objCalendarDayDownloads->datum) );
             $c4d = $this->check4details($objCalendarDayDownloads->id);
             $arrCalendarDayDownloads[] = array(
                                       $viewDate
@@ -409,6 +414,8 @@ class ModuleDlstatsStatistics extends \BackendModule
                                     , $this->getFormattedNumber($objCalendarDayDownloads->downloads,0)
                                     , $objCalendarDayDownloads->id
                                     , $c4d
+                                    , $objCalendarDayDownloads->downloads
+                                    , strtotime($objCalendarDayDownloads->datum)
                                 );
             $oldDate = $newDate;
         }
