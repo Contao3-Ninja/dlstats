@@ -18,6 +18,7 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside']           = 'Clien
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']            = 'Downloads';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']      = 'Downloads TOP %s';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']             = 'Filename';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filetype']             = 'File type';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias']            = 'Host / Page alias';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip']                   = 'IP address / Domain';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']    = 'The last %s downloads';
