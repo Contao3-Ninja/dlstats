@@ -12,12 +12,14 @@
 <link rel="stylesheet" type="text/css" href="system/modules/dlstats/assets/style.css" media="all">
 </head>
 <body id="top">
-<div id="main">
-	<div class="dlstatdetailcontent" style="margin-left:auto;margin-right:auto;width: 690px;">
-<!-- DlstatsDetails::start -->
-<?php echo $this->DlstatsDetailList; ?>
-<!-- DlstatsDetails::stop -->
-	</div><!-- dlstatdetailcontent -->
-</div><!-- main -->
+<div id="container">
+	<div id="main" style="width:840px;">
+		<div class="dlstatdetailcontent" style="margin-left:10px;margin-right:10px;">
+	<!-- DlstatsDetails::start -->
+	<?php echo $this->DlstatsDetailList; ?>
+	<!-- DlstatsDetails::stop -->
+		</div><!-- dlstatdetailcontent -->
+	</div><!-- main -->
+</div><!-- container -->
 </body>
 </html>

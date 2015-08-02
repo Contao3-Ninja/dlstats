@@ -109,7 +109,7 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
         
         $this->TemplatePartial = new \BackendTemplate('mod_dlstats_be_partial_details');
         
-        $this->TemplatePartial->DlstatsDetailList  = '<div class="tl_header" style="">'."\n";
+        $this->TemplatePartial->DlstatsDetailList  = '<div class="tl_header" style="width:800px">'."\n";
         
         $this->TemplatePartial->DlstatsDetailList .= '<table class="tl_header_table">
 	<tbody>
@@ -147,7 +147,7 @@ class ModuleDlstatsStatisticsHelper extends \BackendModule
 </div>
 ';
 
-        $this->TemplatePartial->DlstatsDetailList .= '<div class="tl_content" style="margin-top: 10px;">
+        $this->TemplatePartial->DlstatsDetailList .= '<div class="tl_content" style="margin-top: 10px;width: 800px;">
 	 <div class="dlstatdets">
 		<span class="dlstats-timestamp dlstats-left" style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['tstamp'].'</span>
 		<span class="dlstats-ip dlstats-left"        style="font-weight: bold;">'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip'].'<span title="'.$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside'].'"><sup style="font-weight:normal;">(?)</sup></span></span>
