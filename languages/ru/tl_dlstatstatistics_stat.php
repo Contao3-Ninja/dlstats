@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-01T23:26:10+02:00
+ * last-updated: 2015-07-31T00:51:43+02:00
  */
 
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['aliasnotfound']         = 'Алиас не найден';
@@ -17,6 +17,7 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside']            = 'На
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']             = 'Загрузок';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']       = 'ТОП %s загрузок';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']              = 'Имя файла';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filetype']              = 'Тип файла';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias']             = 'Хост / Алиас страницы';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip']                    = 'IP-адрес / Домен';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']     = 'Последние %s загрузки';
