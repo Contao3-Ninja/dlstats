@@ -53,6 +53,10 @@
 }
 
 /* Sorting Tables */
+th.sort-header:hover {
+	color: #77ac45;
+}
+
 th.sort-header::-moz-selection { background:transparent; }
 th.sort-header::selection      { background:transparent; }
 th.sort-header { cursor:pointer; }
