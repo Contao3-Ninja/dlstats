@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-01T23:26:10+02:00
+ * last-updated: 2015-07-31T00:51:43+02:00
  */
 
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['aliasnotfound']         = 'Alias nicht gefunden';
@@ -17,6 +17,7 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside']            = 'Clie
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']             = 'Downloads';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']       = 'Downloads TOP %s';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']              = 'Dateiname';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filetype']              = 'Dateityp';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias']             = 'Host / Seitenalias';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip']                    = 'IP-Adresse / Domain';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']     = 'Die letzten %s Downloads';

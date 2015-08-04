@@ -4,11 +4,11 @@
 	width: 90%;
 }
 
-.mod_dlstatstatistics_be_year { 
+.mod_dlstatstatistics_be_year {
   width: 50%;
   float:left;
 }
-.mod_dlstatstatistics_be_year td { 
+.mod_dlstatstatistics_be_year td {
   padding-left:6px !important;
   padding-right:6px !important;
 }
@@ -17,13 +17,13 @@
 	width:50%;
 	float:left;
 }
-.mod_dlstatstatistics_be_month td { 
+.mod_dlstatstatistics_be_month td {
   padding-left:6px !important;
   padding-right:6px !important;
 }
 
 
-.mod_dlstatstatistics_be_table_version { 
+.mod_dlstatstatistics_be_table_version {
   margin: 2px 0 !important;
   width: 100%;
   padding: 0;
@@ -38,7 +38,7 @@
 .mod_dlstatstatistics_grey {
 	-moz-opacity:0.3;
 	opacity: 0.3;
-    filter: alpha(opacity=30); /* For IE8 and earlier */	
+    filter: alpha(opacity=30); /* For IE8 and earlier */
 }
 
 /* Handheld */
@@ -50,4 +50,35 @@
 	.mod_dlstatstatistics_be_table {
 		width: 100%;
 	}
+}
+
+/* Sorting Tables */
+th.sort-header:hover {
+	color: #77ac45;
+}
+
+th.sort-header::-moz-selection { background:transparent; }
+th.sort-header::selection      { background:transparent; }
+th.sort-header { cursor:pointer; }
+table th.sort-header:after {
+  content:'';
+  float:right;
+  margin-top:7px;
+  border-width:0 4px 4px;
+  border-style:solid;
+  border-color:#404040 transparent;
+  visibility:hidden;
+}
+table th.sort-header:hover:after {
+  visibility:visible;
+}
+table th.sort-up:after,
+table th.sort-down:after,
+table th.sort-down:hover:after {
+  visibility:visible;
+  opacity:0.8;
+}
+table th.sort-up:after {
+  border-bottom:none;
+  border-width:4px 4px 0;
 }

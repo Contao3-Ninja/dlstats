@@ -22,7 +22,8 @@
     word-break:break-all; 
     word-wrap:break-word;
     white-space: normal;
-	width:200px;
+	width:280px;
+	padding-right: 10px;
 }
 
 .dlstats-hostalias {
@@ -40,7 +41,7 @@
     overflow: hidden;
     padding: 6px;
     position: relative;
-    width: 666px;
+    width: 800px;
 }
 
 .dlstatdetaillist {
@@ -48,13 +49,13 @@
     overflow: hidden;
     padding: 6px;
     position: relative;
-    width: 678px;
+    width: 778px;
 }
 
 .dlstats-username {
     word-wrap:break-word;
     white-space: normal;
-    width: 130px;
+    width: 140px;
 }
 
 .dlstats-wb {
