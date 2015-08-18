@@ -381,8 +381,6 @@ class ModuleDlstatsStatistics extends \BackendModule
      */
     protected function getCalendarDayDownloads($limit=30)
     {
-        $newDate = '02.02.1971';
-        $oldDate = '01.01.1970';
         $arrCalendarDayDownloads = array();
         $CalendarDays = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d")-$limit, date("Y") ) );
         $objCalendarDayDownloads = \Database::getInstance()
@@ -399,13 +397,6 @@ class ModuleDlstatsStatistics extends \BackendModule
 
         while ($objCalendarDayDownloads->next())
         {
-            /*
-            $viewDate = false;
-            if ($oldDate != $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($objCalendarDayDownloads->datum) ) )
-            {
-                $newDate  = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($objCalendarDayDownloads->datum) );
-                $viewDate = $newDate;
-            }*/
             $viewDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($objCalendarDayDownloads->datum) );
             $c4d = $this->check4details($objCalendarDayDownloads->id);
             $arrCalendarDayDownloads[] = array(
@@ -417,7 +408,6 @@ class ModuleDlstatsStatistics extends \BackendModule
                                     , $objCalendarDayDownloads->downloads
                                     , strtotime($objCalendarDayDownloads->datum)
                                 );
-            $oldDate = $newDate;
         }
 
         return $arrCalendarDayDownloads;
