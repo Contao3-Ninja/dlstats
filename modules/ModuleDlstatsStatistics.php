@@ -433,7 +433,7 @@ class ModuleDlstatsStatistics extends \BackendModule
             foreach ($GLOBALS['TL_DLSTATS_HOOKS']['addStatisticPanelLine'] as $callback)
             {
                 $this->import($callback[0]);
-                $result[] = $this->$callback[0]->$callback[1]();
+                $result[] = $this->{$callback[0]}->{$callback[1]}();
             }
             return $result;
         }
