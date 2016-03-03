@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-09-13T21:54:55+02:00
+ * last-updated: 2015-07-31T00:51:43+02:00
  */
 
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['aliasnotfound']         = 'エイリアスがありません';
@@ -17,6 +17,7 @@ $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['clientside']            = 'ク�
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads']             = 'ダウンロード';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['downloads_top20']       = 'ダウンロードの回数の上位%s';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filename']              = 'ファイル名';
+$GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['filetype']              = 'ファイルの種類';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['hostalias']             = 'ホスト / ページのエイリアス';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['ip']                    = 'IPアドレス / ドメイン';
 $GLOBALS['TL_LANG']['tl_dlstatstatistics_stat']['last_20_downloads']     = '最近のダウンロードの上位%s';
