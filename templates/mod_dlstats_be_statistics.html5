@@ -95,7 +95,7 @@
 	<div style="clear:left;"></div><hr>
 	<!-- Top 20 Begin -->
 	<div class="tl_formbody_edit">
-		<div class="limit_height h110 block" style="height: 110px;">
+		<div class="limit_height h110 block">
 			<table summary="Table lists records" class="tl_listing">
 				<tbody>
 				    <tr>
@@ -138,7 +138,7 @@
 	<div style="clear:left;"></div><hr>
 	<!-- Last Downlods Top 20 Begin -->
 	<div class="tl_formbody_edit">
-		<div class="limit_height h110 block" style="height: 110px;">
+		<div class="limit_height h110 block">
 			<table summary="Table lists records" class="tl_listing">
 				<tbody>
 				    <tr>
@@ -188,7 +188,7 @@
 
 	<!-- Last 30 Calendar Days Begin -->
 	<div class="tl_formbody_edit">
-		<div class="limit_height h110 block" style="height: 110px;">
+		<div class="limit_height h110 block">
 			<table summary="Table lists records" class="tl_listing">
 				<tbody>
 				    <tr>
